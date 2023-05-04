@@ -89,10 +89,12 @@ public class LoginPane extends Application {
     }
 
     public void loginOnAction() {
-        KonferencePane dialog = new KonferencePane();
-        dialog.start(new Stage());
-        // dialog.showAndWait();
+        String brugernavnInput = txfBrugernavn.getText().trim();
+        String passwordInput =txfKodeord.getText().trim();
 
-        // Wait for the modal dialog to close
+        if (brugernavnInput.equals(correctUsername) && passwordInput.equals(correctPassword)) {
+            KonferencePane dialog = new KonferencePane();
+            dialog.start(new Stage());
+        }
     }
 }
