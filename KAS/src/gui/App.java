@@ -4,6 +4,7 @@ public class App {
     public static void main(String[] args) {
         print();
         print();
+        print2();
     }
 
     public static void print() {
