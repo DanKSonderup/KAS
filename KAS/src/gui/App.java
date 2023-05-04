@@ -9,6 +9,7 @@ public class App {
 
     public static void print() {
         System.out.println("Faggot");
+        System.out.println("Faggot2");
     }
 
     public static void print2() {
