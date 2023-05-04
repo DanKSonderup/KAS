@@ -3,7 +3,6 @@ package gui;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,15 +11,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.stage.WindowEvent;
-
-import static com.sun.javafx.event.EventUtil.fireEvent;
 
 
 public class LoginPane extends Application {
-
-    private boolean shutDown = false;
     @Override
     public void start(Stage stage) {
         stage.setTitle("Konference Administration System");
@@ -31,10 +25,8 @@ public class LoginPane extends Application {
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
-        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
-            stage.close();
-        });
     }
 
     //-----------------------------------------------------------
