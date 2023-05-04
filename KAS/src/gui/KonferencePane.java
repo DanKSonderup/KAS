@@ -13,8 +13,6 @@ import model.Konference;
 
 public class KonferencePane extends Application {
 
-
-    @Override
     public void start(Stage stage) {
         stage.setTitle("Konference Administration System");
         GridPane pane = new GridPane();

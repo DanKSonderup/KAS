@@ -12,10 +12,15 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
+
+import static com.sun.javafx.event.EventUtil.fireEvent;
 
 
 public class LoginPane extends Application {
 
+    private boolean shutDown = false;
     @Override
     public void start(Stage stage) {
         stage.setTitle("Konference Administration System");
@@ -27,6 +32,9 @@ public class LoginPane extends Application {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
+        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
+            stage.close();
+        });
     }
 
     //-----------------------------------------------------------
@@ -95,6 +103,8 @@ public class LoginPane extends Application {
         if (brugernavnInput.equals(correctUsername) && passwordInput.equals(correctPassword)) {
             KonferencePane dialog = new KonferencePane();
             dialog.start(new Stage());
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.close();
         }
     }
 }
