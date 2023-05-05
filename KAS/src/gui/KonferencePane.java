@@ -13,6 +13,7 @@ import model.Konference;
 
 public class KonferencePane extends Application {
 
+
     public void start(Stage stage) {
         Image image = new Image("ressources/kas2.png", 100, 100, false, false);
         stage.setTitle("Konference Administration System");
