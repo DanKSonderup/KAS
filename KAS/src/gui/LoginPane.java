@@ -95,6 +95,10 @@ public class LoginPane extends Application {
         lblError.setPadding(new Insets(20));
         vbox2.getChildren().add(lblError);
 
+        // SKAL FJERNES --> MIDLERTIDIGT PREFILL AF LOGIN
+        txfBrugernavn.setText("admin");
+        pwfKodeOrd.setText("admin");
+
         btnLogin.setOnAction(event -> this.loginOnAction());
 
         // Tilføjer onKeyPressed Event som udfører loginOnAction hvis der trykkes Enter
