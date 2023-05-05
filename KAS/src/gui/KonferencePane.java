@@ -5,17 +5,16 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import model.Konference;
 
 public class KonferencePane extends Application {
 
     public void start(Stage stage) {
+        Image image = new Image("ressources/kas2.png", 100, 100, false, false);
         stage.setTitle("Konference Administration System");
+        stage.getIcons().add(image);
         GridPane pane = new GridPane();
         this.initContent(pane);
         pane.setMinHeight(600);
