@@ -99,6 +99,8 @@ public class LoginPane extends Application {
         txfBrugernavn.setText("admin");
         pwfKodeOrd.setText("admin");
 
+
+        // Tilføjer actionEvents
         btnLogin.setOnAction(event -> this.loginOnAction());
 
         // Tilføjer onKeyPressed Event som udfører loginOnAction hvis der trykkes Enter
