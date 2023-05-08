@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -37,6 +38,8 @@ public class KonferencePane extends Application {
     private final Button btnOpretKonference = new Button("Opret Konference");
     private final Button btnOpretHotelAftale = new Button("Opret Hotelaftale");
     private final Button btnOpretUdflugt = new Button("Opret Udflugt");
+    private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -85,8 +88,14 @@ public class KonferencePane extends Application {
     }
     public void opretHotelAftaleOnAction() {
         Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
-        AddHotelAftaleWindow dialog = new AddHotelAftaleWindow(selectedKonference);
-        dialog.showAndWait();
+        if (selectedKonference != null) {
+            AddHotelAftaleWindow dialog = new AddHotelAftaleWindow(selectedKonference);
+            dialog.showAndWait();
+        } else {
+            alert.setTitle("Ingen Konference");
+            alert.setHeaderText("Du skal vælge en konference for at oprette en Hotel-aftale");
+            alert.show();
+        }
 
         // Wait for the modal dialog to close
     }
