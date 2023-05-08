@@ -11,7 +11,7 @@ public class Konference {
     private LocalDate slutDato;
     private double prisPerDag;
 
-    // Komposition 1--> 0..* Udflugter
+    // Aggregering 1--> 0..* Udflugter
     ArrayList<Udflugt> udflugter = new ArrayList<>();
     ArrayList<Hotel> hoteller = new ArrayList<>();
 
