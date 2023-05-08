@@ -14,6 +14,7 @@ public class Konference {
     // Aggregering 1--> 0..* Udflugter
     ArrayList<Udflugt> udflugter = new ArrayList<>();
     ArrayList<HotelAftale> hoteller = new ArrayList<>();
+    ArrayList<Deltager> deltagere = new ArrayList<>();
 
     public Konference(String navn, String sted, LocalDate startDato, LocalDate slutDato, double prisPerDag) {
         this.navn = navn;
@@ -51,7 +52,9 @@ public class Konference {
         return hoteller;
     }
 
-
+    public ArrayList<Deltager> getDeltagere() {
+        return deltagere;
+    }
 
     @Override
     public String toString() {

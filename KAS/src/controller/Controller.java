@@ -92,12 +92,22 @@ public abstract class Controller {
 
     public static Deltager createDeltager(
             String navn, String adresse, String by, String land, LocalDate ankomstdato,
-             LocalDate afrejsedato, Konference konference, HotelAftale hotelAftale,
+             LocalDate afrejsedato, Konference konference,
              boolean foredagsholder, String telefonnummer) {
-        Deltager deltager = new Deltager(navn, adresse, by, land, ankomstdato, afrejsedato, konference, hotelAftale, foredagsholder, telefonnummer);
+        Deltager deltager = new Deltager(navn, adresse, by, land, ankomstdato, afrejsedato, konference, foredagsholder, telefonnummer);
         //Storage.storeDeltager(deltager);
         return deltager;
     }
+
+    public static ArrayList<Deltager> getAlleDeltagere(Konference konference) {
+        ArrayList<Deltager> deltagere = new ArrayList<>();
+        for (Deltager d : konference.getDeltagere()) {
+            deltagere.add(d);
+        }
+        return deltagere;
+    }
+
+
 
 
 

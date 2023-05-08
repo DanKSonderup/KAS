@@ -26,7 +26,7 @@ public class Deltager {
     // Jeg tager selvfølgelig forbehold for, at det ikke er alle der skal være der (f.eks. firma).
 
     public Deltager(String navn, String adresse, String by, String land, LocalDate ankomstdato,
-                    LocalDate afrejsedato, Konference konference, HotelAftale hotelAftale, boolean foredagsholder, String telefonnummer) {
+                    LocalDate afrejsedato, Konference konference, boolean foredagsholder, String telefonnummer) {
         this.navn = navn;
         this.adresse = adresse;
         this.by = by;
@@ -34,7 +34,7 @@ public class Deltager {
         this.ankomstdato = ankomstdato;
         this.afrejsedato = afrejsedato;
         // this.firma = firma;
-        // this.konference = konference;
+        this.konference = konference;
         // this.ledsager = ledsager;
         // this.hotel = hotel;
         this.foredagsholder = foredagsholder;
@@ -99,13 +99,21 @@ public class Deltager {
         this.firma = firma;
     }
 
-//    public Konference getKonference() {
-//        return konference;
-//    }
-//
-//    public void setKonference(Konference konference) {
-//        this.konference = konference;
-//    }
+    public Konference getKonference() {
+        return konference;
+    }
+
+    public void setKonference(Konference konference) {
+        this.konference = konference;
+    }
+
+    public HotelAftale getHotelAftale() {
+        return hotelAftale;
+    }
+
+    public void setHotelAftale(HotelAftale hotelAftale) {
+        this.hotelAftale = hotelAftale;
+    }
 
     public Ledsager getLedsager() {
         return ledsager;
@@ -115,13 +123,6 @@ public class Deltager {
         this.ledsager = ledsager;
     }
 
-//    public Hotel getHotel() {
-//        return hotel;
-//    }
-//
-//    public void setHotel(Hotel hotel) {
-//        this.hotel = hotel;
-//    }
 
     public boolean isForedagsholder() {
         return foredagsholder;
