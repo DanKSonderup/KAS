@@ -24,7 +24,7 @@ public abstract class Storage {
     }
 
     // Hotel
-    public static ArrayList<HotelAftale> getHoteller() {
+    public static ArrayList<HotelAftale> getHotelAftaler() {
         return new ArrayList<>(HOTELLER);
     }
     public static void storeHotel(HotelAftale hotelAftale) {

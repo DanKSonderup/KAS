@@ -41,14 +41,14 @@ public abstract class Controller {
      * Pre: navn er ikke tomt, lokation er ikke tomt, prisPrEnkelt/Dobbelt >= 0
      */
 
-    public static HotelAftale createHotel(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
+    public static HotelAftale createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
         HotelAftale hotelAftale = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation, konference);
         Storage.storeHotel(hotelAftale);
         return hotelAftale;
     }
 
-    public static ArrayList<HotelAftale> getAllHoteller() {
-        return Storage.getHoteller();
+    public static ArrayList<HotelAftale> getAllHotelAftaler() {
+        return Storage.getHotelAftaler();
     }
 
     /**
