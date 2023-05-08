@@ -18,7 +18,7 @@ public abstract class Storage {
     public static void storeKonferencer(Konference konference) {
         konferencer.add(konference);
     }
-    
+
     // Hotel
     public static ArrayList<Hotel> getHoteller() {
         return new ArrayList<>(hoteller);
