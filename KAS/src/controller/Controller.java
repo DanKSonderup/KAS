@@ -100,7 +100,6 @@ public abstract class Controller {
         return deltager;
     }
 
-    
 
 
 
