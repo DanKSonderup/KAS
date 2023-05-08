@@ -41,6 +41,12 @@ public class LoginPane extends Application {
     private final PasswordField pwfKodeOrd = new PasswordField();
     private final Button btnLogin = new Button("Login");
     private final Label lblError = new Label();
+    private final Label lblVelkommen = new Label("Velkommen til KAS");
+    private final Label lblBrugernavn = new Label("Brugernavn");
+    private final Label lblKodeord = new Label("Kodeord");
+    private String[] engelskeTeskter = {"Welcome to KAS", "Username", "Password"};
+    private String[] danskeTeskter = {"Velkommen til KAS", "Brugernavn", "Kodeord"};
+
 
     // Vær obs på at dette på ingen måde er en sikker måde at gemme et password på
     // reelt set bør vi kører kodeord igennem en hashing algoritme som f.eks. SHA
@@ -65,7 +71,6 @@ public class LoginPane extends Application {
         vbox1.setAlignment(Pos.CENTER);
         vbox1.setSpacing(50);
         pane.add(vbox1,12,2);
-        Label lblVelkommen = new Label("Velkommen til KAS");
         lblVelkommen.setFont(new Font("Sans-Serif", 60));
         lblVelkommen.setTextFill(Color.WHITE);
         lblVelkommen.setAlignment(Pos.CENTER);
@@ -82,13 +87,13 @@ public class LoginPane extends Application {
         vbox2.setAlignment(Pos.CENTER);
         vbox2.setSpacing(5);
 
-        Label lblBrugernavn = new Label("Brugernavn");
+
         lblBrugernavn.setTextFill(Color.WHITE);
         vbox2.getChildren().add(lblBrugernavn);
         txfBrugernavn.setMaxWidth(150);
         vbox2.getChildren().add(txfBrugernavn);
 
-        Label lblKodeord = new Label("Kodeord");
+
         lblKodeord.setTextFill(Color.WHITE);
         vbox2.getChildren().add(lblKodeord);
         pwfKodeOrd.setMaxWidth(150);
@@ -121,7 +126,7 @@ public class LoginPane extends Application {
         danmarkFlag.setFitHeight(45);
         danmarkFlag.setFitWidth(45);
         pane.getChildren().add(danmarkFlag);
-        // danmarkFlag.setOnMouseClicked(mouseEvent -> );
+        danmarkFlag.setOnMouseClicked(mouseEvent -> this.danishLanguageIconOnAction());
 
         ImageView ukFlag = new ImageView("/ressources/united-kingdom.png");
         ukFlag.setTranslateX(700);
@@ -129,7 +134,7 @@ public class LoginPane extends Application {
         ukFlag.setFitHeight(45);
         ukFlag.setFitWidth(45);
         pane.getChildren().add(ukFlag);
-        // ukFlag.setOnMouseClicked(mouseEvent ->);
+        ukFlag.setOnMouseClicked(mouseEvent -> this.englishLanguageIconOnAction());
     }
 
     public void loginOnAction() {
@@ -145,5 +150,17 @@ public class LoginPane extends Application {
             lblError.setText("Forkert brugernavn eller adgangskode!");
             lblError.setTextFill(Color.RED);
         }
+    }
+
+    public void englishLanguageIconOnAction() {
+        lblVelkommen.setText(engelskeTeskter[0]);
+        lblBrugernavn.setText(engelskeTeskter[1]);
+        lblKodeord.setText(engelskeTeskter[2]);
+    }
+
+    public void danishLanguageIconOnAction() {
+        lblVelkommen.setText(danskeTeskter[0]);
+        lblBrugernavn.setText(danskeTeskter[1]);
+        lblKodeord.setText(danskeTeskter[2]);
     }
 }
