@@ -106,10 +106,5 @@ public abstract class Controller {
         }
         return deltagere;
     }
-
-
-
-
-
-
+    
 }
