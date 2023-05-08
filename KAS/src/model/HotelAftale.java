@@ -8,7 +8,7 @@ public class HotelAftale {
     private double prisPrNatEnkeltVærelse;
     private double prisPrDobbeltVærelse;
     private Konference konference;
-    ArrayList<Tillæg> tillæg = new ArrayList<>();
+    private ArrayList<Tillæg> tillæg = new ArrayList<>();
 
 
     public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation, Konference konference) {
@@ -41,5 +41,8 @@ public class HotelAftale {
 
     public Konference getKonference() {
         return konference;
+    }
+    public void createTillæg(Tillæg tillægInput) {
+        tillæg.add(tillægInput);
     }
 }

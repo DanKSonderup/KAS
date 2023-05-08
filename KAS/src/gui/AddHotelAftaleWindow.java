@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,11 +10,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.HotelAftale;
 import model.Konference;
 import model.Tillæg;
+import storage.Storage;
 
 public class AddHotelAftaleWindow extends Stage {
-    Konference konference;
+    private Konference konference;
+    private HotelAftale hotelAftale;
     private final GridPane pane = new GridPane();
     private final GridPane pane2 = new GridPane();
     private final Scene scene = new Scene(pane);
@@ -39,7 +43,6 @@ public class AddHotelAftaleWindow extends Stage {
     private final TextField txfPrisPrNatDobbeltVærelse = new TextField();
     private final Button btnAfbryd = new Button("Afbryd");
     private final Button btnFortsæt = new Button("Fortsæt");
-    private final Button btnOpretTillæg = new Button("Opret Tillæg");
     private final Label lblAlert = new Label();
     private boolean alertShown = false;
 
@@ -77,6 +80,7 @@ public class AddHotelAftaleWindow extends Stage {
     private final ListView<Tillæg> lvwTillæg = new ListView<>();
     private final TextField txfTillægNavn = new TextField();
     private final TextField txfTillægPris = new TextField();
+    private final Button btnOpretTillæg = new Button("Opret tillæg");
     public void initScene2(GridPane pane) {
         pane.setPadding(new Insets(20));
         // set horizontal gap between components
@@ -94,6 +98,7 @@ public class AddHotelAftaleWindow extends Stage {
         Label lblTillægPris = new Label("Pris:");
         pane.add(lblTillægPris,0,4);
         pane.add(txfTillægPris,1,4);
+        pane.add(btnOpretTillæg,0,5);
     }
 
     public void afbrydOnAction() {
@@ -106,9 +111,20 @@ public class AddHotelAftaleWindow extends Stage {
             lblAlert.setVisible(true);
             alertShown = true;
         } else {
+            String navn = txfNavn.getText().trim();
+            double prisPrNatEnkelt = Double.parseDouble(txfPrisPrNatEnkeltVærelse.getText().trim());
+            double prisPrNatDouble = Double.parseDouble(txfPrisPrNatDobbeltVærelse.getText().trim());
+            String lokation = txfLokation.getText().trim();
+            Controller.createHotelAftale(navn,prisPrNatEnkelt,prisPrNatDouble,lokation,konference);
             this.initScene2(pane2);
             this.setScene(scene2);
-
+            System.out.println(Storage.getHotelAftaler());
         }
+    }
+
+    public void opretTillægOnAction() {
+        String tillægNavn = txfTillægNavn.getText().trim();
+        double tillægPris = Double.parseDouble(txfTillægPris.getText().trim());
+        Controller.createTillæg(hotelAftale,tillægNavn,tillægPris);
     }
 }

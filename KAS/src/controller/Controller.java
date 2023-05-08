@@ -55,9 +55,8 @@ public abstract class Controller {
      * Pre: beskrivelse er ikke tomt, hotel ikke null, pris >= 0
      */
 
-    public static Tillæg createTillæg(HotelAftale hotelAftale, String beskrivelse, double pris) {
-        Tillæg tillæg = new Tillæg(beskrivelse, pris, hotelAftale);
-        return tillæg;
+    public static void createTillæg(HotelAftale hotelAftale, String beskrivelse, double pris) {
+        hotelAftale.createTillæg(new Tillæg(beskrivelse,pris));
     }
 
     public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {
