@@ -103,7 +103,10 @@ public abstract class Controller {
         Deltager deltager = new Deltager(navn, adresse, by, land, ankomstdato, afrejsedato, konference, hotelAftale, foredagsholder, telefonnummer);
         //Storage.storeDeltager(deltager);
         return deltager;
-
     }
+
+    
+
+
 
 }
