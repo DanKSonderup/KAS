@@ -95,7 +95,6 @@ public abstract class Controller {
              LocalDate afrejsedato, Konference konference,
              boolean foredagsholder, String telefonnummer) {
         Deltager deltager = new Deltager(navn, adresse, by, land, ankomstdato, afrejsedato, konference, foredagsholder, telefonnummer);
-        //Storage.storeDeltager(deltager);
         return deltager;
     }
 
