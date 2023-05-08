@@ -16,4 +16,9 @@ public class Tillæg {
     public double getPris() {
         return pris;
     }
+
+    @Override
+    public String toString() {
+        return beskrivelse + " - " + pris + " kr.";
+    }
 }

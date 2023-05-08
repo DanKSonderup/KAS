@@ -81,6 +81,8 @@ public class AddHotelAftaleWindow extends Stage {
     private final TextField txfTillægNavn = new TextField();
     private final TextField txfTillægPris = new TextField();
     private final Button btnOpretTillæg = new Button("Opret tillæg");
+    private final Button btnOpretAftale = new Button("Opret Hotelaftale");
+
     public void initScene2(GridPane pane) {
         pane.setPadding(new Insets(20));
         // set horizontal gap between components
@@ -99,6 +101,9 @@ public class AddHotelAftaleWindow extends Stage {
         pane.add(lblTillægPris,0,4);
         pane.add(txfTillægPris,1,4);
         pane.add(btnOpretTillæg,0,5);
+        pane.add(btnOpretAftale,0,7);
+
+        btnOpretTillæg.setOnAction(event -> this.opretTillægOnAction());
     }
 
     public void afbrydOnAction() {
@@ -115,10 +120,9 @@ public class AddHotelAftaleWindow extends Stage {
             double prisPrNatEnkelt = Double.parseDouble(txfPrisPrNatEnkeltVærelse.getText().trim());
             double prisPrNatDouble = Double.parseDouble(txfPrisPrNatDobbeltVærelse.getText().trim());
             String lokation = txfLokation.getText().trim();
-            Controller.createHotelAftale(navn,prisPrNatEnkelt,prisPrNatDouble,lokation,konference);
+            hotelAftale = new HotelAftale(navn,prisPrNatEnkelt,prisPrNatDouble,lokation,konference);
             this.initScene2(pane2);
             this.setScene(scene2);
-            System.out.println(Storage.getHotelAftaler());
         }
     }
 
@@ -126,5 +130,10 @@ public class AddHotelAftaleWindow extends Stage {
         String tillægNavn = txfTillægNavn.getText().trim();
         double tillægPris = Double.parseDouble(txfTillægPris.getText().trim());
         Controller.createTillæg(hotelAftale,tillægNavn,tillægPris);
+        lvwTillæg.getItems().setAll(hotelAftale.getTillæg());
+    }
+
+    public void opretHotelAftaleOnAction() {
+        Controller.createHotelAftale(hotelAftale);
     }
 }
