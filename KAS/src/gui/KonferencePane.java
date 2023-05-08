@@ -68,6 +68,7 @@ public class KonferencePane extends Application {
 
         // Tilføjer button actions
         btnOpretKonference.setOnAction(event -> this.opretKonferenceOnAction());
+        btnOpretHotel.setOnAction(event -> this.opretHotelOnAction());
 
         updateControls();
     }
@@ -81,6 +82,12 @@ public class KonferencePane extends Application {
         lvwKonferencer.getItems().setAll(Controller.getAlleKonferencer());
         int index = lvwKonferencer.getItems().size() - 1;
         lvwKonferencer.getSelectionModel().select(index);
+    }
+    public void opretHotelOnAction() {
+        AddHotelWindow dialog = new AddHotelWindow();
+        dialog.showAndWait();
+
+        // Wait for the modal dialog to close
     }
 
     public void updateControls() {
