@@ -34,8 +34,7 @@ public class Deltager {
         this.ankomstdato = ankomstdato;
         this.afrejsedato = afrejsedato;
         // this.firma = firma;
-        this.konference = konference;
-        // this.ledsager = ledsager;
+        this.konference = konference; // this.ledsager = ledsager;
         // this.hotel = hotel;
         this.foredagsholder = foredagsholder;
         this.telefonnummer = telefonnummer;
@@ -142,5 +141,19 @@ public class Deltager {
 
     public int getId() {
         return id;
+    }
+
+    public void addDeltager(Firma firma) {
+        for (Deltager d : firma.deltagere) {
+            if (d.getTelefonnummer().compareTo(this.telefonnummer) != 0) {
+                firma.deltagere.add(this);
+            }
+        }
+    }
+
+    public double samletPris() {
+        double pris = 0;
+
+        return pris;
     }
 }
