@@ -35,4 +35,8 @@ public abstract class Controller {
         Udflugt udflugt = new Udflugt(navn, dato, pris, lokation, frokost);
         return udflugt;
     }
+
+    public static ArrayList<Udflugt> getAlleUdflugter(Konference konference) {
+        return konference.getUdflugter();
+    }
 }
