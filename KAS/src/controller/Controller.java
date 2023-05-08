@@ -1,5 +1,6 @@
 package controller;
 
+import model.Hotel;
 import model.Konference;
 import model.Udflugt;
 import storage.Storage;
@@ -23,9 +24,6 @@ public abstract class Controller {
         return Storage.getKonferencer();
     }
 
-
-
-
     /**
      * Opretter en udflugt
      * Pre: navn er ikke tomt, startDate <= endDDate, pris >= 0
@@ -39,4 +37,15 @@ public abstract class Controller {
     public static ArrayList<Udflugt> getAlleUdflugter(Konference konference) {
         return konference.getUdflugter();
     }
+
+    public static Hotel createHotel(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse) {
+        Hotel hotel = new Hotel(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse);
+        Storage.storeHoteller(hotel);
+        return hotel;
+    }
+
+    public static ArrayList<Hotel> getAllHoteller() {
+        return Storage
+    }
+
 }
