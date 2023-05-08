@@ -1,9 +1,6 @@
 package controller;
 
-import model.Hotel;
-import model.Konference;
-import model.Tillæg;
-import model.Udflugt;
+import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -39,15 +36,18 @@ public abstract class Controller {
         return konference.getUdflugter();
     }
 
-    // Hoteller
+    /**
+     * Opretter et hotel
+     * Pre: navn er ikke tomt, lokation er ikke tomt, prisPrEnkelt/Dobbelt >= 0
+     */
 
-    public static Hotel createHotel(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation) {
-        Hotel hotel = new Hotel(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation);
-        Storage.storeHotel(hotel);
-        return hotel;
+    public static HotelAftale createHotel(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
+        HotelAftale hotelAftale = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation, konference);
+        Storage.storeHotel(hotelAftale);
+        return hotelAftale;
     }
 
-    public static ArrayList<Hotel> getAllHoteller() {
+    public static ArrayList<HotelAftale> getAllHoteller() {
         return Storage.getHoteller();
     }
 
@@ -56,14 +56,14 @@ public abstract class Controller {
      * Pre: beskrivelse er ikke tomt, hotel ikke null, pris >= 0
      */
 
-    public static Tillæg createTillæg(Hotel hotel, String beskrivelse, double pris) {
-        Tillæg tillæg = new Tillæg(beskrivelse, pris, hotel);
+    public static Tillæg createTillæg(HotelAftale hotelAftale, String beskrivelse, double pris) {
+        Tillæg tillæg = new Tillæg(beskrivelse, pris, hotelAftale);
         return tillæg;
     }
 
-    public static ArrayList<Tillæg> getAlleKøbsTillæg(Hotel hotel) {
+    public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {
         ArrayList<Tillæg> købsTillæg = new ArrayList<>();
-        for (Tillæg købs : hotel.getTillæg()) {
+        for (Tillæg købs : hotelAftale.getTillæg()) {
             if (købs.getPris() > 0) {
                 købsTillæg.add(købs);
             }
@@ -71,13 +71,34 @@ public abstract class Controller {
         return købsTillæg;
     }
 
-    public static ArrayList<Tillæg> getAlleInkluderedeTillæg(Hotel hotel) {
+    public static ArrayList<Tillæg> getAlleInkluderedeTillæg(HotelAftale hotelAftale) {
         ArrayList<Tillæg> inkluderedeTillæg = new ArrayList<>();
-        for (Tillæg inkluderede : hotel.getTillæg()) {
+        for (Tillæg inkluderede : hotelAftale.getTillæg()) {
             if (inkluderede.getPris() == 0) {
                 inkluderedeTillæg.add(inkluderede);
             }
         }
         return inkluderedeTillæg;
     }
+
+    // Firma
+
+    public static Firma createFirma(String navn, String telefonnummer) {
+        Firma firma = new Firma(navn, telefonnummer);
+        Storage.storeFirma(firma);
+        return firma;
+    }
+
+    // Deltager
+
+    public static Deltager createDeltager(
+            String navn, String adresse, String by, String land, LocalDate ankomstdato,
+             LocalDate afrejsedato, Konference konference, HotelAftale hotelAftale,
+             boolean foredagsholder, String telefonnummer) {
+        Deltager deltager = new Deltager(navn, adresse, by, land, ankomstdato, afrejsedato, konference, hotelAftale, foredagsholder, telefonnummer);
+        //Storage.storeDeltager(deltager);
+        return deltager;
+
+    }
+
 }

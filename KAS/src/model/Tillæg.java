@@ -3,12 +3,12 @@ package model;
 public class Tillæg {
     private String beskrivelse;
     private double pris;
-    private Hotel hotel;
+    private HotelAftale hotelAftale;
 
-    public Tillæg(String beskrivelse, double pris, Hotel hotel) {
+    public Tillæg(String beskrivelse, double pris, HotelAftale hotelAftale) {
         this.beskrivelse = beskrivelse;
         this.pris = pris;
-        this.hotel = hotel;
+        this.hotelAftale = hotelAftale;
     }
 
     public String getBeskrivelse() {
@@ -19,7 +19,7 @@ public class Tillæg {
         return pris;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public HotelAftale getHotel() {
+        return hotelAftale;
     }
 }
