@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public abstract class Storage {
     private static final ArrayList<Konference> konferencer = new ArrayList<>();
-    private static final ArrayList<HotelAftale> HOTELLER = new ArrayList<>();
+    private static final ArrayList<HotelAftale> hotelAftaler = new ArrayList<>();
     private static final ArrayList<Firma> firmaer = new ArrayList<>();
 
 
@@ -25,10 +25,10 @@ public abstract class Storage {
 
     // Hotel
     public static ArrayList<HotelAftale> getHotelAftaler() {
-        return new ArrayList<>(HOTELLER);
+        return new ArrayList<>(hotelAftaler);
     }
     public static void storeHotel(HotelAftale hotelAftale) {
-        HOTELLER.add(hotelAftale);
+        hotelAftaler.add(hotelAftale);
     }
     // Firma
     public static ArrayList<Firma> getFirmaer() {
