@@ -5,6 +5,7 @@ import model.Udflugt;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public abstract class Controller {
 
@@ -14,8 +15,12 @@ public abstract class Controller {
      */
     public static Konference createKonference(String navn, String sted, LocalDate startDato, LocalDate slutDato, double prisPrDag) {
         Konference konference = new Konference(navn, sted, startDato, slutDato, prisPrDag);
-        //Storage.storeKonference(konference);
+        Storage.storeKonferencer(konference);
         return konference;
+    }
+
+    public static ArrayList<Konference> getAlleKonferencer() {
+        return Storage.getKonferencer();
     }
 
 
@@ -26,7 +31,6 @@ public abstract class Controller {
      * Pre: navn er ikke tomt, startDate <= endDDate, pris >= 0
      * Throws IllegalArgumentException, hvis dato er udenfor konferencedage
      */
-
     public static Udflugt createUdflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost) throws IllegalArgumentException {
         Udflugt udflugt = new Udflugt(navn, dato, pris, lokation, frokost);
         return udflugt;
