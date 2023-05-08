@@ -60,7 +60,7 @@ public abstract class Controller {
         Tillæg tillæg = new Tillæg(beskrivelse, pris, hotel);
         return tillæg;
     }
-    
+
     public static ArrayList<Tillæg> getAlleKøbsTillæg(Hotel hotel) {
         ArrayList<Tillæg> købsTillæg = new ArrayList<>();
         for (Tillæg købs : hotel.getTillæg()) {
