@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Konference;
-import storage.Storage;
 
 public class KonferencePane extends Application {
 
@@ -36,7 +35,7 @@ public class KonferencePane extends Application {
 
     private final ListView<Konference> lvwKonferencer = new ListView<>();
     private final Button btnOpretKonference = new Button("Opret Konference");
-    private final Button btnOpretHotel = new Button("Opret Hotel");
+    private final Button btnOpretHotelAftale = new Button("Opret Hotelaftale");
     private final Button btnOpretUdflugt = new Button("Opret Udflugt");
 
     public void initContent (GridPane pane) {
@@ -63,12 +62,12 @@ public class KonferencePane extends Application {
         lvwKonferencer.setMaxHeight(200);
         pane.add(lvwKonferencer,0,1,4,2);
         pane.add(btnOpretKonference,1,3);
-        pane.add(btnOpretHotel,2,3);
+        pane.add(btnOpretHotelAftale,2,3);
         pane.add(btnOpretUdflugt,5,1);
 
         // Tilføjer button actions
         btnOpretKonference.setOnAction(event -> this.opretKonferenceOnAction());
-        btnOpretHotel.setOnAction(event -> this.opretHotelOnAction());
+        btnOpretHotelAftale.setOnAction(event -> this.opretHotelAftaleOnAction());
 
         updateControls();
     }
@@ -83,8 +82,9 @@ public class KonferencePane extends Application {
         int index = lvwKonferencer.getItems().size() - 1;
         lvwKonferencer.getSelectionModel().select(index);
     }
-    public void opretHotelOnAction() {
-        AddHotelWindow dialog = new AddHotelWindow();
+    public void opretHotelAftaleOnAction() {
+        Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
+        AddHotelAftaleWindow dialog = new AddHotelAftaleWindow(selectedKonference);
         dialog.showAndWait();
 
         // Wait for the modal dialog to close

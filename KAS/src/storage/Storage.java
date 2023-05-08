@@ -1,5 +1,6 @@
 package storage;
 
+import model.Deltager;
 import model.Hotel;
 import model.Konference;
 
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 public abstract class Storage {
     private static final ArrayList<Konference> konferencer = new ArrayList<>();
     private static final ArrayList<Hotel> hoteller = new ArrayList<>();
-
 
 
     // Konference
@@ -26,5 +26,6 @@ public abstract class Storage {
     public static void storeHotel(Hotel hotel) {
         hoteller.add(hotel);
     }
+
 
 }

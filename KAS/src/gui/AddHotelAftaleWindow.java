@@ -1,7 +1,6 @@
 package gui;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,16 +11,18 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Konference;
 import model.Tillæg;
 
-import java.util.List;
+public class AddHotelAftaleWindow extends Stage {
 
-public class AddHotelWindow extends Stage {
+    Konference konference;
 
-    public AddHotelWindow() {
+    public AddHotelAftaleWindow(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
+        this.konference = konference;
 
         this.setTitle("Opret Hotel");
         GridPane pane = new GridPane();
