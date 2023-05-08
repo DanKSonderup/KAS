@@ -1,6 +1,8 @@
 package gui;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -110,6 +112,22 @@ public class LoginPane extends Application {
                 }
             }
         });
+
+        ImageView danmarkFlag = new ImageView("/ressources/DanmarkFlag.png");
+        danmarkFlag.setTranslateX(640);
+        danmarkFlag.setTranslateY(520);
+        danmarkFlag.setFitHeight(45);
+        danmarkFlag.setFitWidth(45);
+        pane.getChildren().add(danmarkFlag);
+        // danmarkFlag.setOnMouseClicked(mouseEvent -> );
+
+        ImageView ukFlag = new ImageView("/ressources/united-kingdom.png");
+        ukFlag.setTranslateX(700);
+        ukFlag.setTranslateY(520);
+        ukFlag.setFitHeight(45);
+        ukFlag.setFitWidth(45);
+        pane.getChildren().add(ukFlag);
+        // ukFlag.setOnMouseClicked(mouseEvent ->);
     }
 
     public void loginOnAction() {
