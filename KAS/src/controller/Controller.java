@@ -15,8 +15,8 @@ public abstract class Controller {
      * Opretter en konference
      * Pre: navn er ikke tomt, startDate <= endDDate, prisPerDag >= 0
      */
-    public static Konference createKonference(String navn, String sted, LocalDate startDato, LocalDate slutDato, double prisPrDag) {
-        Konference konference = new Konference(navn, sted, startDato, slutDato, prisPrDag);
+    public static Konference createKonference(String navn, String adresse, LocalDate startDato, LocalDate slutDato, double prisPrDag) {
+        Konference konference = new Konference(navn, adresse, startDato, slutDato, prisPrDag);
         Storage.storeKonferencer(konference);
         return konference;
     }
