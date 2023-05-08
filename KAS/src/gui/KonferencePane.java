@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Konference;
+import storage.Storage;
 
 public class KonferencePane extends Application {
 
@@ -66,6 +68,8 @@ public class KonferencePane extends Application {
 
         // Tilføjer button actions
         btnOpretKonference.setOnAction(event -> this.opretKonferenceOnAction());
+
+        updateControls();
     }
 
     public void opretKonferenceOnAction() {
@@ -74,11 +78,13 @@ public class KonferencePane extends Application {
 
         // Wait for the modal dialog to close
 
-        // Koden her mangler nogle metoder før de virker
+        lvwKonferencer.getItems().setAll(Controller.getAlleKonferencer());
+        int index = lvwKonferencer.getItems().size() - 1;
+        lvwKonferencer.getSelectionModel().select(index);
+    }
 
-        // lvwKonferencer.getItems().setAll(Storage.getKonferencer());
-        //int index = lvwKonferencer.getItems().size() - 1;
-        // lvwKonferencer.getSelectionModel().select(index);
+    public void updateControls() {
+        lvwKonferencer.getItems().setAll(Controller.getAlleKonferencer());
     }
 
 }
