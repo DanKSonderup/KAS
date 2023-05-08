@@ -41,8 +41,8 @@ public abstract class Controller {
 
     // Hoteller
 
-    public static Hotel createHotel(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse) {
-        Hotel hotel = new Hotel(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse);
+    public static Hotel createHotel(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation) {
+        Hotel hotel = new Hotel(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation);
         Storage.storeHotel(hotel);
         return hotel;
     }
