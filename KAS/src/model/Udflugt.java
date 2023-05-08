@@ -8,13 +8,15 @@ public class Udflugt {
     private double pris;
     private String lokation;
     private boolean frokost;
+    private Konference konference;
 
-    public Udflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost) {
+    public Udflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost, Konference konference) {
         this.navn = navn;
         this.dato = dato;
         this.pris = pris;
         this.lokation = lokation;
         this.frokost = frokost;
+        this.konference = konference;
     }
 
     public String getNavn() {
@@ -55,5 +57,9 @@ public class Udflugt {
 
     public void setFrokost(boolean frokost) {
         this.frokost = frokost;
+    }
+
+    public Konference getKonference() {
+        return konference;
     }
 }
