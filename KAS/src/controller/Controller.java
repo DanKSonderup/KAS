@@ -42,7 +42,7 @@ public abstract class Controller {
      */
     public static HotelAftale createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
         HotelAftale hotelAftale = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation, konference);
-        Storage.storeHotel(hotelAftale);
+        Storage.storeHotelAftale(hotelAftale);
         return hotelAftale;
     }
 

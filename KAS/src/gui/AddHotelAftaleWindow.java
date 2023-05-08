@@ -2,12 +2,10 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,6 +40,8 @@ public class AddHotelAftaleWindow extends Stage {
     private final Button btnAfbryd = new Button("Afbryd");
     private final Button btnFortsæt = new Button("Fortsæt");
     private final Button btnOpretTillæg = new Button("Opret Tillæg");
+    private final Label lblAlert = new Label();
+    private boolean alertShown = false;
 
     public void initContent(GridPane pane) {
         String[] labelStrenge = {"Navn:", "Lokation", "Pris per nat enkeltværelse:", "Pris per nat dobbeltværelse:"};
@@ -65,6 +65,9 @@ public class AddHotelAftaleWindow extends Stage {
         hboxButtons.getChildren().add(btnAfbryd);
         hboxButtons.getChildren().add(btnFortsæt);
         pane.add(hboxButtons,1,7);
+        pane.add(lblAlert,0,5);
+        lblAlert.setText("Er du sikker på du vil fortsætte? \nDu kan ikke ændre navn og pris når du fortsætter");
+        lblAlert.setVisible(false);
 
         // Tilføjer action events til knapper
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
@@ -98,7 +101,14 @@ public class AddHotelAftaleWindow extends Stage {
     }
 
     public void FortsætOnAction() {
-        this.initScene2(pane2);
-        this.setScene(scene2);
+        if (!alertShown) {
+            lblAlert.setTextFill(Color.RED);
+            lblAlert.setVisible(true);
+            alertShown = true;
+        } else {
+            this.initScene2(pane2);
+            this.setScene(scene2);
+
+        }
     }
 }
