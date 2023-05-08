@@ -68,6 +68,7 @@ public class KonferencePane extends Application {
         // Tilføjer button actions
         btnOpretKonference.setOnAction(event -> this.opretKonferenceOnAction());
         btnOpretHotelAftale.setOnAction(event -> this.opretHotelAftaleOnAction());
+        btnOpretUdflugt.setOnAction(event -> this.opretUdflugtOnAction());
 
         updateControls();
     }
@@ -88,6 +89,11 @@ public class KonferencePane extends Application {
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
+    }
+
+    public void opretUdflugtOnAction() {
+        AddUdflugtWindow dialog = new AddUdflugtWindow();
+        dialog.showAndWait();
     }
 
     public void updateControls() {

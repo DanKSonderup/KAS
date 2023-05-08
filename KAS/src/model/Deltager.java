@@ -5,21 +5,21 @@ import java.time.LocalDate;
 public class Deltager {
     private String navn;
     private String adresse;
+    private String telefonnummer;
+
+    // Tildeler hver deltager et 'ID'. Tænkte det kunne være en sjov måde at holde styr på f.eks. hvem der var d. 3 første tilmedlte
+    private int id;
     private String by;
     private String land;
     private LocalDate ankomstdato;
     private LocalDate afrejsedato;
+    private boolean foredagsholder;
 
     // En deltager behøver ikke være knyttet til et firma. Der skal derfor tages forbehold for ændringer
     private Firma firma;
     private Ledsager ledsager;
     private Konference konference;
     private HotelAftale hotelAftale;
-    private boolean foredagsholder;
-    private String telefonnummer;
-    private int id;
-
-    // Tildeler hver deltager et 'ID'. Tænkte det kunne være en sjov måde at holde styr på f.eks. hvem der var d. 3 første tilmedlte
     private static int counter;
 
     // Har smidt alle datafelterne i constructeren med udgangspunkt fra tilmeldingsblanketten.
