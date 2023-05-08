@@ -51,6 +51,8 @@ public class Konference {
         return hoteller;
     }
 
+
+
     @Override
     public String toString() {
         return navn + " fra " + startDato + " til " + slutDato + " - Pris: " + prisPerDag;
