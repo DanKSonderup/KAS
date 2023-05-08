@@ -13,8 +13,8 @@ public class Deltager {
     // En deltager behøver ikke være knyttet til et firma. Der skal derfor tages forbehold for ændringer
     private Firma firma;
     private Ledsager ledsager;
-//    private Konference konference;
-//    private Hotel hotel;
+    private Konference konference;
+    private HotelAftale hotelAftale;
     private boolean foredagsholder;
     private String telefonnummer;
     private int id;
@@ -26,17 +26,16 @@ public class Deltager {
     // Jeg tager selvfølgelig forbehold for, at det ikke er alle der skal være der (f.eks. firma).
 
     public Deltager(String navn, String adresse, String by, String land, LocalDate ankomstdato,
-                    LocalDate afrejsedato, Firma firma, Konference konference,
-                    Ledsager ledsager, Hotel hotel, boolean foredagsholder, String telefonnummer) {
+                    LocalDate afrejsedato, Konference konference, HotelAftale hotelAftale, boolean foredagsholder, String telefonnummer) {
         this.navn = navn;
         this.adresse = adresse;
         this.by = by;
         this.land = land;
         this.ankomstdato = ankomstdato;
         this.afrejsedato = afrejsedato;
-        this.firma = firma;
+        // this.firma = firma;
         // this.konference = konference;
-        this.ledsager = ledsager;
+        // this.ledsager = ledsager;
         // this.hotel = hotel;
         this.foredagsholder = foredagsholder;
         this.telefonnummer = telefonnummer;

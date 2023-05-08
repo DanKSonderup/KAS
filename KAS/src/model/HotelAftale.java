@@ -2,19 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
-public class Hotel {
+public class HotelAftale {
     private String navn;
     private String lokation;
     private double prisPrNatEnkeltVærelse;
     private double prisPrDobbeltVærelse;
+    private Konference konference;
     ArrayList<Tillæg> tillæg = new ArrayList<>();
 
 
-    public Hotel(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation) {
+    public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation, Konference konference) {
         this.navn = navn;
         this.prisPrNatEnkeltVærelse = prisPrNatEnkeltVærelse;
         this.prisPrDobbeltVærelse = prisPrDobbeltVærelse;
         this.lokation = lokation;
+        this.konference = konference;
     }
 
     public String getNavn() {
@@ -35,5 +37,9 @@ public class Hotel {
 
     public String getLokation() {
         return lokation;
+    }
+
+    public Konference getKonference() {
+        return konference;
     }
 }
