@@ -40,14 +40,18 @@ public class AddUdflugtWindow extends Stage {
         pane.setHgap(10);
         pane.setVgap(10);
 
-        String[] labelStrenge = {"Navn:", "Dato:", "lokation:", "pris:", "frokost:"};
+        String[] labelStrenge = {"Navn:", "Dato:", "Lokation:", "Pris:"};
         TextField[] tekstFelter = {txfNavn, txfDato, txfLokation, txfPris};
 
-        for (int i = 0; i < labelStrenge.length; i++) {
+        for (int i = 0; i < labelStrenge.length - 1; i++) {
             Label lbl1 = new Label(labelStrenge[i]);
             pane.add(lbl1, 0, i);
             pane.add(tekstFelter[i], 1, i);
         }
+        Label lblFrokost = new Label("Frokost:");
+        pane.add(lblFrokost, 0, 4);
+        pane.add(cbFrokost, 1, 4);
+
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
         hboxButtons.getChildren().add(btnAfbryd);
