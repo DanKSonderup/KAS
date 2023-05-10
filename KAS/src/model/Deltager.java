@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Deltager {
     private String navn;
@@ -18,26 +19,24 @@ public class Deltager {
     // En deltager behøver ikke være knyttet til et firma. Der skal derfor tages forbehold for ændringer
     private Firma firma;
     private Ledsager ledsager;
-    private Konference konference;
+    private ArrayList<Konference> konferencer = new ArrayList<>();
     private HotelAftale hotelAftale;
+    private Tilmelding tilmelding;
     private static int counter;
 
     // Har smidt alle datafelterne i constructeren med udgangspunkt fra tilmeldingsblanketten.
     // Jeg tager selvfølgelig forbehold for, at det ikke er alle der skal være der (f.eks. firma).
 
-    public Deltager(String navn, String adresse, String by, String land, LocalDate ankomstdato,
-                    LocalDate afrejsedato, Konference konference, boolean foredagsholder, String telefonnummer) {
+    public Deltager(String navn, String adresse, String telefonnummer,
+                    String by, String land, LocalDate ankomstdato, LocalDate afrejsedato, boolean foredagsholder) {
         this.navn = navn;
         this.adresse = adresse;
+        this.telefonnummer = telefonnummer;
         this.by = by;
         this.land = land;
         this.ankomstdato = ankomstdato;
         this.afrejsedato = afrejsedato;
-        // this.firma = firma;
-        this.konference = konference; // this.ledsager = ledsager;
-        // this.hotel = hotel;
         this.foredagsholder = foredagsholder;
-        this.telefonnummer = telefonnummer;
         counter++;
         this.id = counter;
     }
@@ -98,12 +97,8 @@ public class Deltager {
         this.firma = firma;
     }
 
-    public Konference getKonference() {
-        return konference;
-    }
-
-    public void setKonference(Konference konference) {
-        this.konference = konference;
+    public ArrayList<Konference> getKonferencer() {
+        return konferencer;
     }
 
     public HotelAftale getHotelAftale() {
@@ -141,6 +136,10 @@ public class Deltager {
 
     public int getId() {
         return id;
+    }
+
+    public void addKonference(Konference konference) {
+        konferencer.add(konference);
     }
 
     public void addDeltager(Firma firma) {

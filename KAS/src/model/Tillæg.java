@@ -1,16 +1,18 @@
 package model;
 
 public class Tillæg {
-    private String beskrivelse;
+    private String navn;
     private double pris;
+    private HotelAftale hotelAftale;
 
-    public Tillæg(String beskrivelse, double pris) {
-        this.beskrivelse = beskrivelse;
+    public Tillæg(String navn, double pris, HotelAftale hotelAftale) {
+        this.navn = navn;
         this.pris = pris;
+        this.hotelAftale = hotelAftale;
     }
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public String getNavn() {
+        return navn;
     }
 
     public double getPris() {
@@ -19,6 +21,6 @@ public class Tillæg {
 
     @Override
     public String toString() {
-        return beskrivelse + " - " + pris + " kr.";
+        return navn + " - " + pris + " kr.";
     }
 }

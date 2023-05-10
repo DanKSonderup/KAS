@@ -8,15 +8,14 @@ public class HotelAftale {
     private double prisPrNatEnkeltVærelse;
     private double prisPrDobbeltVærelse;
     private Konference konference;
-    private ArrayList<Tillæg> tillæg;
+    private ArrayList<Tillæg> tillæg = new ArrayList<>();
 
 
-    public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation, ArrayList<Tillæg> tillæg, Konference konference) {
+    public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation, Konference konference) {
         this.navn = navn;
         this.prisPrNatEnkeltVærelse = prisPrNatEnkeltVærelse;
         this.prisPrDobbeltVærelse = prisPrDobbeltVærelse;
         this.lokation = lokation;
-        this.tillæg = tillæg;
         this.konference = konference;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class HotelBooking {
     private int antalNætter;
+    private Tilmelding tilmelding;
     private ArrayList<Tillæg> valgteTillæg = new ArrayList<>();
 
     public HotelBooking(int antalNætter, ArrayList<Tillæg> valgteTillæg) {
