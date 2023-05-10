@@ -90,10 +90,9 @@ public abstract class Controller {
     // Deltager
 
     public static Deltager createDeltager(
-            String navn, String adresse, String by, String land, LocalDate ankomstdato,
-             LocalDate afrejsedato, Konference konference,
-             boolean foredagsholder, String telefonnummer) {
-        Deltager deltager = new Deltager(navn, adresse, by, land, ankomstdato, afrejsedato, konference, foredagsholder, telefonnummer);
+            String navn, String adresse, String telefonnummer,
+            String by, String land, LocalDate ankomstdato, LocalDate afrejsedato, boolean foredagsholder) {
+        Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land, ankomstdato, afrejsedato, foredagsholder);
         return deltager;
     }
 
