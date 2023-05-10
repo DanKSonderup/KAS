@@ -39,9 +39,11 @@ public abstract class Controller {
      * Opretter et hotel
      * Pre: navn er ikke tomt, lokation er ikke tomt, prisPrEnkelt/Dobbelt >= 0
      */
-    public static void createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
-        konference.addHotelAftale(new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation));
-        Storage.storeHotelAftale(konference.addHotelAftale(new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation));
+    public static HotelAftale createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
+        HotelAftale h1 = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation);
+        konference.addHotelAftale(h1);
+        Storage.storeHotelAftale(h1);
+        return h1;
     }
 
 
