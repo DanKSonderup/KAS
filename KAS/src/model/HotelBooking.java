@@ -3,13 +3,14 @@ package model;
 import java.util.ArrayList;
 
 public class HotelBooking {
-    private int antalNætter;
     private Tilmelding tilmelding;
     private ArrayList<Tillæg> valgteTillæg = new ArrayList<>();
+    private HotelAftale hotelAftale;
 
-    public HotelBooking(int antalNætter, ArrayList<Tillæg> valgteTillæg) {
-        this.antalNætter = antalNætter;
+    public HotelBooking(Tilmelding tilmelding, ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
+        this.tilmelding = tilmelding;
         this.valgteTillæg = valgteTillæg;
+        this.hotelAftale = hotelAftale;
     }
 
 

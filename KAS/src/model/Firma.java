@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Firma {
     private String navn;
     private String telefonnummer;
-    ArrayList<Deltager> deltagere = new ArrayList<>();
+    ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
 
     public Firma(String navn, String telefonnummer) {
         this.navn = navn;
@@ -26,5 +26,13 @@ public class Firma {
 
     public void setTelefonnummer(String telefonnummer) {
         this.telefonnummer = telefonnummer;
+    }
+
+    public ArrayList<Tilmelding> getTilmeldinger() {
+        return tilmeldinger;
+    }
+
+    public void addTilmelding(Tilmelding tilmelding) {
+        tilmeldinger.add(tilmelding);
     }
 }
