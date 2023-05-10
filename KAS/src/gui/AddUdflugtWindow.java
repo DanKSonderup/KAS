@@ -40,14 +40,20 @@ public class AddUdflugtWindow extends Stage {
         pane.setHgap(10);
         pane.setVgap(10);
 
-        String[] labelStrenge = {"Navn:", "Dato:", "lokation:", "pris:", "frokost:"};
+        String[] labelStrenge = {"Navn:", "Dato:", "Lokation:", "Pris:"};
         TextField[] tekstFelter = {txfNavn, txfDato, txfLokation, txfPris};
 
-        for (int i = 0; i < labelStrenge.length; i++) {
+        for (int i = 0; i < labelStrenge.length - 1; i++) {
             Label lbl1 = new Label(labelStrenge[i]);
             pane.add(lbl1, 0, i);
             pane.add(tekstFelter[i], 1, i);
         }
+        txfDato.setPromptText("DD-MM-YYYY");
+
+        Label lblFrokost = new Label("Frokost:");
+        pane.add(lblFrokost, 0, 4);
+        pane.add(cbFrokost, 1, 4);
+
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
         hboxButtons.getChildren().add(btnAfbryd);
@@ -55,5 +61,17 @@ public class AddUdflugtWindow extends Stage {
         pane.add(hboxButtons, 3, 5);
 
 
+        btnOk.setOnAction(event -> okOnAction());
+        btnAfbryd.setOnAction(event -> afbrydOnAction());
+
+
+    }
+
+    public void okOnAction() {
+        this.hide();
+    }
+
+    public void afbrydOnAction() {
+        this.hide();
     }
 }
