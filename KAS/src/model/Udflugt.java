@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Udflugt {
     private String navn;
@@ -8,16 +9,14 @@ public class Udflugt {
     private double pris;
     private String lokation;
     private boolean frokost;
-    private Konference konference;
-    private Ledsager ledsager;
+    private ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
-    public Udflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost, Konference konference) {
+    public Udflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost) {
         this.navn = navn;
         this.dato = dato;
         this.pris = pris;
         this.lokation = lokation;
         this.frokost = frokost;
-        this.konference = konference;
     }
 
     public String getNavn() {
@@ -58,9 +57,5 @@ public class Udflugt {
 
     public void setFrokost(boolean frokost) {
         this.frokost = frokost;
-    }
-
-    public Konference getKonference() {
-        return konference;
     }
 }
