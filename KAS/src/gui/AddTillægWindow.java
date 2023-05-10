@@ -15,8 +15,8 @@ import model.Tillæg;
 import java.util.ArrayList;
 
 public class AddTillægWindow extends Stage {
-
-    private static Tillæg tillæg;
+    private String navn;
+    private double pris;
     public AddTillægWindow() {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -59,19 +59,24 @@ public class AddTillægWindow extends Stage {
         btnOpretTillæg.setOnAction(event -> this.opretTillægOnAction());
     }
 
-    public Tillæg getTillæg() {
-        return tillæg;
+    public String getNavn() {
+        return navn;
+    }
+
+    public double getPris() {
+        return pris;
     }
 
     private void opretTillægOnAction() {
-        String navn = txfTillægNavn.getText().trim();
-        double pris = 0;
+        String navnInput = txfTillægNavn.getText().trim();
+        double prisInput = 0;
         try {
-        pris = Double.parseDouble(txfTillægPris.getText().trim()) ;
+        prisInput = Double.parseDouble(txfTillægPris.getText().trim()) ;
         } catch (NumberFormatException ex) {
             lblError.setVisible(true);
         }
-        tillæg = new Tillæg(navn, pris);
+        navn = navnInput;
+        pris = prisInput;
         this.hide();
     }
 }

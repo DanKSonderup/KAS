@@ -40,8 +40,8 @@ public abstract class Controller {
      * Opretter et hotel
      * Pre: navn er ikke tomt, lokation er ikke tomt, prisPrEnkelt/Dobbelt >= 0
      */
-    public static HotelAftale createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, ArrayList<Tillæg> tillæg, Konference konference) {
-        HotelAftale hotelAftale = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation,tillæg, konference);
+    public static HotelAftale createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
+        HotelAftale hotelAftale = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation, konference);
         Storage.storeHotelAftale(hotelAftale);
         return hotelAftale;
     }
@@ -55,8 +55,8 @@ public abstract class Controller {
      * Pre: beskrivelse er ikke tomt, hotel ikke null, pris >= 0
      */
 
-    public static void createTillæg(HotelAftale hotelAftale, String beskrivelse, double pris) {
-        hotelAftale.createTillæg(new Tillæg(beskrivelse,pris));
+    public static void createTillæg(HotelAftale hotelAftale, String navn, double pris) {
+        hotelAftale.createTillæg(new Tillæg(navn,pris, hotelAftale));
     }
 
     public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {

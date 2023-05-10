@@ -18,9 +18,23 @@ import storage.Storage;
 import java.util.ArrayList;
 
 public class AddHotelAftaleWindow extends Stage {
+
+    private class Pair {
+        private String navn;
+        private double pris;
+
+        public Pair(String navn, double pris) {
+            this.navn = navn;
+            this.pris = pris;
+        }
+
+        public String toString() {
+            return navn + " - " + pris + " kr.";
+        }
+    }
     private Konference konference;
 
-    private ArrayList<Tillæg> tillægListe = new ArrayList<>();
+    private final ArrayList<Pair> pairListe = new ArrayList<>();
 
     public AddHotelAftaleWindow(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
@@ -42,7 +56,7 @@ public class AddHotelAftaleWindow extends Stage {
     private final TextField txfPrisPrNatEnkeltVærelse = new TextField();
     private final TextField txfPrisPrNatDobbeltVærelse = new TextField();
     private final Button btnAfbryd = new Button("Afbryd");
-    private final ListView<Tillæg> lvwTillæg = new ListView<>();
+    private final ListView<Pair> lvwTillæg = new ListView<>();
     private final Button btnOpretTillæg = new Button("Opret tillæg");
     private final Button btnOpretAftale = new Button("Opret Hotel Aftale");
 
@@ -93,7 +107,11 @@ public class AddHotelAftaleWindow extends Stage {
             }
             String navn = txfNavn.getText().trim();
             String lokation = txfLokation.getText().trim();
-            Controller.createHotelAftale(navn,prisPrNatEnkelt,prisPrNatDobbelt, lokation, tillægListe, konference);
+            HotelAftale h1 = Controller.createHotelAftale(navn,prisPrNatEnkelt,prisPrNatDobbelt, lokation, konference);
+
+            for (Pair pair: pairListe) {
+                Controller.createTillæg(h1, pair.navn, pair.pris);
+            }
             System.out.println(Controller.getAllHotelAftaler());
             this.hide();
     }
@@ -103,12 +121,8 @@ public class AddHotelAftaleWindow extends Stage {
 
         dialog.showAndWait();
         // ----->
-
-        tillægListe.add(dialog.getTillæg());
-        lvwTillæg.getItems().setAll(tillægListe);
-    }
-
-    public void opretHotelAftaleOnAction() {
-        // Controller.createHotelAftale(hotelAftale);
+        Pair p1 = new Pair(dialog.getNavn(), dialog.getPris());
+        pairListe.add(p1);
+        lvwTillæg.getItems().setAll(pairListe);
     }
 }
