@@ -12,13 +12,20 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Konference;
+import model.Udflugt;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class AddUdflugtWindow extends Stage {
+    private Konference konference;
 
-    public AddUdflugtWindow() {
+    public AddUdflugtWindow(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
+        this.konference = konference;
 
         this.setTitle("Opret Udflugt");
         GridPane pane = new GridPane();
@@ -35,6 +42,7 @@ public class AddUdflugtWindow extends Stage {
     private final CheckBox cbFrokost = new CheckBox();
     private final Button btnAfbryd = new Button("Afbryd");
     private final Button btnOk = new Button("Ok");
+    private final Label lblError = new Label();
     public void initContent(GridPane pane) {
         pane.setPadding(new Insets(20));
         pane.setHgap(10);
@@ -67,11 +75,46 @@ public class AddUdflugtWindow extends Stage {
 
     }
 
-    public void okOnAction() {
+    private void okOnAction() {
+        if (!erDatoValid(txfDato.getText().trim())) {
+            lblError.setText("Datoen er skrevet i forkert format!");
+        } else if (!erDatoIKonference(txfDato.getText().trim())) {
+            lblError.setText("Konferencen foregår ikke på denne dato!");
+        }
+
+    }
+
+    private void afbrydOnAction() {
         this.hide();
     }
 
-    public void afbrydOnAction() {
-        this.hide();
+    // TODO
+    /**
+     * Returnerer om datoen i den valgte udflugt er valid eller ej
+     * pre: dato > konferencens startdato og dato < konferencens slutdato
+     */
+    private boolean erDatoValid(String dato) {
+        boolean erValid = true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        try {
+            formatter.parse(dato);
+        } catch (DateTimeParseException e) {
+            erValid = false;
+        }
+
+        return erValid;
+    }
+
+    private boolean erDatoIKonference(String dato) {
+        boolean ErIKonference = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        if (erDatoValid(dato)) {
+            LocalDate d = (LocalDate) formatter.parse(dato);
+            if (d.isAfter(konference.getStartDato()) && d.isBefore(konference.getSlutDato())) {
+                ErIKonference = true;
+            }
+        }
+
+        return ErIKonference;
     }
 }

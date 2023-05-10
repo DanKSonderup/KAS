@@ -101,7 +101,7 @@ public class KonferencePane extends Application {
     }
 
     public void opretUdflugtOnAction() {
-        AddUdflugtWindow dialog = new AddUdflugtWindow();
+        AddUdflugtWindow dialog = new AddUdflugtWindow(lvwKonferencer.getSelectionModel().getSelectedItem());
         dialog.showAndWait();
     }
 
