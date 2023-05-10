@@ -9,6 +9,7 @@ public class Udflugt {
     private String lokation;
     private boolean frokost;
     private Konference konference;
+    private Ledsager ledsager;
 
     public Udflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost, Konference konference) {
         this.navn = navn;
