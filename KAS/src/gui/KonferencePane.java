@@ -38,6 +38,7 @@ public class KonferencePane extends Application {
     private final Button btnOpretKonference = new Button("Opret Konference");
     private final Button btnOpretHotelAftale = new Button("Opret Hotelaftale");
     private final Button btnOpretUdflugt = new Button("Opret Udflugt");
+    private final Button btnOpretTilmelding = new Button("Opret Tilmelding");
     private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
 
@@ -67,11 +68,13 @@ public class KonferencePane extends Application {
         pane.add(btnOpretKonference,1,3);
         pane.add(btnOpretHotelAftale,2,3);
         pane.add(btnOpretUdflugt,5,1);
+        pane.add(btnOpretTilmelding,5,2);
 
         // Tilføjer button actions
         btnOpretKonference.setOnAction(event -> this.opretKonferenceOnAction());
         btnOpretHotelAftale.setOnAction(event -> this.opretHotelAftaleOnAction());
         btnOpretUdflugt.setOnAction(event -> this.opretUdflugtOnAction());
+        btnOpretTilmelding.setOnAction(event -> this.opretTilmeldingOnAction());
 
         updateControls();
     }
@@ -85,6 +88,17 @@ public class KonferencePane extends Application {
         lvwKonferencer.getItems().setAll(Controller.getAlleKonferencer());
         int index = lvwKonferencer.getItems().size() - 1;
         lvwKonferencer.getSelectionModel().select(index);
+    }
+    public void opretTilmeldingOnAction() {
+        Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
+        if (selectedKonference != null) {
+            OpretTilmeldingWindow dialog = new OpretTilmeldingWindow(selectedKonference);
+            dialog.showAndWait();
+        } else {
+            alert.setTitle("Ingen Konference");
+            alert.setHeaderText("Du skal vælge en konference for at oprette en tilmelding");
+            alert.show();
+        }
     }
     public void opretHotelAftaleOnAction() {
         Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
