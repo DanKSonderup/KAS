@@ -76,10 +76,15 @@ public class AddUdflugtWindow extends Stage {
     }
 
     private void okOnAction() {
-        if (!erDatoValid(txfDato.getText().trim())) {
-            lblError.setText("Datoen er skrevet i forkert format!");
-        } else if (!erDatoIKonference(txfDato.getText().trim())) {
-            lblError.setText("Konferencen foregår ikke på denne dato!");
+        boolean fortsæt = true;
+        while (fortsæt) {
+            if (!erDatoValid(txfDato.getText().trim())) {
+                lblError.setText("Datoen er skrevet i forkert format!");
+                fortsæt = false;
+            } else if (!erDatoIKonference(txfDato.getText().trim())) {
+                lblError.setText("Konferencen foregår ikke på denne dato!");
+                fortsæt = false;
+            }
         }
 
     }
@@ -91,7 +96,7 @@ public class AddUdflugtWindow extends Stage {
     // TODO
     /**
      * Returnerer om datoen i den valgte udflugt er valid eller ej
-     * pre: dato > konferencens startdato og dato < konferencens slutdato
+     * pre: Datofeltet er ikke tomt  og datoerne for konferencen er sat
      */
     private boolean erDatoValid(String dato) {
         boolean erValid = true;
@@ -104,6 +109,11 @@ public class AddUdflugtWindow extends Stage {
 
         return erValid;
     }
+
+    /**
+     * Returnerer om datoen for udflugten er indenfor konferencens datoer
+     * pre: datoerne for konferencen er sat og datoen for udflugten er valid
+     */
 
     private boolean erDatoIKonference(String dato) {
         boolean ErIKonference = false;
