@@ -62,6 +62,9 @@ public class AddKonferenceWindow extends Stage {
             pane.add(tekstFelter[i],1,i);
         }
 
+        txfStartDato.setPromptText("DD-MM-YYYY");
+        txfSlutDato.setPromptText("DD-MM-YYYY");
+
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
         hboxButtons.getChildren().add(btnAfbryd);
