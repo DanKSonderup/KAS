@@ -9,6 +9,7 @@ public class HotelAftale {
     private double prisPrDobbeltVærelse;
     private Konference konference;
     private ArrayList<Tillæg> tillæg = new ArrayList<>();
+    private ArrayList<HotelBooking> hotelBookings = new ArrayList<>();
 
 
     public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation, Konference konference) {
