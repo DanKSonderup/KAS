@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -52,7 +53,7 @@ public class AddTillægWindow extends Stage {
         pane.add(lblTillægPris,0,1);
         pane.add(txfTillægPris,1,1);
         pane.add(btnOpretTillæg,1,2);
-        pane.add(lblError,0,4);
+        pane.add(lblError,1,4);
         lblError.setVisible(false);
 
         // Action events
@@ -69,11 +70,20 @@ public class AddTillægWindow extends Stage {
 
     private void opretTillægOnAction() {
         String navnInput = txfTillægNavn.getText().trim();
-        double prisInput = 0;
+        double prisInput = -1;
         try {
         prisInput = Double.parseDouble(txfTillægPris.getText().trim()) ;
         } catch (NumberFormatException ex) {
             lblError.setVisible(true);
+            lblError.setText("Pris er ikke et tal");
+            lblError.setTextFill(Color.RED);
+            return;
+        }
+        if (prisInput < 0) {
+            lblError.setVisible(true);
+            lblError.setText("Pris må ikke være negativ");
+            lblError.setTextFill(Color.RED);
+            return;
         }
         navn = navnInput;
         pris = prisInput;
