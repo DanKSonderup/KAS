@@ -28,7 +28,7 @@ public abstract class Controller {
      * Throws IllegalArgumentException, hvis dato er udenfor konferencedage
      */
     public static void createUdflugt(Konference konference, String navn, LocalDate dato, double pris, String lokation, boolean frokost) throws IllegalArgumentException {
-        konference.createUdflugt(new Udflugt(navn, dato, pris, lokation, frokost));
+        konference.addUdflugt(new Udflugt(navn, dato, pris, lokation, frokost));
     }
 
     public static ArrayList<Udflugt> getAlleUdflugter(Konference konference) {
@@ -39,11 +39,11 @@ public abstract class Controller {
      * Opretter et hotel
      * Pre: navn er ikke tomt, lokation er ikke tomt, prisPrEnkelt/Dobbelt >= 0
      */
-    public static HotelAftale createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
-        HotelAftale hotelAftale = new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation, konference);
-        Storage.storeHotelAftale(hotelAftale);
-        return hotelAftale;
+    public static void createHotelAftale(String navn, double prisNatEnkeltVærelse, double prisNatDobbeltVærelse, String lokation, Konference konference) {
+        konference.addHotelAftale(new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation));
+        Storage.storeHotelAftale(konference.addHotelAftale(new HotelAftale(navn, prisNatEnkeltVærelse, prisNatDobbeltVærelse, lokation));
     }
+
 
     public static ArrayList<HotelAftale> getAllHotelAftaler() {
         return Storage.getHotelAftaler();
@@ -55,7 +55,7 @@ public abstract class Controller {
      */
 
     public static void createTillæg(HotelAftale hotelAftale, String navn, double pris) {
-        hotelAftale.createTillæg(new Tillæg(navn,pris, hotelAftale));
+        hotelAftale.createTillæg(new Tillæg(navn,pris));
     }
 
     public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {

@@ -7,17 +7,15 @@ public class HotelAftale {
     private String lokation;
     private double prisPrNatEnkeltVærelse;
     private double prisPrDobbeltVærelse;
-    private Konference konference;
     private ArrayList<Tillæg> tillæg = new ArrayList<>();
     private ArrayList<HotelBooking> hotelBookings = new ArrayList<>();
 
 
-    public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation, Konference konference) {
+    public HotelAftale(String navn, double prisPrNatEnkeltVærelse, double prisPrDobbeltVærelse, String lokation) {
         this.navn = navn;
         this.prisPrNatEnkeltVærelse = prisPrNatEnkeltVærelse;
         this.prisPrDobbeltVærelse = prisPrDobbeltVærelse;
         this.lokation = lokation;
-        this.konference = konference;
     }
 
     public String getNavn() {
@@ -40,15 +38,12 @@ public class HotelAftale {
         return lokation;
     }
 
-    public Konference getKonference() {
-        return konference;
-    }
     public void createTillæg(Tillæg tillægInput) {
         tillæg.add(tillægInput);
     }
 
     @Override
     public String toString() {
-        return konference + " " + navn + " " + lokation + " " + prisPrNatEnkeltVærelse + " " + prisPrDobbeltVærelse + " " + tillæg;
+        return navn + " " + lokation + " " + prisPrNatEnkeltVærelse + " " + prisPrDobbeltVærelse + " " + tillæg;
     }
 }
