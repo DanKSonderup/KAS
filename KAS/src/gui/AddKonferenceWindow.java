@@ -12,6 +12,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class AddKonferenceWindow extends Stage {
 
     public AddKonferenceWindow() {
@@ -35,7 +38,8 @@ public class AddKonferenceWindow extends Stage {
     private final TextField txfSlutDato = new TextField();
     private final TextField txfPrisPerDag = new TextField();
     private final Button btnAfbryd = new Button("Afbryd");
-    private final Button btnOk = new Button("Ok");
+    private final Button btnOpret = new Button("Opret Konference");
+    private final Label lblError = new Label("Forket Data");
 
     public void initContent(GridPane pane) {
         String[] labelStrenge = {"Navn:", "Lokation:", "Start Dato:", "Slut Dato:", "Pris pr. dag:"};
@@ -55,15 +59,36 @@ public class AddKonferenceWindow extends Stage {
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
         hboxButtons.getChildren().add(btnAfbryd);
-        hboxButtons.getChildren().add(btnOk);
+        hboxButtons.getChildren().add(btnOpret);
         pane.add(hboxButtons,3,5);
+        pane.add(lblError,0,7);
+        // lblError.setVisible(false);
 
         // Tilføjer action events til knapper
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
+        btnOpret.setOnAction(event -> this.opretOnAction());
 
     }
 
     public void afbrydOnAction() {
         this.hide();
+    }
+
+    public void opretOnAction() {
+        if (!erDatoValid(txfStartDato.getText().trim()) || !erDatoValid(txfSlutDato.getText().trim())) {
+
+        }
+    }
+
+    private boolean erDatoValid(String dato) {
+        boolean erValid = true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        try {
+            formatter.parse(dato);
+        } catch (DateTimeParseException e) {
+            erValid = false;
+        }
+
+        return erValid;
     }
 }
