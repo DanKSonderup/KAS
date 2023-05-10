@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class AddTillægWindow extends Stage {
     private String navn;
     private double pris;
+    private boolean canCreate = false;
     public AddTillægWindow() {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -68,6 +69,10 @@ public class AddTillægWindow extends Stage {
         return pris;
     }
 
+    public boolean canCreate() {
+        return canCreate;
+    }
+
     private void opretTillægOnAction() {
         String navnInput = txfTillægNavn.getText().trim();
         if (navnInput.length() == 0) {
@@ -93,6 +98,7 @@ public class AddTillægWindow extends Stage {
         }
         navn = navnInput;
         pris = prisInput;
+        canCreate = true;
         this.hide();
     }
 }

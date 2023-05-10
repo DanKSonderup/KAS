@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,11 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -40,7 +43,7 @@ public class AddKonferenceWindow extends Stage {
     private final TextField txfPrisPerDag = new TextField();
     private final Button btnAfbryd = new Button("Afbryd");
     private final Button btnOpret = new Button("Opret Konference");
-    private final Label lblError = new Label("Forket Data");
+    private final Label lblError = new Label("Der opstod en fejl \n prøv igen");
 
     public void initContent(GridPane pane) {
         String[] labelStrenge = {"Navn:", "Lokation:", "Start Dato:", "Slut Dato:", "Pris pr. dag:"};
@@ -52,17 +55,23 @@ public class AddKonferenceWindow extends Stage {
         // set vertical gap between components
         pane.setVgap(10);
 
+        // Tilføjer Labels og Tekstfelter
         for (int i = 0; i < 5; i++) {
             Label lbl1 = new Label(labelStrenge[i]);
             pane.add(lbl1,0,i);
             pane.add(tekstFelter[i],1,i);
         }
+
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
         hboxButtons.getChildren().add(btnAfbryd);
         hboxButtons.getChildren().add(btnOpret);
         pane.add(hboxButtons,3,5);
-        pane.add(lblError,0,7);
+
+        // Vbox til vores Error label
+        VBox vboxError = new VBox();
+        pane.add(vboxError,3,6);
+        vboxError.getChildren().add(lblError);
         lblError.setVisible(false);
 
         // Tilføjer action events til knapper
@@ -76,31 +85,31 @@ public class AddKonferenceWindow extends Stage {
     }
 
     public void opretOnAction() {
-        String startDato = txfStartDato.getText().trim();
-        String slutDato = txfSlutDato.getText().trim();
+        String startDatoString = txfStartDato.getText().trim();
+        String slutDatoString = txfSlutDato.getText().trim();
         String navn = txfNavn.getText().trim();
         String lokation = txfLokation.getText().trim();
 
         if (navn.length() == 0) {
-            lblError.setText("Navn skal udfyldes");
+            lblError.setText("Navn skal udfyldes \n");
             lblError.setTextFill(Color.RED);
             lblError.setVisible(true);
             return;
         }
         if (lokation.length() == 0) {
-            lblError.setText("Lokation skal udfyldes");
+            lblError.setText("Lokation skal udfyldes \n");
             lblError.setTextFill(Color.RED);
             lblError.setVisible(true);
             return;
         }
-        if (!erDatoValid(startDato)) {
-            lblError.setText("Startdato er ikke en gyldig Dato");
+        if (!erDatoValid(startDatoString)) {
+            lblError.setText("Startdato er ikke \nen gyldig Dato");
             lblError.setTextFill(Color.RED);
             lblError.setVisible(true);
             return;
         }
-        if (!erDatoValid(slutDato)) {
-            lblError.setText("Slutdato er ikke en gyldig Dato");
+        if (!erDatoValid(slutDatoString)) {
+            lblError.setText("Slutdato er ikke \nen gyldig Dato");
             lblError.setTextFill(Color.RED);
             lblError.setVisible(true);
             return;
@@ -109,12 +118,32 @@ public class AddKonferenceWindow extends Stage {
         try {
             prisPrDag = Double.parseDouble(txfPrisPerDag.getText().trim());
         } catch (NumberFormatException ex) {
-            lblError.setText("Pris per dag er ikke et tal");
+            lblError.setText("Pris per dag er ikke et tal \n");
             lblError.setTextFill(Color.RED);
             lblError.setVisible(true);
             return;
         }
+        LocalDate startDate = null;
+        LocalDate slutDate = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        try {
+            startDate = LocalDate.parse(startDatoString, formatter);
+            slutDate = LocalDate.parse(slutDatoString, formatter);
+        }
+        catch (DateTimeParseException e) {
+            lblError.setText("En af dine datoer \ner ikke en gyldig dato");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
+        if (slutDate.isBefore(startDate)) {
+            lblError.setText("Din slutdato er før \ndin startdato");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
+        Controller.createKonference(navn, lokation, startDate,slutDate,prisPrDag);
+        this.hide();
 
     }
 
