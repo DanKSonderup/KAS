@@ -48,6 +48,8 @@ public class AddUdflugtWindow extends Stage {
             pane.add(lbl1, 0, i);
             pane.add(tekstFelter[i], 1, i);
         }
+        txfDato.setPromptText("DD-MM-YYYY");
+
         Label lblFrokost = new Label("Frokost:");
         pane.add(lblFrokost, 0, 4);
         pane.add(cbFrokost, 1, 4);
@@ -59,5 +61,17 @@ public class AddUdflugtWindow extends Stage {
         pane.add(hboxButtons, 3, 5);
 
 
+        btnOk.setOnAction(event -> okOnAction());
+        btnAfbryd.setOnAction(event -> afbrydOnAction());
+
+
+    }
+
+    public void okOnAction() {
+        this.hide();
+    }
+
+    public void afbrydOnAction() {
+        this.hide();
     }
 }
