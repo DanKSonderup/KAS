@@ -12,6 +12,7 @@ public class HotelBooking {
         this.valgteTillæg = valgteTillæg;
     }
 
+
     public double samletPris() {
         double pris = 0;
         /** TODO
