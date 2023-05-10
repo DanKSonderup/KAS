@@ -91,8 +91,8 @@ public abstract class Controller {
 
     public static Deltager createDeltager(
             String navn, String adresse, String telefonnummer,
-            String by, String land, LocalDate ankomstdato, LocalDate afrejsedato, boolean foredagsholder) {
-        Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land, ankomstdato, afrejsedato, foredagsholder);
+            String by, String land) {
+        Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land);
         return deltager;
     }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Tilmelding {
     private LocalDate ankomstDato;
@@ -24,5 +25,14 @@ public class Tilmelding {
     public Ledsager createLedsager(String navn) {
         Ledsager ledsager1 = new Ledsager(navn, this);
         return ledsager1;
+    }
+
+    public void addFirma(Firma firma) {
+        this.firma = firma;
+    }
+
+    public HotelBooking createHotelBooking(ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
+        HotelBooking hotelBooking1 = new HotelBooking(this, valgteTillæg, hotelAftale);
+        return hotelBooking1;
     }
 }
