@@ -3,12 +3,10 @@ package model;
 public class Tillæg {
     private String navn;
     private double pris;
-    private HotelAftale hotelAftale;
 
-    public Tillæg(String navn, double pris, HotelAftale hotelAftale) {
+    public Tillæg(String navn, double pris) {
         this.navn = navn;
         this.pris = pris;
-        this.hotelAftale = hotelAftale;
     }
 
     public String getNavn() {
