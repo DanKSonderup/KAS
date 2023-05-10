@@ -59,6 +59,7 @@ public class AddHotelAftaleWindow extends Stage {
     private final ListView<Pair> lvwTillæg = new ListView<>();
     private final Button btnOpretTillæg = new Button("Opret tillæg");
     private final Button btnOpretAftale = new Button("Opret Hotel Aftale");
+    private final Label lblError = new Label("Der opstod en fejl");
 
     public void initContent(GridPane pane) {
         String[] labelStrenge = {"Navn:", "Lokation", "Pris per nat enkeltværelse:", "Pris per nat dobbeltværelse:"};
@@ -84,6 +85,8 @@ public class AddHotelAftaleWindow extends Stage {
         hboxButtons.getChildren().add(btnAfbryd);
         hboxButtons.getChildren().add(btnOpretAftale);
         pane.add(hboxButtons,1,9);
+        pane.add(lblError,1,11);
+        lblError.setVisible(false);
 
 
         // Tilføjer action events til knapper
@@ -103,10 +106,25 @@ public class AddHotelAftaleWindow extends Stage {
                 prisPrNatEnkelt = Double.parseDouble(txfPrisPrNatEnkeltVærelse.getText().trim());
                 prisPrNatDobbelt = Double.parseDouble(txfPrisPrNatDobbeltVærelse.getText().trim());
             } catch (NumberFormatException ex) {
-
+                lblError.setText("En af dine priser \ner ikke et tal");
+                lblError.setTextFill(Color.RED);
+                lblError.setVisible(true);
+                return;
             }
             String navn = txfNavn.getText().trim();
             String lokation = txfLokation.getText().trim();
+            if (navn.length() == 0) {
+                lblError.setText("Navn skal udfyldes");
+                lblError.setTextFill(Color.RED);
+                lblError.setVisible(true);
+                return;
+            }
+            if (lokation.length() == 0) {
+            lblError.setText("Lokation skal udfyldes");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+            }
             HotelAftale h1 = Controller.createHotelAftale(navn,prisPrNatEnkelt,prisPrNatDobbelt, lokation, konference);
 
             for (Pair pair: pairListe) {

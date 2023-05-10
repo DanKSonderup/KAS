@@ -70,6 +70,12 @@ public class AddTillægWindow extends Stage {
 
     private void opretTillægOnAction() {
         String navnInput = txfTillægNavn.getText().trim();
+        if (navnInput.length() == 0) {
+            lblError.setVisible(true);
+            lblError.setText("Navn er ikke udfyldt");
+            lblError.setTextFill(Color.RED);
+            return;
+        }
         double prisInput = -1;
         try {
         prisInput = Double.parseDouble(txfTillægPris.getText().trim()) ;

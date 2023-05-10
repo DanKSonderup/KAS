@@ -6,15 +6,18 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Konference;
 
 public class OpretTilmeldingWindow extends Stage {
 
-    public OpretTilmeldingWindow() {
+    private Konference konference;
+
+    public OpretTilmeldingWindow(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
         // this.setWidth(300); --> Nødvendig hvis hidden items
-
+        this.konference = konference;
         this.setTitle("Opret Tilmelding");
         GridPane pane = new GridPane();
         this.initContent(pane);

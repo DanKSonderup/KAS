@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -62,7 +63,7 @@ public class AddKonferenceWindow extends Stage {
         hboxButtons.getChildren().add(btnOpret);
         pane.add(hboxButtons,3,5);
         pane.add(lblError,0,7);
-        // lblError.setVisible(false);
+        lblError.setVisible(false);
 
         // Tilføjer action events til knapper
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
@@ -75,9 +76,46 @@ public class AddKonferenceWindow extends Stage {
     }
 
     public void opretOnAction() {
-        if (!erDatoValid(txfStartDato.getText().trim()) || !erDatoValid(txfSlutDato.getText().trim())) {
+        String startDato = txfStartDato.getText().trim();
+        String slutDato = txfSlutDato.getText().trim();
+        String navn = txfNavn.getText().trim();
+        String lokation = txfLokation.getText().trim();
 
+        if (navn.length() == 0) {
+            lblError.setText("Navn skal udfyldes");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
         }
+        if (lokation.length() == 0) {
+            lblError.setText("Lokation skal udfyldes");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
+        if (!erDatoValid(startDato)) {
+            lblError.setText("Startdato er ikke en gyldig Dato");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
+        if (!erDatoValid(slutDato)) {
+            lblError.setText("Slutdato er ikke en gyldig Dato");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
+        double prisPrDag = -1;
+        try {
+            prisPrDag = Double.parseDouble(txfPrisPerDag.getText().trim());
+        } catch (NumberFormatException ex) {
+            lblError.setText("Pris per dag er ikke et tal");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+
     }
 
     private boolean erDatoValid(String dato) {
