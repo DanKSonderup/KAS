@@ -140,7 +140,9 @@ public class AddHotelAftaleWindow extends Stage {
         dialog.showAndWait();
         // ----->
         Pair p1 = new Pair(dialog.getNavn(), dialog.getPris());
-        pairListe.add(p1);
-        lvwTillæg.getItems().setAll(pairListe);
+        if (dialog.canCreate()) {
+            pairListe.add(p1);
+            lvwTillæg.getItems().setAll(pairListe);
+        }
     }
 }
