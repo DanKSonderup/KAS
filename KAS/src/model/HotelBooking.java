@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HotelBooking {
@@ -21,6 +22,14 @@ public class HotelBooking {
          * I liked the part where Oliver said "Its mathing time" and then mathed all over the method
          */
 
+        double prisPrNat = 0;
+
+        if (tilmelding.getLedsager() == null) {
+            prisPrNat = hotelAftale.getPrisPrNatEnkeltVærelse();
+        } else {
+            prisPrNat = hotelAftale.getPrisPrDobbeltVærelse();
+        }
+        pris = (tilmelding.antalDage()) * prisPrNat;
         return pris;
     }
 }
