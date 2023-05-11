@@ -119,6 +119,17 @@ public abstract class Controller {
         return tilmeldinger;
     }
 
+    public static ArrayList<Deltager> getAlleDeltagere() {
+        ArrayList<Deltager> deltagere = new ArrayList<>();
+        for (Konference konference: Storage.getKonferencer()) {
+
+            for (Tilmelding tilmelding: konference.getTilmeldinger()) {
+                deltagere.add(tilmelding.getDeltager());
+            }
+        }
+        return deltagere;
+    }
+
     public static ArrayList<Deltager> getAlleDeltagerForKonference(Konference konference) {
         ArrayList<Deltager> deltagerne = new ArrayList<>();
         for (Tilmelding t : konference.getTilmeldinger()) {

@@ -70,6 +70,11 @@ public class Udflugt {
 
     @Override
     public String toString() {
-        return  navn + " " + dato + " " + pris + " " + lokation + " " + frokost + " ";
+        String frokostString = "";
+        if (frokost) {
+            frokostString = "Frokost inkl.";
+        }
+        return  navn + " " + dato + " " + pris + " " + lokation + " "
+                + frokostString;
     }
 }

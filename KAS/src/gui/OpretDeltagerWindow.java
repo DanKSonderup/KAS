@@ -9,18 +9,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Deltager;
 import model.Konference;
 import javafx.scene.control.*;
 
 public class OpretDeltagerWindow extends Stage {
 
-    private Konference konference;
-    public OpretDeltagerWindow(Konference konference) {
+    private Deltager deltager;
+    public OpretDeltagerWindow() {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-        // this.setWidth(300); --> Nødvendig hvis hidden items
-        this.konference = konference;
         this.setTitle("Opret Deltager");
         GridPane pane = new GridPane();
         this.initContent(pane);
@@ -90,6 +89,11 @@ public class OpretDeltagerWindow extends Stage {
         String telefonnummer = txfTelefonNummer.getText().trim();
         String by = txfBy.getText().trim();
         String land = txfLand.getText().trim();
+        deltager = new Deltager(navn,adresse,telefonnummer,by,land);
         this.hide();
+    }
+
+    public Deltager getDeltager() {
+        return deltager;
     }
 }

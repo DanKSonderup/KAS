@@ -69,4 +69,9 @@ public class Deltager {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return navn + " (" + telefonnummer + ") - " +  adresse + ", " + by + ", " + land;
+    }
 }

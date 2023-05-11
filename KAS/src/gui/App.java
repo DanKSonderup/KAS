@@ -1,10 +1,7 @@
 package gui;
 
 import controller.Controller;
-import model.Deltager;
-import model.Konference;
-import model.Ledsager;
-import model.Tilmelding;
+import model.*;
 
 import java.time.LocalDate;
 
@@ -28,5 +25,7 @@ public class App {
         Tilmelding t1 = Controller.createTilmelding(kf, deltager2,date1,d2,true);
         Ledsager l1 = new Ledsager("Jeppe", t1);
         Controller.addLedsagerTilTilmelding(t1,l1);
+
+        Controller.createUdflugt(kf,"Byrundtur Odense", date1, 100, "Odense", true);
     }
 }
