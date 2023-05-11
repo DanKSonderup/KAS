@@ -1,5 +1,7 @@
 package gui;
 
+import controller.Controller;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -71,6 +73,18 @@ public class OpretTilmeldingWindow extends Stage {
         pane.add(btnOpretDeltager, 2, 1);
         pane.add(btnOpretHotelBooking, 2, 2);
         pane.add(btnOpretLedsager, 2, 3);
+        btnOpretLedsager.setDisable(true);
+
+        lvwDeltagere.getItems().addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(ListChangeListener.Change change) {
+                Deltager selectedDeltager = lvwDeltagere.getSelectionModel().getSelectedItem();
+                if (selectedDeltager != null) {
+                    TextAreaInfo.setText("" + selectedDeltager);
+                    btnOpretLedsager.setDisable(false);
+                }
+            }
+        });
 
         pane.add(TextAreaInfo, 4, 1, 2, 4);
         TextAreaInfo.setPrefHeight(170);
@@ -89,11 +103,9 @@ public class OpretTilmeldingWindow extends Stage {
 
         pane.add(btnAfbryd, 3, 8);
         pane.add(btnOk, 4, 8);
+    }
 
-
-
-
-
-
+    public void updateControls() {
+        // lvwDeltagere.getItems().setAll(Controller.get);
     }
 }
