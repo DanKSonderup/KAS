@@ -28,6 +28,10 @@ public class Tilmelding {
         return ledsager1;
     }
 
+    public void setLedsager(Ledsager ledsager) {
+        this.ledsager = ledsager;
+    }
+
     public void addFirma(Firma firma) {
         this.firma = firma;
     }
@@ -57,22 +61,36 @@ public class Tilmelding {
         return konference;
     }
 
-    public int antalDage() {
-        long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
-        int dage = (int) daysBetween;
-        return dage;
-    }
+        @Override
+        public String toString () {
+            String udskrift = deltager.getNavn() + "\n" +
+                    "fra " + ankomstDato + " til " + afrejseDato;
 
-    @Override
-    public String toString2() {
-        return "Tilmelding{" +
-                "ankomstDato=" + ankomstDato +
-                ", afrejseDato=" + afrejseDato +
-                ", foredragsholder=" + foredragsholder +
-                ", firma=" + firma +
-                ", deltager=" + deltager +
-                ", ledsager=" + ledsager +
-                ", konference=" + konference +
-                '}';
+            if (ledsager != null) {
+                udskrift += "\n" + ledsager.getNavn();
+                if (ledsager.getUdflugter() != null) {
+                    udskrift += "\n Udflugter: ";
+                    for (Udflugt udflugt : ledsager.getUdflugter()) {
+                        udskrift += udflugt.getNavn() + " ";
+                    }
+                }
+            }
+            if (foredragsholder) {
+                udskrift += "\n" + "Er foredragsholder";
+            }
+            if (hotelBooking != null) {
+                udskrift += "\n Hotel: " + hotelBooking.getHotelAftaleNavn();
+            }
+            if (firma != null) {
+                udskrift += "\n Firma: " + firma.getNavn();
+            }
+
+            return udskrift;
+        }
+
+        public int antalDage () {
+            long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
+            int dage = (int) daysBetween;
+            return dage;
+        }
     }
-}
