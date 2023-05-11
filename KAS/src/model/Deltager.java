@@ -56,4 +56,6 @@ public class Deltager {
 
         return pris;
     }
+
+
 }

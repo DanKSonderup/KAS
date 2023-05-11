@@ -53,7 +53,19 @@ public class Tilmelding {
         return afrejseDato;
     }
 
+    @Override
+    public String toString() {
+        if (ledsager != null) {
+            String s1 = deltager.getNavn() + "\n"
+                    + "fra " + ankomstDato + " til " + afrejseDato;
+        } if (foredragsholder == true) {
+            String s1 += ""
+        }
 
+
+
+         return færdigTekst;
+    }
 
     public int antalDage() {
         long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);

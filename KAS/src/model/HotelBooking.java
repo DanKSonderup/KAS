@@ -32,4 +32,8 @@ public class HotelBooking {
         pris = (tilmelding.antalDage()) * prisPrNat;
         return pris;
     }
+
+    public String getHotelAftaleNavn() {
+        return hotelAftale.getNavn();
+    }
 }
