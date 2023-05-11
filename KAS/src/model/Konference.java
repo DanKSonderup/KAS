@@ -32,6 +32,10 @@ public class Konference {
         hotelaftaler.add(hotelAftale);
     }
 
+    public void addTilmelding(Tilmelding tilmelding) {
+        tilmeldinger.add(tilmelding);
+    }
+
     public String getNavn() {
         return navn;
     }

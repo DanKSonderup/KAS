@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -51,7 +53,7 @@ public class AddUdflugtWindow extends Stage {
         String[] labelStrenge = {"Navn:", "Dato:", "Lokation:", "Pris:"};
         TextField[] tekstFelter = {txfNavn, txfDato, txfLokation, txfPris};
 
-        for (int i = 0; i < labelStrenge.length - 1; i++) {
+        for (int i = 0; i < labelStrenge.length; i++) {
             Label lbl1 = new Label(labelStrenge[i]);
             pane.add(lbl1, 0, i);
             pane.add(tekstFelter[i], 1, i);
@@ -61,6 +63,8 @@ public class AddUdflugtWindow extends Stage {
         Label lblFrokost = new Label("Frokost:");
         pane.add(lblFrokost, 0, 4);
         pane.add(cbFrokost, 1, 4);
+        pane.add(lblError,1,5);
+        lblError.setMinHeight(40);
 
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
@@ -79,18 +83,50 @@ public class AddUdflugtWindow extends Stage {
         boolean fortsæt = true;
         while (fortsæt) {
             if (!erDatoValid(txfDato.getText().trim())) {
-                lblError.setText("Datoen er skrevet i forkert format!");
+                lblError.setText("Datoen er skrevet\ni forkert format!");
                 fortsæt = false;
             } else if (!erDatoIKonference(txfDato.getText().trim())) {
-                lblError.setText("Konferencen foregår ikke på denne dato!");
+                lblError.setText("Konferencen foregår\nikke på denne dato!");
                 fortsæt = false;
+            } else if (!erPrisValid(txfPris.getText().trim())) {
+                lblError.setText("Pris er ikke et gyldigt tal!");
+                fortsæt = false;
+            } else if (txfNavn.getText().trim().length() < 1) {
+                lblError.setText("Der er intet navn!");
+                fortsæt = false;
+            } else if (txfLokation.getText().trim().length() < 1) {
+                lblError.setText("Der ingen lokation!");
+                fortsæt = false;
+            } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+                LocalDate udflugtDato = LocalDate.parse(txfDato.getText().trim(), formatter);
+                double pris = Double.parseDouble(txfPris.getText().trim());
+                Udflugt uf = Controller.createUdflugt(konference,txfNavn.getText().trim(), udflugtDato, pris, txfLokation.getText().trim(), cbFrokost.isSelected());
+                System.out.println(uf);
+                this.hide();
+                return;
             }
         }
+
 
     }
 
     private void afbrydOnAction() {
         this.hide();
+    }
+
+    /**
+     * Returnerer om Pris i den valgte udflugt er en gyldig Double
+     *
+     */
+    private boolean erPrisValid(String prisInput) {
+        boolean erValid = true;
+        try {
+        double pris = Double.parseDouble(prisInput);
+        } catch (NumberFormatException ex) {
+            erValid = false;
+        }
+        return erValid;
     }
 
     // TODO
@@ -100,10 +136,13 @@ public class AddUdflugtWindow extends Stage {
      */
     private boolean erDatoValid(String dato) {
         boolean erValid = true;
+        LocalDate udflugtDato = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+
         try {
-            formatter.parse(dato);
-        } catch (DateTimeParseException e) {
+            udflugtDato = LocalDate.parse(dato, formatter);
+        }
+        catch (DateTimeParseException e) {
             erValid = false;
         }
 
@@ -118,8 +157,9 @@ public class AddUdflugtWindow extends Stage {
     private boolean erDatoIKonference(String dato) {
         boolean ErIKonference = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+
         if (erDatoValid(dato)) {
-            LocalDate d = (LocalDate) formatter.parse(dato);
+            LocalDate d = LocalDate.parse(dato, formatter);
             if (d.isAfter(konference.getStartDato()) && d.isBefore(konference.getSlutDato())) {
                 ErIKonference = true;
             }

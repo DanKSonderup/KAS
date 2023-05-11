@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.nio.charset.Charset;
+
 
 public class LoginPane extends Application {
     @Override

@@ -115,8 +115,15 @@ public class KonferencePane extends Application {
     }
 
     public void opretUdflugtOnAction() {
-        AddUdflugtWindow dialog = new AddUdflugtWindow(lvwKonferencer.getSelectionModel().getSelectedItem());
-        dialog.showAndWait();
+        Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
+        if (selectedKonference != null) {
+            AddUdflugtWindow dialog = new AddUdflugtWindow(selectedKonference);
+            dialog.showAndWait();
+        } else {
+            alert.setTitle("Ingen Konference");
+            alert.setHeaderText("Du skal vælge en konference for at oprette en Udflugt");
+            alert.show();
+        }
     }
 
     public void updateControls() {

@@ -58,4 +58,9 @@ public class Udflugt {
     public void setFrokost(boolean frokost) {
         this.frokost = frokost;
     }
+
+    @Override
+    public String toString() {
+        return  navn + " " + dato + " " + pris + " " + lokation + " " + frokost + " ";
+    }
 }
