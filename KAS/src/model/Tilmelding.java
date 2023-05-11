@@ -23,11 +23,6 @@ public class Tilmelding {
         this.konference = konference;
     }
 
-    public Ledsager createLedsager(String navn) {
-        Ledsager ledsager1 = new Ledsager(navn, this);
-        return ledsager1;
-    }
-
     public void setLedsager(Ledsager ledsager) {
         this.ledsager = ledsager;
     }
