@@ -27,4 +27,9 @@ public class Ledsager {
     public ArrayList<Udflugt> getUdflugter() {
         return udflugter;
     }
+
+    @Override
+    public String toString() {
+        return navn;
+    }
 }

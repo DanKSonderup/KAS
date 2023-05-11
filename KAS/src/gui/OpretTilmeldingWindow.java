@@ -12,13 +12,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Deltager;
 import model.Konference;
+import storage.Storage;
 
 import javax.swing.event.ChangeListener;
 
 public class OpretTilmeldingWindow extends Stage {
 
     private Konference konference;
-
+    private Scene scene;
     public OpretTilmeldingWindow(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -27,9 +28,8 @@ public class OpretTilmeldingWindow extends Stage {
         this.konference = konference;
         this.setTitle("Opret Tilmelding");
         GridPane pane = new GridPane();
-        this.initContent(pane);
-
-        Scene scene = new Scene(pane);
+        this.initContent1(pane);
+        scene = new Scene(pane);
         this.setScene(scene);
     }
 
@@ -50,10 +50,8 @@ public class OpretTilmeldingWindow extends Stage {
     private final Label lblError = new Label();
     private final CheckBox cbxForedagsholder = new CheckBox("Foredragsholder");
 
-    private static int counter = 0;
 
-
-    public void initContent (GridPane pane) {
+    public void initContent1 (GridPane pane) {
         pane.setPadding(new Insets(20));
         // set horizontal gap between components
         pane.setHgap(10);
@@ -61,7 +59,7 @@ public class OpretTilmeldingWindow extends Stage {
         pane.setVgap(10);
         updateControls();
 
-        Label lblDeltager = new Label("Deltagere");
+        Label lblDeltager = new Label("Marker en deltager for at vælge en tidligere deltager");
         pane.add(lblDeltager, 0, 0);
         pane.add(lvwDeltagere, 0, 1, 2, 4);
         lvwDeltagere.setPrefHeight(170);
@@ -80,18 +78,9 @@ public class OpretTilmeldingWindow extends Stage {
         pane.add(btnOpretLedsager, 2, 3);
         btnOpretLedsager.setDisable(true);
 
+
         lvwDeltagere.getSelectionModel().selectedItemProperty().addListener(event ->
                 this.deltagerSelectionChanged(lvwDeltagere.getSelectionModel().getSelectedItem()));
-        /*
-        lvwDeltagere.getSelectionModel().selectedItemProperty()
-                .addListener((obs, oldDeltager, newDeltager) -> {
-                    if (newDeltager != null) {
-                        TextAreaInfo.setText("" + newDeltager.getNavn());
-                    }
-                    });
-
-         */
-
 
 
         pane.add(TextAreaInfo, 4, 1, 2, 4);
@@ -111,20 +100,57 @@ public class OpretTilmeldingWindow extends Stage {
 
         pane.add(btnAfbryd, 3, 8);
         pane.add(btnOk, 4, 8);
+
+        btnOpretDeltager.setOnAction(event -> this.opretDeltagerOnAction());
+        btnOk.setOnAction(event -> this.sceneSelectOpretNyDeltager());
+    }
+    public void initContent2 (GridPane pane) {
+        pane.setPadding(new Insets(20));
+        // set horizontal gap between components
+        pane.setHgap(10);
+        // set vertical gap between components
+        pane.setVgap(10);
+
     }
 
     public void updateControls() {
         lvwDeltagere.getItems().setAll(Controller.getAlleDeltagerForKonference(konference));
+
+        if (lvwDeltagere.getSelectionModel().getSelectedItem() != null) {
+            deltagerSelectionChanged(lvwDeltagere.getSelectionModel().getSelectedItem());
+        }
     }
 
     public void deltagerSelectionChanged(Deltager deltager) {
         StringBuilder sb = new StringBuilder();
         if (deltager != null) {
-            sb.append("Navn: " + deltager.getNavn());
+            sb.append("Navn: " + deltager.getNavn() + "\n");
         }
-        if (deltager.findTilmeldingTilKonference(konference) != null) {
-            sb.append("Ledsager: " + deltager.findTilmeldingTilKonference(konference).getDeltager());
+        if (deltager.findTilmeldingTilKonference(konference).getLedsager() != null) {
+            sb.append("Ledsager: " + deltager.findTilmeldingTilKonference(konference).getLedsager());
+            btnOpretLedsager.setDisable(true);
+        } else {
+            btnOpretLedsager.setDisable(false);
         }
         TextAreaInfo.setText("" + sb);
+    }
+
+    private void opretDeltagerOnAction() {
+        OpretDeltagerWindow dialog = new OpretDeltagerWindow(konference);
+        dialog.showAndWait();
+
+        // Wait for the modal dialog to close
+
+        lvwDeltagere.getItems().setAll(Controller.getAlleDeltagerForKonference(konference));
+        int index = lvwDeltagere.getItems().size() - 1;
+        lvwDeltagere.getSelectionModel().select(index);
+    }
+
+    private void sceneSelectOpretNyDeltager() {
+        this.setTitle("Opret ny Deltager");
+        GridPane pane2 = new GridPane();
+        this.initContent2(pane2);
+        scene = new Scene(pane2);
+        this.setScene(scene);
     }
 }

@@ -108,7 +108,7 @@ public abstract class Controller {
     }
 
     public static void addLedsagerTilTilmelding(Tilmelding tilmelding, Ledsager ledsager) {
-
+        tilmelding.setLedsager(ledsager);
     }
 
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
