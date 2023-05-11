@@ -102,11 +102,18 @@ public class AddHotelAftaleWindow extends Stage {
     public void OpretAftaleOnAction() {
             double prisPrNatEnkelt = 0;
             double prisPrNatDobbelt = 0;
+
             try {
                 prisPrNatEnkelt = Double.parseDouble(txfPrisPrNatEnkeltVærelse.getText().trim());
                 prisPrNatDobbelt = Double.parseDouble(txfPrisPrNatDobbeltVærelse.getText().trim());
             } catch (NumberFormatException ex) {
                 lblError.setText("En af dine priser \ner ikke et tal");
+                lblError.setTextFill(Color.RED);
+                lblError.setVisible(true);
+                return;
+            }
+            if (prisPrNatDobbelt < 0 || prisPrNatEnkelt < 0) {
+                lblError.setText("Priser må ikke \nvære negative");
                 lblError.setTextFill(Color.RED);
                 lblError.setVisible(true);
                 return;

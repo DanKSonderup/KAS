@@ -27,8 +27,10 @@ public abstract class Controller {
      * Pre: navn er ikke tomt, startDate <= endDDate, pris >= 0
      * Throws IllegalArgumentException, hvis dato er udenfor konferencedage
      */
-    public static void createUdflugt(Konference konference, String navn, LocalDate dato, double pris, String lokation, boolean frokost) throws IllegalArgumentException {
-        konference.addUdflugt(new Udflugt(navn, dato, pris, lokation, frokost));
+    public static Udflugt createUdflugt(Konference konference, String navn, LocalDate dato, double pris, String lokation, boolean frokost) throws IllegalArgumentException {
+        Udflugt uf = new Udflugt(navn, dato, pris, lokation, frokost);
+        konference.addUdflugt(uf);
+        return uf;
     }
 
     public static ArrayList<Udflugt> getAlleUdflugter(Konference konference) {
@@ -96,6 +98,16 @@ public abstract class Controller {
         Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land);
         return deltager;
     }
+
+    /*
+    public static Tilmelding createTilmelding(Konference konference, Deltager deltager, LocalDate ankomstDato, LocalDate afrejseDato, boolean foredragsholder) {
+        Tilmelding t1 = new Tilmelding(ankomstDato,afrejseDato,foredragsholder, deltager, konference);
+        konference.addTilmelding(t1);
+        deltager.addTilmelding(t1);
+
+    }
+
+     */
 
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
         ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
