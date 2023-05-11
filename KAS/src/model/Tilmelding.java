@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Tilmelding {
@@ -34,5 +35,29 @@ public class Tilmelding {
     public HotelBooking createHotelBooking(ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
         HotelBooking hotelBooking1 = new HotelBooking(this, valgteTillæg, hotelAftale);
         return hotelBooking1;
+    }
+
+    public Ledsager getLedsager() {
+        return ledsager;
+    }
+
+    public Deltager getDeltager() {
+        return deltager;
+    }
+
+    public LocalDate getAnkomstDato() {
+        return ankomstDato;
+    }
+
+    public LocalDate getAfrejseDato() {
+        return afrejseDato;
+    }
+
+
+
+    public int antalDage() {
+        long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
+        int dage = (int) daysBetween;
+        return dage;
     }
 }
