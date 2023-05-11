@@ -55,16 +55,29 @@ public class Tilmelding {
 
     @Override
     public String toString() {
+        String udskrift = deltager.getNavn() + "\n" +
+                "fra " + ankomstDato + " til " + afrejseDato;
+
         if (ledsager != null) {
-            String s1 = deltager.getNavn() + "\n"
-                    + "fra " + ankomstDato + " til " + afrejseDato;
-        } if (foredragsholder == true) {
-            String s1 += ""
+            udskrift += "\n" + ledsager.getNavn();
+            if (ledsager.getUdflugter() != null) {
+                udskrift += "\n Udflugter: ";
+                for (Udflugt udflugt : ledsager.getUdflugter()) {
+                    udskrift += udflugt.getNavn() + " ";
+                }
+            }
+        }
+        if (foredragsholder) {
+            udskrift += "\n" + "Er foredragsholder";
+        }
+        if (hotelBooking != null) {
+            udskrift += "\n Hotel: " + hotelBooking.getHotelAftaleNavn();
+        }
+        if (firma != null) {
+            udskrift += "\n Firma: " + firma.getNavn();
         }
 
-
-
-         return færdigTekst;
+         return udskrift;
     }
 
     public int antalDage() {
