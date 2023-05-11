@@ -122,9 +122,13 @@ public class OpretTilmeldingWindow extends Stage {
         if (deltager != null) {
             sb.append("Navn: " + deltager.getNavn());
         }
+        deltager.findTilmeldingTilKonference(konference);
+        /*
         if (deltager.findTilmeldingTilKonference(konference) != null) {
             sb.append("Ledsager: " + deltager.findTilmeldingTilKonference(konference).getDeltager());
         }
+
+         */
         TextAreaInfo.setText("" + sb);
     }
 }

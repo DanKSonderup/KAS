@@ -99,15 +99,13 @@ public abstract class Controller {
         return deltager;
     }
 
-    /*
+
     public static Tilmelding createTilmelding(Konference konference, Deltager deltager, LocalDate ankomstDato, LocalDate afrejseDato, boolean foredragsholder) {
         Tilmelding t1 = new Tilmelding(ankomstDato,afrejseDato,foredragsholder, deltager, konference);
         konference.addTilmelding(t1);
         deltager.addTilmelding(t1);
-
+        return t1;
     }
-
-     */
 
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
         ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
