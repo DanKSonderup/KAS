@@ -73,14 +73,16 @@ public class Konference {
         return navn + " fra " + startDato + " til " + slutDato + " - Pris: " + prisPerDag;
     }
 
+
+
     public String visInfo() {
-        String udskrift = "Udflugter knyttet til konferencen " + navn;
+        String udskrift = "Udflugter knyttet til konferencen " + navn + "\n";
 
         if (udflugter != null) {
             for (Udflugt u : udflugter) {
                 udskrift += u.getNavn() + " " + u.getDato() + "\n";
-                for (Tilmelding t : tilmeldinger) {
-                    udskrift += t.getLedsager().getNavn() + "(" + t.getDeltager().getNavn() + ")\n";
+                for (Ledsager ledsager: u.getLedsagere()) {
+                    udskrift += "   " + ledsager.getNavn() + "(" + ledsager.getTilmelding().getDeltager().getNavn() + ")\n";
                 }
             }
         }

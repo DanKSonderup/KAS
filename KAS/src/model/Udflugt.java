@@ -60,6 +60,14 @@ public class Udflugt {
         this.frokost = frokost;
     }
 
+    public ArrayList<Ledsager> getLedsagere() {
+        return ledsagere;
+    }
+
+    public void addLedsager(Ledsager ledsager) {
+        ledsagere.add(ledsager);
+    }
+
     @Override
     public String toString() {
         return  navn + " " + dato + " " + pris + " " + lokation + " " + frokost + " ";
