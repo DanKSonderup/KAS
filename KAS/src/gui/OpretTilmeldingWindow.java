@@ -8,9 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Deltager;
-import model.Firma;
 import model.Konference;
-import model.Tilmelding;
 
 public class OpretTilmeldingWindow extends Stage {
 
@@ -34,7 +32,7 @@ public class OpretTilmeldingWindow extends Stage {
     // Data felter
     private final ListView<Deltager> lvwDeltagere = new ListView<>();
     // Skal listview være Tilmelding eller bare en String?
-    private final ListView<Tilmelding> lvwInfo = new ListView<>();
+    private final TextArea TextAreaInfo = new TextArea();
     private final TextField txfNavn = new TextField();
     private final TextField txfTelefonNr = new TextField();
     private final TextField txfAnkomstDato = new TextField();
@@ -74,9 +72,9 @@ public class OpretTilmeldingWindow extends Stage {
         pane.add(btnOpretHotelBooking, 2, 2);
         pane.add(btnOpretLedsager, 2, 3);
 
-        pane.add(lvwInfo, 4, 1, 2, 4);
-        lvwInfo.setPrefHeight(170);
-        lvwInfo.setPrefWidth(100);
+        pane.add(TextAreaInfo, 4, 1, 2, 4);
+        TextAreaInfo.setPrefHeight(170);
+        TextAreaInfo.setPrefWidth(100);
 
         Label lblFirma = new Label("Firma:");
         pane.add(lblFirma, 3, 5);
