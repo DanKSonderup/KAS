@@ -52,13 +52,9 @@ public class Tilmelding {
     public LocalDate getAfrejseDato() {
         return afrejseDato;
     }
-
+    
     public Konference getKonference() {
         return konference;
-    }
-
-    public void setLedsager(Ledsager ledsager) {
-        this.ledsager = ledsager;
     }
 
     public int antalDage() {
@@ -68,7 +64,7 @@ public class Tilmelding {
     }
 
     @Override
-    public String toString() {
+    public String toString2() {
         return "Tilmelding{" +
                 "ankomstDato=" + ankomstDato +
                 ", afrejseDato=" + afrejseDato +
