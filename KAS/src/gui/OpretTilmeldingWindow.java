@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Deltager;
 import model.Konference;
+
+import javax.swing.event.ChangeListener;
 
 public class OpretTilmeldingWindow extends Stage {
 
@@ -32,7 +35,7 @@ public class OpretTilmeldingWindow extends Stage {
 
     //--------------------------------------------------
     // Data felter
-    private final ListView<Deltager> lvwDeltagere = new ListView<>();
+    private final ListView<Deltager> lvwDeltagere = new ListView<Deltager>();
     // Skal listview være Tilmelding eller bare en String?
     private final TextArea TextAreaInfo = new TextArea();
     private final TextField txfNavn = new TextField();
@@ -47,6 +50,8 @@ public class OpretTilmeldingWindow extends Stage {
     private final Label lblError = new Label();
     private final CheckBox cbxForedagsholder = new CheckBox("Foredragsholder");
 
+    private static int counter = 0;
+
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -54,6 +59,7 @@ public class OpretTilmeldingWindow extends Stage {
         pane.setHgap(10);
         // set vertical gap between components
         pane.setVgap(10);
+        updateControls();
 
         Label lblDeltager = new Label("Deltagere");
         pane.add(lblDeltager, 0, 0);
@@ -69,22 +75,24 @@ public class OpretTilmeldingWindow extends Stage {
         pane.add(lblAfrejseDato, 0, 6);
         pane.add(txfAfrejseDato, 1, 6);
         pane.add(cbxForedagsholder, 1, 7);
-
         pane.add(btnOpretDeltager, 2, 1);
         pane.add(btnOpretHotelBooking, 2, 2);
         pane.add(btnOpretLedsager, 2, 3);
         btnOpretLedsager.setDisable(true);
 
-        lvwDeltagere.getItems().addListener(new ListChangeListener() {
-            @Override
-            public void onChanged(ListChangeListener.Change change) {
-                Deltager selectedDeltager = lvwDeltagere.getSelectionModel().getSelectedItem();
-                if (selectedDeltager != null) {
-                    TextAreaInfo.setText("" + selectedDeltager);
-                    btnOpretLedsager.setDisable(false);
-                }
-            }
-        });
+        lvwDeltagere.getSelectionModel().selectedItemProperty().addListener(event ->
+                this.deltagerSelectionChanged(lvwDeltagere.getSelectionModel().getSelectedItem()));
+        /*
+        lvwDeltagere.getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldDeltager, newDeltager) -> {
+                    if (newDeltager != null) {
+                        TextAreaInfo.setText("" + newDeltager.getNavn());
+                    }
+                    });
+
+         */
+
+
 
         pane.add(TextAreaInfo, 4, 1, 2, 4);
         TextAreaInfo.setPrefHeight(170);
@@ -106,6 +114,17 @@ public class OpretTilmeldingWindow extends Stage {
     }
 
     public void updateControls() {
-        // lvwDeltagere.getItems().setAll(Controller.get);
+        lvwDeltagere.getItems().setAll(Controller.getAlleDeltagerForKonference(konference));
+    }
+
+    public void deltagerSelectionChanged(Deltager deltager) {
+        StringBuilder sb = new StringBuilder();
+        if (deltager != null) {
+            sb.append("Navn: " + deltager.getNavn());
+        }
+        if (deltager.findTilmeldingTilKonference(konference) != null) {
+            sb.append("Ledsager: " + deltager.findTilmeldingTilKonference(konference).getDeltager());
+        }
+        TextAreaInfo.setText("" + sb);
     }
 }

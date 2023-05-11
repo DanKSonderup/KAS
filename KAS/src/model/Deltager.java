@@ -51,9 +51,22 @@ public class Deltager {
         tilmeldinger.add(tilmelding);
     }
 
+    public ArrayList<Tilmelding> getTilmeldinger() {
+        return tilmeldinger;
+    }
+
     public double samletPris() {
         double pris = 0;
 
         return pris;
+    }
+
+    public Tilmelding findTilmeldingTilKonference(Konference konference) {
+        for (Tilmelding tilmelding: tilmeldinger) {
+            if (tilmelding.getKonference().equals(konference)) {
+                return tilmelding;
+            }
+        }
+        return null;
     }
 }

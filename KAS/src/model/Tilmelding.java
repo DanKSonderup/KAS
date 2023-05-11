@@ -53,11 +53,30 @@ public class Tilmelding {
         return afrejseDato;
     }
 
+    public Konference getKonference() {
+        return konference;
+    }
 
+    public void setLedsager(Ledsager ledsager) {
+        this.ledsager = ledsager;
+    }
 
     public int antalDage() {
         long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
         int dage = (int) daysBetween;
         return dage;
+    }
+
+    @Override
+    public String toString() {
+        return "Tilmelding{" +
+                "ankomstDato=" + ankomstDato +
+                ", afrejseDato=" + afrejseDato +
+                ", foredragsholder=" + foredragsholder +
+                ", firma=" + firma +
+                ", deltager=" + deltager +
+                ", ledsager=" + ledsager +
+                ", konference=" + konference +
+                '}';
     }
 }
