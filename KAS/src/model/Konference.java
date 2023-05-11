@@ -72,4 +72,18 @@ public class Konference {
     public String toString() {
         return navn + " fra " + startDato + " til " + slutDato + " - Pris: " + prisPerDag;
     }
+
+    public String visInfo() {
+        String udskrift = "Udflugter knyttet til konferencen " + navn;
+
+        if (udflugter != null) {
+            for (Udflugt u : udflugter) {
+                udskrift += u.getNavn() + " " + u.getDato() + "\n";
+                for (Tilmelding t : tilmeldinger) {
+                    udskrift += t.getLedsager().getNavn() + "(" + t.getDeltager().getNavn() + ")\n";
+                }
+            }
+        }
+        return udskrift;
+    }
 }

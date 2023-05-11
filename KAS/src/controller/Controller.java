@@ -130,4 +130,10 @@ public abstract class Controller {
         }
         return info;
     }
+
+    public static String getAlleUdflugterInfo(Konference konference) {
+        String info = konference.visInfo();
+        return info;
+    }
 }
+

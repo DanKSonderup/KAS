@@ -9,6 +9,7 @@ public class Udflugt {
     private double pris;
     private String lokation;
     private boolean frokost;
+    private Deltager deltager;
     private ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
     public Udflugt(String navn, LocalDate dato, double pris, String lokation, boolean frokost) {
