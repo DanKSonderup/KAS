@@ -107,6 +107,10 @@ public abstract class Controller {
         return t1;
     }
 
+    public static void addLedsagerTilTilmelding(Tilmelding tilmelding, Ledsager ledsager) {
+
+    }
+
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
         ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
         for (Tilmelding t : konference.getTilmeldinger()) {
