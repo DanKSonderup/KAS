@@ -54,7 +54,7 @@ public class Test {
 
         Ledsager l1 = new Ledsager("Jude Bellingham", t2);
         Ledsager l2 = new Ledsager("Mason Mount", t3);
-        Ledsager l3 = ("Daniel Cock", t1);
+        // Ledsager l3 = ("Daniel Cock", t1);
 
 
 
@@ -72,7 +72,7 @@ public class Test {
 
         h1.getTillæg();
 
-        HotelBooking hb1 = Controller.createHotelBooking(t1, h1.getTillæg(), h1);
+        // HotelBooking hb1 = Controller.createHotelBooking(t1, h1.getTillæg(), h1);
         HotelBooking hb2 = Controller.createHotelBooking(t2, h1.getTillæg(), h2);
         HotelBooking hb3 = Controller.createHotelBooking(t3, h1.getTillæg(), h3);
         HotelBooking hb4 = Controller.createHotelBooking(t4, h1.getTillæg(), h3);

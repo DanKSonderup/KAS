@@ -9,16 +9,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Deltager;
-import model.Firma;
-import model.Konference;
-import model.Ledsager;
+import model.*;
 import storage.Storage;
 
 import javax.swing.event.ChangeListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class OpretTilmeldingWindow extends Stage {
 
@@ -41,15 +43,13 @@ public class OpretTilmeldingWindow extends Stage {
     private final ListView<Deltager> lvwDeltagere = new ListView<Deltager>();
     // Skal listview være Tilmelding eller bare en String?
     private final TextArea TextAreaInfo = new TextArea();
-    private final TextField txfNavn = new TextField();
-    private final TextField txfTelefonNr = new TextField();
     private final TextField txfAnkomstDato = new TextField();
     private final TextField txfAfrejseDato = new TextField();
     private final Button btnAfbryd = new Button("Afbryd");
     private final Button btnOk = new Button("Opret tilmelding");
     private final Button btnOpretDeltager = new Button("Opret deltager");
     private final Button btnOpretHotelBooking = new Button("Opret hotelbooking");
-    private final Button btnOpretLedsager = new Button("Opret/ny ledsager");
+    private final Button btnOpretLedsager = new Button("Tilføj ledsager");
     private final Button btnVælgDeltager = new Button("Brug tidligere deltager");
     private final Button btnTilføjFirma = new Button("Tilføj Firma");
     private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -60,6 +60,8 @@ public class OpretTilmeldingWindow extends Stage {
     private Deltager deltager;
     private Ledsager ledsager;
     private Firma firma;
+    private HotelAftale hotelAftale;
+    private ArrayList<Tillæg> valgteTillæg = new ArrayList<>();
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -106,6 +108,7 @@ public class OpretTilmeldingWindow extends Stage {
         btnOpretHotelBooking.setDisable(true);
         btnTilføjFirma.setDisable(true);
         btnOpretLedsager.setDisable(true);
+        btnOk.setDisable(true);
 
 
 
@@ -133,6 +136,7 @@ public class OpretTilmeldingWindow extends Stage {
         btnOpretLedsager.setOnAction(event -> this.opretLedsagerOnAction());
         btnTilføjFirma.setOnAction(event -> this.tilføjFirmaOnAction());
         btnOpretHotelBooking.setOnAction(event -> this.opretHotelBookingOnAction());
+        btnOk.setOnAction(event -> this.opretTilmeldingOnAction());
     }
 
     public void updateControls() {
@@ -155,6 +159,7 @@ public class OpretTilmeldingWindow extends Stage {
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
             btnOpretLedsager.setDisable(false);
+            btnOk.setDisable(false);
         }
     }
 
@@ -169,6 +174,7 @@ public class OpretTilmeldingWindow extends Stage {
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
             btnOpretLedsager.setDisable(false);
+            btnOk.setDisable(false);
         } else {
             alert.setTitle("Ingen Deltager");
             alert.setHeaderText("Du skal vælge en deltager for at tildele en tidligere deltager");
@@ -214,23 +220,43 @@ public class OpretTilmeldingWindow extends Stage {
 
         // Wait for the modal dialog to close
 
-        /*
-        if (dialog.getLedsager() != null) {
-            ledsager = dialog.getLedsager();
+        if (dialog.getHotelAftale() != null) {
+            hotelAftale = dialog.getHotelAftale();
+            valgteTillæg = dialog.getValgteTillæg();
             String temp = TextAreaInfo.getText().trim();
-            temp += "\n\nLedsager: " + ledsager;
-            if (ledsager.getUdflugter().size() > 0) {
-                temp += "\n" + ledsager + "'s udflugter: " + ledsager.getUdflugter();
+            temp += "\n\nHotelbooking på: " + hotelAftale.getNavn();
+            if (dialog.getValgteTillæg().size() > 0) {
+                temp += "\nTillæg:" + valgteTillæg;
             }
             TextAreaInfo.setText(temp);
-            btnOpretLedsager.setDisable(true);
-            alert.setTitle("Ledsager");
-            alert.setHeaderText("Ledsager oprettet");
-            alert.setContentText("" + ledsager + " blev oprettet med følgende udflugter: \n" + ledsager.getUdflugter());
-            alert.show();
+            btnOpretHotelBooking.setDisable(true);
         }
+    }
 
-         */
+    public void opretTilmeldingOnAction() {
+        String ankomstDatoString = txfAnkomstDato.getText().trim();
+        String afrejseDatoString = txfAfrejseDato.getText().trim();
+        LocalDate ankomstDato = null;
+        LocalDate afrejseDato = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        try {
+            ankomstDato = LocalDate.parse(ankomstDatoString, formatter);
+            afrejseDato = LocalDate.parse(afrejseDatoString, formatter);
+        }
+        catch (DateTimeParseException e) {
+            alert.setTitle("Ugyldig dato");
+            alert.setHeaderText("En af dine datoer er ikke en gyldig dato");
+            alert.show();
+            return;
+        }
+        if (afrejseDato.isBefore(ankomstDato)) {
+            alert.setTitle("Ugyldig dato");
+            alert.setHeaderText("Din slutdato er før din startdato");
+            alert.show();
+            return;
+        }
+        System.out.println(Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected()));
+        this.hide();
     }
 
     private void afbrydOnAction() {
