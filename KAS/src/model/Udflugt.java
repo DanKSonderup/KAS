@@ -74,7 +74,7 @@ public class Udflugt {
         if (frokost) {
             frokostString = "Frokost inkl.";
         }
-        return  navn + " " + dato + " " + pris + " kr. " + lokation + " "
+        return  navn + ", " +  lokation + " , d. " + dato + ", Pris: " + pris + " kr. "
                 + frokostString;
     }
 }

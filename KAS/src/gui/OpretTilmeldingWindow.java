@@ -13,7 +13,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Deltager;
+import model.Firma;
 import model.Konference;
+import model.Ledsager;
 import storage.Storage;
 
 import javax.swing.event.ChangeListener;
@@ -56,7 +58,8 @@ public class OpretTilmeldingWindow extends Stage {
     //-------------------------------------------------
     // Data Felter til oprettelse af Tilmelding
     private Deltager deltager;
-
+    private Ledsager ledsager;
+    private Firma firma;
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -102,6 +105,7 @@ public class OpretTilmeldingWindow extends Stage {
 
         btnOpretHotelBooking.setDisable(true);
         btnTilføjFirma.setDisable(true);
+        btnOpretLedsager.setDisable(true);
 
 
 
@@ -168,23 +172,24 @@ public class OpretTilmeldingWindow extends Stage {
             temp += "\nDeltager: " + dialog.getDeltager();
             TextAreaInfo.setText(temp);
             btnVælgDeltager.setDisable(true);
+            btnOpretDeltager.setDisable(true);
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
-            btnOpretDeltager.setDisable(true);
+            btnOpretLedsager.setDisable(false);
         }
     }
 
     private void vælgDeltagerOnAction() {
         if (lvwDeltagere.getSelectionModel().getSelectedItem() != null) {
-            Deltager dTemp = lvwDeltagere.getSelectionModel().getSelectedItem();
-            deltager = dTemp;
+            deltager = lvwDeltagere.getSelectionModel().getSelectedItem();
             String temp = TextAreaInfo.getText().trim();
-            temp += "\nDeltager: " + dTemp;
+            temp += "\nDeltager: " + deltager;
             TextAreaInfo.setText(temp);
             btnOpretDeltager.setDisable(true);
             btnVælgDeltager.setDisable(true);
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
+            btnOpretLedsager.setDisable(false);
         } else {
             alert.setTitle("Ingen Deltager");
             alert.setHeaderText("Du skal vælge en deltager for at tildele en tidligere deltager");
@@ -197,6 +202,39 @@ public class OpretTilmeldingWindow extends Stage {
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
+
+        if (dialog.getLedsager() != null) {
+            ledsager = dialog.getLedsager();
+            String temp = TextAreaInfo.getText().trim();
+            temp += "\n\nLedsager: " + ledsager;
+            if (ledsager.getUdflugter().size() > 0) {
+                temp += "\n" + ledsager + "'s udflugter: " + ledsager.getUdflugter();
+            }
+            TextAreaInfo.setText(temp);
+            btnOpretLedsager.setDisable(true);
+            alert.setTitle("Ledsager");
+            alert.setHeaderText("Ledsager oprettet");
+            alert.setContentText("" + ledsager + " blev oprettet med følgende udflugter: \n" + ledsager.getUdflugter());
+            alert.show();
+        }
+    }
+
+    private void tilføjFirmaOnAction() {
+        TilføjFirmaWindow dialog = new TilføjFirmaWindow();
+        dialog.showAndWait();
+
+        // Wait for the modal dialog to close
+        if (dialog.getFirma() != null) {
+            firma = dialog.getFirma();
+            String temp = TextAreaInfo.getText().trim();
+            temp += "\n\nFirma: " + firma;
+            TextAreaInfo.setText(temp);
+            btnTilføjFirma.setDisable(true);
+            alert.setTitle("Firma");
+            alert.setHeaderText("Firma oprettet");
+            alert.setContentText("" + firma + " blev oprettet");
+            alert.show();
+        }
     }
 
     private void afbrydOnAction() {

@@ -12,6 +12,10 @@ public class Ledsager {
         this.tilmelding = tilmelding;
     }
 
+    public Ledsager(String navn) {
+        this.navn = navn;
+    }
+
     public String getNavn() {
         return navn;
     }

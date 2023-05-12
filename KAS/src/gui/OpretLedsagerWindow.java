@@ -4,15 +4,20 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Konference;
+import model.Ledsager;
 import model.Udflugt;
+
+import java.util.ArrayList;
 
 public class OpretLedsagerWindow extends Stage {
 
-    Konference konference;
+    private Konference konference;
+    private Ledsager ledsager;
     public OpretLedsagerWindow(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -34,6 +39,7 @@ public class OpretLedsagerWindow extends Stage {
     private final ListView<Udflugt> lvwUdflugter = new ListView<>();
     private final Button btnOpret = new Button("Opret/opdater Ledsager");
     private final Button btnAfbryd = new Button("Afbryd");
+    private final Label lblError = new Label();
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -56,7 +62,41 @@ public class OpretLedsagerWindow extends Stage {
         pane.add(lvwUdflugter,1,3);
         lvwUdflugter.setPrefHeight(150);
         lvwUdflugter.setPrefWidth(300);
+
+        HBox hboxKnapper = new HBox();
+        hboxKnapper.setSpacing(15);
+        hboxKnapper.getChildren().add(btnOpret);
+        hboxKnapper.getChildren().add(btnAfbryd);
+
+        pane.add(hboxKnapper,1,4);
+        pane.add(lblError,1,5);
+        lblError.setVisible(false);
+
+        btnAfbryd.setOnAction(event -> this.afbrydOnAction());
+        btnOpret.setOnAction(event -> this.opretLedsagerOnAction());
     }
 
 
+    private void afbrydOnAction() {
+        this.hide();
+    }
+
+    private void opretLedsagerOnAction() {
+        if (txfNavn.getText().trim().length() < 1) {
+            lblError.setText("Dit navn er tomt");
+            lblError.setVisible(true);
+            return;
+        } else {
+            ledsager = new Ledsager(txfNavn.getText().trim());
+            ArrayList<Udflugt> udflugter = new ArrayList<>(lvwUdflugter.getSelectionModel().getSelectedItems());
+            for (Udflugt udflugt: udflugter) {
+                ledsager.addUdflugt(udflugt);
+            }
+        }
+        this.hide();
+    }
+
+    public Ledsager getLedsager() {
+        return ledsager;
+    }
 }
