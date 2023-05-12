@@ -18,6 +18,9 @@ public abstract class Controller {
         return konference;
     }
 
+    /**
+     * Henter alle konferencer fra storage og returnere en ArrayList med dem
+     */
     public static ArrayList<Konference> getAlleKonferencer() {
         return Storage.getKonferencer();
     }
@@ -33,6 +36,9 @@ public abstract class Controller {
         return uf;
     }
 
+    /**
+     * Henter alle udflugter fra en konference og returnere en ArrayList med dem
+     */
     public static ArrayList<Udflugt> getAlleUdflugter(Konference konference) {
         return konference.getUdflugter();
     }
@@ -48,7 +54,9 @@ public abstract class Controller {
         return h1;
     }
 
-
+    /**
+     * Henter alle hotelaftaler fra storage og returnerer en liste med dem
+     */
     public static ArrayList<HotelAftale> getAllHotelAftaler() {
         return Storage.getHotelAftaler();
     }
@@ -57,11 +65,13 @@ public abstract class Controller {
      * Opretter et tillæg
      * Pre: beskrivelse er ikke tomt, hotel ikke null, pris >= 0
      */
-
     public static void createTillæg(HotelAftale hotelAftale, String navn, double pris) {
         hotelAftale.createTillæg(new Tillæg(navn,pris));
     }
 
+    /**
+     * Henter alle købstillæg fra en hotelaftale og returnerer en liste med dem
+     */
     public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {
         ArrayList<Tillæg> købsTillæg = new ArrayList<>();
         for (Tillæg købs : hotelAftale.getTillæg()) {
