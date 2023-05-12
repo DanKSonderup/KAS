@@ -13,10 +13,6 @@ public class Test {
 
         long daysBetween = ChronoUnit.DAYS.between(d1, d2);
 
-        System.out.println(daysBetween);
-
-        System.out.println(d1);
-
         Deltager de1 = Controller.createDeltager("Oliver Buus", "Hjem", "88888888", "Aarhus", "Danmark");
         Konference k = new Konference("Konfi", "Aarhus", LocalDate.parse("2023-11-13"), LocalDate.parse("2023-11-15"), 1100);
         Konference k2 = new Konference("HEHE", "Odense", LocalDate.parse("2023-11-13"), LocalDate.parse("2023-11-15"), 2000);
@@ -56,11 +52,6 @@ public class Test {
         Ledsager l1 = Controller.createLedsager("Jude Bellingham", t2);
         Ledsager l2 = Controller.createLedsager("Mason Mount", t3);
         Ledsager l3 = Controller.createLedsager("Daniel Cock", t1);
-
-
-
-        System.out.println(k.visInfo());
-
 
 
 

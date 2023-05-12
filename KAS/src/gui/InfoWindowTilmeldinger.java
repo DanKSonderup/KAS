@@ -44,7 +44,6 @@ public class InfoWindowTilmeldinger extends Stage {
 
         pane.add(visTilmeldinger, 0, 0);
         visTilmeldinger.setText(printInfoPåDeltager());
-        System.out.println(konference);
     }
     public String printInfoPåDeltager() {
         String s = "";
