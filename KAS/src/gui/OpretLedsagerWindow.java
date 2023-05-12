@@ -91,6 +91,7 @@ public class OpretLedsagerWindow extends Stage {
             ArrayList<Udflugt> udflugter = new ArrayList<>(lvwUdflugter.getSelectionModel().getSelectedItems());
             for (Udflugt udflugt: udflugter) {
                 ledsager.addUdflugt(udflugt);
+                udflugt.addLedsager(ledsager);
             }
         }
         this.hide();
