@@ -131,34 +131,13 @@ public class OpretTilmeldingWindow extends Stage {
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
         btnVælgDeltager.setOnAction(event -> this.vælgDeltagerOnAction());
         btnOpretLedsager.setOnAction(event -> this.opretLedsagerOnAction());
+        btnTilføjFirma.setOnAction(event -> this.tilføjFirmaOnAction());
+        btnOpretHotelBooking.setOnAction(event -> this.opretHotelBookingOnAction());
     }
 
     public void updateControls() {
         lvwDeltagere.getItems().setAll(Controller.getAlleDeltagere());
-/*
-        if (lvwDeltagere.getSelectionModel().getSelectedItem() != null) {
-            deltagerSelectionChanged(lvwDeltagere.getSelectionModel().getSelectedItem());
-        }
-
- */
     }
-
-    /*
-    public void deltagerSelectionChanged(Deltager deltager) {
-        String temp = "";
-        if (!lvwDeltagere.isDisabled()) {
-            temp = TextAreaInfo.getText().trim();
-            if (deltager != null) {
-                temp += "\nDeltager: " + deltager;
-            }
-            if (deltager.findTilmeldingTilKonference(konference).getLedsager() != null) {
-                temp += "\nLedsager: " + deltager.findTilmeldingTilKonference(konference).getLedsager();
-            }
-        }
-        TextAreaInfo.setText(temp);
-    }
-
-     */
 
     private void opretDeltagerOnAction() {
         OpretDeltagerWindow dialog = new OpretDeltagerWindow();
@@ -212,10 +191,6 @@ public class OpretTilmeldingWindow extends Stage {
             }
             TextAreaInfo.setText(temp);
             btnOpretLedsager.setDisable(true);
-            alert.setTitle("Ledsager");
-            alert.setHeaderText("Ledsager oprettet");
-            alert.setContentText("" + ledsager + " blev oprettet med følgende udflugter: \n" + ledsager.getUdflugter());
-            alert.show();
         }
     }
 
@@ -230,11 +205,32 @@ public class OpretTilmeldingWindow extends Stage {
             temp += "\n\nFirma: " + firma;
             TextAreaInfo.setText(temp);
             btnTilføjFirma.setDisable(true);
-            alert.setTitle("Firma");
-            alert.setHeaderText("Firma oprettet");
-            alert.setContentText("" + firma + " blev oprettet");
+        }
+    }
+
+    private void opretHotelBookingOnAction() {
+        OpretHotelBookingWindow dialog = new OpretHotelBookingWindow(konference);
+        dialog.showAndWait();
+
+        // Wait for the modal dialog to close
+
+        /*
+        if (dialog.getLedsager() != null) {
+            ledsager = dialog.getLedsager();
+            String temp = TextAreaInfo.getText().trim();
+            temp += "\n\nLedsager: " + ledsager;
+            if (ledsager.getUdflugter().size() > 0) {
+                temp += "\n" + ledsager + "'s udflugter: " + ledsager.getUdflugter();
+            }
+            TextAreaInfo.setText(temp);
+            btnOpretLedsager.setDisable(true);
+            alert.setTitle("Ledsager");
+            alert.setHeaderText("Ledsager oprettet");
+            alert.setContentText("" + ledsager + " blev oprettet med følgende udflugter: \n" + ledsager.getUdflugter());
             alert.show();
         }
+
+         */
     }
 
     private void afbrydOnAction() {

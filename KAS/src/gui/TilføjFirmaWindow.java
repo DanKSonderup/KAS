@@ -61,6 +61,7 @@ public class TilføjFirmaWindow extends Stage {
         lblError.setVisible(false);
 
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
+        btnOpret.setOnAction(event -> this.opretOnAction());
     }
 
     private void afbrydOnAction() {
