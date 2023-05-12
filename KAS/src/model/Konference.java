@@ -82,7 +82,7 @@ public class Konference {
             for (Udflugt u : udflugter) {
                 udskrift += u.getNavn() + " " + u.getDato() + "\n";
                 for (Ledsager ledsager: u.getLedsagere()) {
-                    udskrift += "   " + ledsager.getNavn() + "(" + ledsager.getTilmelding().getDeltager().getNavn() + ")\n";
+                    udskrift += "   " + ledsager.getNavn() + " (" + ledsager.getTilmelding().getDeltager().getNavn() + ")\n";
                 }
             }
         }

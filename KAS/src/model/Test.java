@@ -50,6 +50,8 @@ public class Test {
         u1.addLedsager(l1);
         u1.addLedsager(l2);
 
+        u2.addLedsager(l2);
+
         System.out.println(k.visInfo());
     }
 }
