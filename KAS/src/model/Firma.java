@@ -35,4 +35,9 @@ public class Firma {
     public void addTilmelding(Tilmelding tilmelding) {
         tilmeldinger.add(tilmelding);
     }
+
+    @Override
+    public String toString() {
+        return navn + " " + " tlf: " + telefonnummer;
+    }
 }
