@@ -37,7 +37,7 @@ public class OpretLedsagerWindow extends Stage {
     // Data felter
     private final TextField txfNavn = new TextField();
     private final ListView<Udflugt> lvwUdflugter = new ListView<>();
-    private final Button btnOpret = new Button("Opret/opdater Ledsager");
+    private final Button btnOpret = new Button("Tilføj Ledsager");
     private final Button btnAfbryd = new Button("Afbryd");
     private final Label lblError = new Label();
 
@@ -91,6 +91,7 @@ public class OpretLedsagerWindow extends Stage {
             ArrayList<Udflugt> udflugter = new ArrayList<>(lvwUdflugter.getSelectionModel().getSelectedItems());
             for (Udflugt udflugt: udflugter) {
                 ledsager.addUdflugt(udflugt);
+                udflugt.addLedsager(ledsager);
             }
         }
         this.hide();

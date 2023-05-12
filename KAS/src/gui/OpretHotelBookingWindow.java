@@ -92,9 +92,7 @@ public class OpretHotelBookingWindow extends Stage {
         private void opretHotelBookingOnAction() {
             if (lvwHotelAftaler.getSelectionModel().getSelectedItem() != null) {
                 hotelAftale = lvwHotelAftaler.getSelectionModel().getSelectedItem();
-                System.out.println(hotelAftale);
                 valgteTillæg = new ArrayList<>(lvwHotelAftaleTillæg.getSelectionModel().getSelectedItems());
-                System.out.println(valgteTillæg);
                 this.hide();
             } else {
                 alert.setTitle("Ingen Hotel");

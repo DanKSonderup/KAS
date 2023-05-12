@@ -102,7 +102,6 @@ public class AddUdflugtWindow extends Stage {
                 LocalDate udflugtDato = LocalDate.parse(txfDato.getText().trim(), formatter);
                 double pris = Double.parseDouble(txfPris.getText().trim());
                 Udflugt uf = Controller.createUdflugt(konference,txfNavn.getText().trim(), udflugtDato, pris, txfLokation.getText().trim(), cbFrokost.isSelected());
-                System.out.println(uf);
                 this.hide();
                 return;
             }
@@ -160,7 +159,7 @@ public class AddUdflugtWindow extends Stage {
 
         if (erDatoValid(dato)) {
             LocalDate d = LocalDate.parse(dato, formatter);
-            if (d.isAfter(konference.getStartDato()) && d.isBefore(konference.getSlutDato())) {
+            if (!d.isBefore(konference.getStartDato()) && !d.isAfter(konference.getSlutDato())) {
                 ErIKonference = true;
             }
         }

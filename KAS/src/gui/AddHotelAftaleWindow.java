@@ -137,7 +137,6 @@ public class AddHotelAftaleWindow extends Stage {
             for (Pair pair: pairListe) {
                 Controller.createTillæg(h1, pair.navn, pair.pris);
             }
-            System.out.println(Controller.getAllHotelAftaler());
             this.hide();
     }
 

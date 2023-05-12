@@ -13,10 +13,6 @@ public class Test {
 
         long daysBetween = ChronoUnit.DAYS.between(d1, d2);
 
-        System.out.println(daysBetween);
-
-        System.out.println(d1);
-
         Deltager de1 = Controller.createDeltager("Oliver Buus", "Hjem", "88888888", "Aarhus", "Danmark");
         Konference k = new Konference("Konfi", "Aarhus", LocalDate.parse("2023-11-13"), LocalDate.parse("2023-11-15"), 1100);
         Konference k2 = new Konference("HEHE", "Odense", LocalDate.parse("2023-11-13"), LocalDate.parse("2023-11-15"), 2000);
@@ -59,11 +55,6 @@ public class Test {
 
 
 
-        System.out.println(k.visInfo());
-
-
-
-
 
 
 
@@ -78,14 +69,6 @@ public class Test {
         HotelBooking hb3 = Controller.createHotelBooking(t3, h1.getTillæg(), h3);
         HotelBooking hb1 = Controller.createHotelBooking(t1, h1.getTillæg(), h1);
         HotelBooking hb4 = Controller.createHotelBooking(t4, h1.getTillæg(), h3);
-
-
-        // Tillæg
-
-        Controller.createTillæg(h1, "WIFI", 200);
-        Controller.createTillæg(h1, "Spa", 150);
-
-        System.out.println(Controller.visHotelOgDeltagerInfo());
 
     }
 }
