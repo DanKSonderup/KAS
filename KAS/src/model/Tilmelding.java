@@ -70,7 +70,7 @@ public class Tilmelding {
                 if (ledsager.getUdflugter() != null) {
                     udskrift += "\nUdflugter: ";
                     for (Udflugt udflugt : ledsager.getUdflugter()) {
-                        udskrift += udflugt.getNavn() + " \n";
+                        udskrift += udflugt.getNavn();
                     }
                 }
             }
