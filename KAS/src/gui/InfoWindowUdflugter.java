@@ -1,22 +1,26 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Konference;
+import model.Udflugt;
 
 public class InfoWindowUdflugter extends Stage {
+    private Konference konference;
     public InfoWindowUdflugter(Konference konference) {
+        this.konference = konference;
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
         // this.setWidth(300); --> Nødvendig hvis hidden items
-
-        this.setTitle("New Person");
+        this.setTitle("Udflugter til " + konference.getNavn());
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -26,6 +30,8 @@ public class InfoWindowUdflugter extends Stage {
 
     //--------------------------------------------------
     // Data felter
+    private final TextArea visUdflugter = new TextArea();
+
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -33,5 +39,9 @@ public class InfoWindowUdflugter extends Stage {
         pane.setHgap(10);
         // set vertical gap between components
         pane.setVgap(10);
+
+        pane.add(visUdflugter, 0,0);
+        visUdflugter.setText("" + konference.visInfo());
     }
+
 }

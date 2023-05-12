@@ -16,7 +16,7 @@ import model.Tilmelding;
 import java.awt.*;
 
 public class InfoWindowTilmeldinger extends Stage {
-    Konference konference;
+    private Konference konference;
     public InfoWindowTilmeldinger(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -34,7 +34,6 @@ public class InfoWindowTilmeldinger extends Stage {
     // Data felter
 
     private final TextArea visTilmeldinger = new TextArea();
-    private Tilmelding tilmelding;
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -45,6 +44,7 @@ public class InfoWindowTilmeldinger extends Stage {
 
         pane.add(visTilmeldinger, 0, 0);
         visTilmeldinger.setText(printInfoPåDeltager());
+        System.out.println(konference);
     }
     public String printInfoPåDeltager() {
         String s = "";
