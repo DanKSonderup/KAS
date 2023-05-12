@@ -261,7 +261,8 @@ public class OpretTilmeldingWindow extends Stage {
             alert.show();
             return;
         }
-        Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected());
+        Tilmelding h1 = Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected());
+        Controller.addLedsagerTilTilmelding(h1, ledsager);
         this.hide();
     }
 

@@ -160,7 +160,7 @@ public class AddUdflugtWindow extends Stage {
 
         if (erDatoValid(dato)) {
             LocalDate d = LocalDate.parse(dato, formatter);
-            if (d.isAfter(konference.getStartDato()) && d.isBefore(konference.getSlutDato())) {
+            if (!d.isBefore(konference.getStartDato()) && !d.isAfter(konference.getSlutDato())) {
                 ErIKonference = true;
             }
         }
