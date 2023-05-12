@@ -32,6 +32,10 @@ public class Ledsager {
         return udflugter;
     }
 
+    public void setTilmelding(Tilmelding tilmelding) {
+        this.tilmelding = tilmelding;
+    }
+
     @Override
     public String toString() {
         return navn;

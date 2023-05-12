@@ -262,7 +262,17 @@ public class OpretTilmeldingWindow extends Stage {
             return;
         }
         Tilmelding h1 = Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected());
-        Controller.addLedsagerTilTilmelding(h1, ledsager);
+
+        if (hotelAftale != null) {
+            Controller.createHotelBooking(h1,valgteTillæg,hotelAftale);
+        }
+        if (ledsager != null) {
+            Controller.addLedsagerTilTilmelding(h1, ledsager);
+        }
+        if (firma != null) {
+            Controller.addFirmaTilTilmelding(firma, h1);
+        }
+
 
         this.hide();
     }
