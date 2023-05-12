@@ -31,6 +31,10 @@ public class Tilmelding {
         this.firma = firma;
     }
 
+    public void addHotelBooking(HotelBooking hotelBooking) {
+        this.hotelBooking = hotelBooking;
+    }
+
     public HotelBooking createHotelBooking(ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
         HotelBooking hotelBooking1 = new HotelBooking(this, valgteTillæg, hotelAftale);
         return hotelBooking1;
@@ -88,4 +92,8 @@ public class Tilmelding {
             int dage = (int) daysBetween;
             return dage;
         }
+
+    public HotelBooking getHotelBooking() {
+        return hotelBooking;
     }
+}

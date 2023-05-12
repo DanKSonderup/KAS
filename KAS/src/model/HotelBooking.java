@@ -14,6 +14,17 @@ public class HotelBooking {
         this.hotelAftale = hotelAftale;
     }
 
+    public Tilmelding getTilmelding() {
+        return tilmelding;
+    }
+
+    public HotelAftale getHotelAftale() {
+        return hotelAftale;
+    }
+
+    public ArrayList<Tillæg> getValgteTillæg() {
+        return valgteTillæg;
+    }
 
     public double samletPris() {
         double pris = 0;
