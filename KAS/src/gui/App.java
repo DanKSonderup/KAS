@@ -27,5 +27,12 @@ public class App {
         Controller.addLedsagerTilTilmelding(t1,l1);
 
         Controller.createUdflugt(kf,"Byrundtur Odense", date1, 100, "Odense", true);
+
+        HotelAftale h1 = Controller.createHotelAftale("Esbjerg Hotel", 1000, 1200, "Esbjerg", kf);
+        HotelAftale h2 = Controller.createHotelAftale("Odense Hotel", 700, 1000, "Odense", kf);
+
+        Controller.createTillæg(h1, "WIFI", 250);
+        Controller.createTillæg(h2, "Mad", 150);
+        Controller.createTillæg(h1,"Svømmekort", 450);
     }
 }

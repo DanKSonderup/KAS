@@ -19,6 +19,6 @@ public class Tillæg {
 
     @Override
     public String toString() {
-        return navn + " - " + pris + " kr.";
+        return navn + " - " + pris + " kr. ";
     }
 }

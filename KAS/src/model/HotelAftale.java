@@ -51,7 +51,7 @@ public class HotelAftale {
 
     @Override
     public String toString() {
-        return navn + " " + lokation + " " + prisPrNatEnkeltVærelse + " " + prisPrDobbeltVærelse + " " + tillæg;
+        return navn + " " + lokation + " " + prisPrNatEnkeltVærelse + " " + prisPrDobbeltVærelse;
     }
 
     public ArrayList<String> GetHotelNavne() {
