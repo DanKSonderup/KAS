@@ -72,6 +72,8 @@ public abstract class Controller {
     /**
      * Henter alle købstillæg fra en hotelaftale og returnerer en liste med dem
      */
+
+    // Denne metode er blevet overflødig pågrund af rettelser i koden
     public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {
         ArrayList<Tillæg> købsTillæg = new ArrayList<>();
         for (Tillæg købs : hotelAftale.getTillæg()) {
@@ -82,6 +84,7 @@ public abstract class Controller {
         return købsTillæg;
     }
 
+    // Denne metode er blevet overflødig pågrund af rettelser i koden
     public static ArrayList<Tillæg> getAlleInkluderedeTillæg(HotelAftale hotelAftale) {
         ArrayList<Tillæg> inkluderedeTillæg = new ArrayList<>();
         for (Tillæg inkluderede : hotelAftale.getTillæg()) {
@@ -90,6 +93,16 @@ public abstract class Controller {
             }
         }
         return inkluderedeTillæg;
+    }
+
+    public static ArrayList<Udflugt> getUdflugterForKonferenceMellem(Konference konference, LocalDate d1, LocalDate d2) {
+        ArrayList<Udflugt> udflugter = new ArrayList<>();
+        for (Udflugt udflugt: konference.getUdflugter()) {
+            if (!udflugt.getDato().isBefore(d1) && !udflugt.getDato().isAfter(d2)) {
+                udflugter.add(udflugt);
+            }
+        }
+        return udflugter;
     }
 
     // Firma

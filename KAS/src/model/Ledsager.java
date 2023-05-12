@@ -36,6 +36,14 @@ public class Ledsager {
         this.tilmelding = tilmelding;
     }
 
+    public double samletUdflugtsPris() {
+        double pris = 0;
+        for (Udflugt udflugt: udflugter) {
+            pris += udflugt.getPris();
+        }
+        return pris;
+    }
+
     @Override
     public String toString() {
         return navn;

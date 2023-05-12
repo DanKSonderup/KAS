@@ -13,8 +13,8 @@ public class App {
 
     public static void initStorage() {
         Konference kf = Controller.createKonference("Hav og Himmel", "Odense Universitet", LocalDate.parse("2023-10-08"), LocalDate.parse("2023-10-16"),1500);
-        LocalDate date1 = LocalDate.parse("2023-11-13");
-        LocalDate d2 = LocalDate.parse("2023-11-15");
+        LocalDate date1 = LocalDate.parse("2023-10-13");
+        LocalDate d2 = LocalDate.parse("2023-10-15");
 
         Deltager deltager1 = new Deltager("Hans", "Odensevej 22", "888888", "Odense", "Danmark");
         Deltager deltager2 = new Deltager("Peter", "Odensevej 22", "888888", "Odense", "Danmark");
