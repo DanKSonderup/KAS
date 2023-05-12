@@ -170,6 +170,12 @@ public abstract class Controller {
         return temp;
     }
 
+    public static Ledsager createLedsager(String navn, Tilmelding tilmelding) {
+        Ledsager l1 = new Ledsager(navn, tilmelding);
+        tilmelding.setLedsager(l1);
+        return l1;
+    }
+
     public static String visHotelOgDeltagerInfo() {
         String udskrift = "";
         for (String s : getUnikkeHotelNavne()) {
@@ -177,11 +183,19 @@ public abstract class Controller {
             udskrift += s + "\n";
             for (HotelAftale hotelAftale : h1) {
                 for (HotelBooking hotelBooking : hotelAftale.getHotelBookings()) {
+                    udskrift += "   " + hotelBooking.getTilmelding().getDeltager().getNavn();
                     if (hotelBooking.getTilmelding().getLedsager() != null) {
-                        udskrift += "   " + hotelBooking.getTilmelding().getDeltager().getNavn() + " (" + hotelBooking.getTilmelding().getLedsager().getNavn() + ")" + "\n";
-                    } else {
-                        udskrift += "   " + hotelBooking.getTilmelding().getDeltager().getNavn() + "\n";
+                        udskrift += " (" + hotelBooking.getTilmelding().getLedsager().getNavn() + ")";
                     }
+                        udskrift +=
+                                "\n    " + hotelBooking.getTilmelding().getAnkomstDato()
+                                + " - " + hotelBooking.getTilmelding().getAfrejseDato() + "\n";
+                    if (hotelBooking.getValgteTillæg() != null) {
+                        for (Tillæg tillæg : hotelBooking.getValgteTillæg()) {
+                            udskrift += "     " + tillæg.getNavn() + " " + tillæg.getPris() + "kr.\n";
+                        }
+                    }
+                    udskrift += "\n";
                 }
             }
         }
