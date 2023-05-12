@@ -7,9 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Konference;
 
 public class InfoWindowUdflugter extends Stage {
-    public InfoWindowUdflugter() {
+    public InfoWindowUdflugter(Konference konference) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);

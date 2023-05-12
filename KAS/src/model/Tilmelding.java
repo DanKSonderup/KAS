@@ -66,9 +66,9 @@ public class Tilmelding {
                     "fra " + ankomstDato + " til " + afrejseDato;
 
             if (ledsager != null) {
-                udskrift += "\n" + ledsager.getNavn();
+                udskrift += "\nLedsager: " + ledsager.getNavn();
                 if (ledsager.getUdflugter() != null) {
-                    udskrift += "\n Udflugter: ";
+                    udskrift += "\nUdflugter: ";
                     for (Udflugt udflugt : ledsager.getUdflugter()) {
                         udskrift += udflugt.getNavn() + " ";
                     }
@@ -83,6 +83,7 @@ public class Tilmelding {
             if (firma != null) {
                 udskrift += "\n Firma: " + firma.getNavn();
             }
+            udskrift += "\n\n";
 
             return udskrift;
         }
