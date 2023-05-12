@@ -39,6 +39,9 @@ public class KonferencePane extends Application {
     private final Button btnOpretHotelAftale = new Button("Opret Hotelaftale");
     private final Button btnOpretUdflugt = new Button("Opret Udflugt");
     private final Button btnOpretTilmelding = new Button("Opret Tilmelding");
+    private final Button btnInfoWindowTilmeldinger = new Button("Vis tilmeldinger");
+    private final Button btnInfoWindowUdflugter = new Button("Vis udflugter");
+    private final Button btnInfoWindowHoteller = new Button("Vis hotel oversigt");
     private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
 
@@ -70,11 +73,19 @@ public class KonferencePane extends Application {
         pane.add(btnOpretUdflugt,5,1);
         pane.add(btnOpretTilmelding,5,2);
 
+        pane.add(btnInfoWindowTilmeldinger, 0, 8);
+        pane.add(btnInfoWindowUdflugter, 1, 8);
+        pane.add(btnInfoWindowHoteller, 2, 8);
+
+
         // Tilføjer button actions
         btnOpretKonference.setOnAction(event -> this.opretKonferenceOnAction());
         btnOpretHotelAftale.setOnAction(event -> this.opretHotelAftaleOnAction());
         btnOpretUdflugt.setOnAction(event -> this.opretUdflugtOnAction());
         btnOpretTilmelding.setOnAction(event -> this.opretTilmeldingOnAction());
+        btnInfoWindowTilmeldinger.setOnAction(event -> this.visTilmeldingerOnAction());
+        btnInfoWindowUdflugter.setOnAction(event -> this.visUdflugterOnAction());
+        btnInfoWindowHoteller.setOnAction(event -> this.visHotellerOnAction());
 
         updateControls();
     }
@@ -124,6 +135,33 @@ public class KonferencePane extends Application {
             alert.setHeaderText("Du skal vælge en konference for at oprette en Udflugt");
             alert.show();
         }
+    }
+
+    public void visTilmeldingerOnAction() {
+        Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
+        if (selectedKonference != null) {
+            InfoWindowTilmeldinger dialog = new InfoWindowTilmeldinger(selectedKonference);
+            dialog.showAndWait();
+        } else {
+            alert.setTitle("Ingen Konference");
+            alert.setHeaderText("Du skal vælge en konference for at vise tilmeldinger");
+            alert.show();
+        }
+    }
+    public void visUdflugterOnAction() {
+        Konference selectedKonference = lvwKonferencer.getSelectionModel().getSelectedItem();
+        if (selectedKonference != null) {
+            InfoWindowUdflugter dialog = new InfoWindowUdflugter(selectedKonference);
+            dialog.showAndWait();
+        } else {
+            alert.setTitle("Ingen Konference");
+            alert.setHeaderText("Du skal vælge en konference for at vise udflugter");
+            alert.show();
+        }
+    }
+    public void visHotellerOnAction() {
+            InfoWindowHoteller dialog = new InfoWindowHoteller();
+            dialog.showAndWait();
     }
 
     public void updateControls() {
