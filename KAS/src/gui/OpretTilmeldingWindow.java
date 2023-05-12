@@ -255,7 +255,14 @@ public class OpretTilmeldingWindow extends Stage {
             alert.show();
             return;
         }
-        System.out.println(Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected()));
+        if (afrejseDato.isAfter(konference.getSlutDato()) || ankomstDato.isBefore(konference.getStartDato())) {
+            alert.setTitle("Ugyldig dato");
+            alert.setHeaderText("Dine valgte ankomst eller afrejse dato er udenfor konferencens datoer");
+            alert.show();
+            return;
+        }
+        Tilmelding h1 = Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected());
+        Controller.addLedsagerTilTilmelding(h1, ledsager);
         this.hide();
     }
 

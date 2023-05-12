@@ -119,6 +119,8 @@ public abstract class Controller {
         tilmelding.setLedsager(ledsager);
     }
 
+    // public static void addFirmaTilTilmelding()
+
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
         ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
         for (Tilmelding t : konference.getTilmeldinger()) {
