@@ -79,13 +79,5 @@ public class Test {
         HotelBooking hb1 = Controller.createHotelBooking(t1, h1.getTillæg(), h1);
         HotelBooking hb4 = Controller.createHotelBooking(t4, h1.getTillæg(), h3);
 
-
-        // Tillæg
-
-        Controller.createTillæg(h1, "WIFI", 200);
-        Controller.createTillæg(h1, "Spa", 150);
-
-        System.out.println(Controller.visHotelOgDeltagerInfo());
-
     }
 }

@@ -1,7 +1,9 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,7 +18,7 @@ public class InfoWindowHoteller extends Stage {
         this.setResizable(false);
         // this.setWidth(300); --> Nødvendig hvis hidden items
 
-        this.setTitle("New Person");
+        this.setTitle("Vis oversigt over alle hoteller og alle deltagere som har besøgt hotellet");
         GridPane pane = new GridPane();
         this.initContent(pane);
 
@@ -27,17 +29,16 @@ public class InfoWindowHoteller extends Stage {
         //--------------------------------------------------
         // Data felter
 
+    private TextArea visOversigt = new TextArea();
+
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
         // set horizontal gap between components
         pane.setHgap(10);
         // set vertical gap between components
         pane.setVgap(10);
-    }
 
-    public String printInfo() {
-        String s = "";
-        // TODO
-        return s;
+        pane.add(visOversigt, 0,0 );
+        visOversigt.setText(Controller.visHotelOgDeltagerInfo());
     }
 }
