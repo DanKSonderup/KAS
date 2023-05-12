@@ -77,4 +77,8 @@ public class HotelAftale {
         return temp;
     }
 
+    public void addHotelBooking(HotelBooking hotelBooking) {
+        hotelBookings.add(hotelBooking);
+    }
+
 }

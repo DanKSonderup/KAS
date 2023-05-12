@@ -10,6 +10,7 @@ public class Deltager {
     private int id;
     private String by;
     private String land;
+    private Ledsager ledsager;
     ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
     private static int counter;
 
@@ -68,6 +69,10 @@ public class Deltager {
             }
         }
         return null;
+    }
+
+    public Ledsager getLedsager() {
+        return ledsager;
     }
 
     @Override
