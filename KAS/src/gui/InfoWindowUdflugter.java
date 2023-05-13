@@ -3,6 +3,7 @@ package gui;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -31,7 +32,7 @@ public class InfoWindowUdflugter extends Stage {
     //--------------------------------------------------
     // Data felter
     private final TextArea visUdflugter = new TextArea();
-
+    private final Button btnLuk = new Button("Luk");
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -40,8 +41,17 @@ public class InfoWindowUdflugter extends Stage {
         // set vertical gap between components
         pane.setVgap(10);
 
-        pane.add(visUdflugter, 0,0);
+        pane.add(visUdflugter, 0,0, 2, 2);
         visUdflugter.setText("" + konference.visInfo());
+
+        pane.add(btnLuk, 2, 3);
+        btnLuk.setOnAction(event -> this.btnLukOnAction());
+
     }
+
+    private void btnLukOnAction() {
+        this.hide();
+    }
+
 
 }
