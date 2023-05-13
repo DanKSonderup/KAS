@@ -52,6 +52,7 @@ public class OpretTilmeldingWindow extends Stage {
     private final Button btnOpretLedsager = new Button("Tilføj ledsager");
     private final Button btnVælgDeltager = new Button("Brug tidligere deltager");
     private final Button btnTilføjFirma = new Button("Tilføj Firma");
+    private final Button btnVælgDatoer = new Button("Vælg datoer");
     private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private final CheckBox cbxForedagsholder = new CheckBox("Foredragsholder");
 
@@ -62,6 +63,8 @@ public class OpretTilmeldingWindow extends Stage {
     private Firma firma;
     private HotelAftale hotelAftale;
     private ArrayList<Tillæg> valgteTillæg = new ArrayList<>();
+    private LocalDate ankomstDato;
+    private LocalDate afrejseDato;
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -85,25 +88,27 @@ public class OpretTilmeldingWindow extends Stage {
         pane.add(vboxKnapperTop,3,1);
         vboxKnapperTop.getChildren().add(btnOpretDeltager);
         vboxKnapperTop.getChildren().add(btnVælgDeltager);
-        vboxKnapperTop.getChildren().add(btnOpretLedsager);
 
 
         Label lblDinTilmelding = new Label("Din tilmelding: ");
-        pane.add(lblDinTilmelding,0,5);
+        pane.add(lblDinTilmelding,0,9);
         VBox vboxKnapperBund = new VBox();
         vboxKnapperBund.setSpacing(15);
         vboxKnapperBund.getChildren().add(btnOpretHotelBooking);
         vboxKnapperBund.getChildren().add(btnTilføjFirma);
-        pane.add(vboxKnapperBund,3,6);
+        pane.add(vboxKnapperBund,3,11);
 
         Label lblAnkomstDato = new Label("Ankomstdato:");
-        pane.add(lblAnkomstDato, 0, 10);
-        pane.add(txfAnkomstDato, 1, 10);
+        pane.add(lblAnkomstDato, 0, 6);
+        pane.add(txfAnkomstDato, 1, 6);
+        txfAnkomstDato.setPromptText("DD-MM-YYYY");
 
         Label lblAfrejseDato = new Label("Afrejsedato:");
-        pane.add(lblAfrejseDato, 0, 11);
-        pane.add(txfAfrejseDato, 1, 11);
-        pane.add(cbxForedagsholder, 1, 12);
+        pane.add(lblAfrejseDato, 0, 7);
+        pane.add(txfAfrejseDato, 1, 7);
+        txfAfrejseDato.setPromptText("DD-MM-YYYY");
+        pane.add(btnVælgDatoer,3,8);
+        pane.add(btnOpretLedsager, 3, 7);
 
         btnOpretHotelBooking.setDisable(true);
         btnTilføjFirma.setDisable(true);
@@ -111,24 +116,18 @@ public class OpretTilmeldingWindow extends Stage {
         btnOk.setDisable(true);
 
 
-
-        /*
-        lvwDeltagere.getSelectionModel().selectedItemProperty().addListener(event ->
-                this.deltagerSelectionChanged(lvwDeltagere.getSelectionModel().getSelectedItem()));
-
-         */
-
-
-        pane.add(TextAreaInfo, 0, 6, 2, 3);
+        pane.add(TextAreaInfo, 0, 10, 2, 3);
         TextAreaInfo.setPrefHeight(170);
         TextAreaInfo.setPrefWidth(100);
-
+        Label lblForedragsHolder = new Label("Er deltager foredragsholder ?");
+        pane.add(lblForedragsHolder,0,13);
+        pane.add(cbxForedagsholder, 1, 13);
 
         HBox hboxVindueKnapper = new HBox();
         hboxVindueKnapper.setSpacing(15);
         hboxVindueKnapper.getChildren().add(btnAfbryd);
         hboxVindueKnapper.getChildren().add(btnOk);
-        pane.add(hboxVindueKnapper,0,13);
+        pane.add(hboxVindueKnapper,0,16);
 
         btnOpretDeltager.setOnAction(event -> this.opretDeltagerOnAction());
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
@@ -137,6 +136,7 @@ public class OpretTilmeldingWindow extends Stage {
         btnTilføjFirma.setOnAction(event -> this.tilføjFirmaOnAction());
         btnOpretHotelBooking.setOnAction(event -> this.opretHotelBookingOnAction());
         btnOk.setOnAction(event -> this.opretTilmeldingOnAction());
+        btnVælgDatoer.setOnAction(event -> this.vælgDatoerOnAction());
     }
 
     public void updateControls() {
@@ -158,9 +158,44 @@ public class OpretTilmeldingWindow extends Stage {
             btnOpretDeltager.setDisable(true);
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
-            btnOpretLedsager.setDisable(false);
-            btnOk.setDisable(false);
         }
+    }
+
+    private void vælgDatoerOnAction() {
+        String ankomstDatoString = txfAnkomstDato.getText().trim();
+        String afrejseDatoString = txfAfrejseDato.getText().trim();
+        LocalDate ankomstDato = null;
+        LocalDate afrejseDato = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        try {
+            ankomstDato = LocalDate.parse(ankomstDatoString, formatter);
+            afrejseDato = LocalDate.parse(afrejseDatoString, formatter);
+        }
+        catch (DateTimeParseException e) {
+            alert.setTitle("Ugyldig dato");
+            alert.setHeaderText("En af dine datoer er ikke en gyldig dato");
+            alert.show();
+            return;
+        }
+        if (afrejseDato.isBefore(ankomstDato)) {
+            alert.setTitle("Ugyldig dato");
+            alert.setHeaderText("Din slutdato er før din startdato");
+            alert.show();
+            return;
+        }
+        if (afrejseDato.isAfter(konference.getSlutDato()) || ankomstDato.isBefore(konference.getStartDato())) {
+            alert.setTitle("Ugyldig dato");
+            alert.setHeaderText("Dine valgte ankomst eller afrejse dato er udenfor konferencens datoer");
+            alert.show();
+            return;
+        }
+        this.ankomstDato = ankomstDato;
+        this.afrejseDato = afrejseDato;
+        btnVælgDatoer.setDisable(true);
+        txfAnkomstDato.setDisable(true);
+        txfAfrejseDato.setDisable(true);
+        btnOpretLedsager.setDisable(false);
+        btnOk.setDisable(false);
     }
 
     private void vælgDeltagerOnAction() {
@@ -173,8 +208,6 @@ public class OpretTilmeldingWindow extends Stage {
             btnVælgDeltager.setDisable(true);
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
-            btnOpretLedsager.setDisable(false);
-            btnOk.setDisable(false);
         } else {
             alert.setTitle("Ingen Deltager");
             alert.setHeaderText("Du skal vælge en deltager for at tildele en tidligere deltager");
@@ -183,7 +216,7 @@ public class OpretTilmeldingWindow extends Stage {
     }
 
     private void opretLedsagerOnAction() {
-        OpretLedsagerWindow dialog = new OpretLedsagerWindow(konference);
+        OpretLedsagerWindow dialog = new OpretLedsagerWindow(konference, ankomstDato, afrejseDato);
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
@@ -234,33 +267,7 @@ public class OpretTilmeldingWindow extends Stage {
     }
 
     public void opretTilmeldingOnAction() {
-        String ankomstDatoString = txfAnkomstDato.getText().trim();
-        String afrejseDatoString = txfAfrejseDato.getText().trim();
-        LocalDate ankomstDato = null;
-        LocalDate afrejseDato = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
-        try {
-            ankomstDato = LocalDate.parse(ankomstDatoString, formatter);
-            afrejseDato = LocalDate.parse(afrejseDatoString, formatter);
-        }
-        catch (DateTimeParseException e) {
-            alert.setTitle("Ugyldig dato");
-            alert.setHeaderText("En af dine datoer er ikke en gyldig dato");
-            alert.show();
-            return;
-        }
-        if (afrejseDato.isBefore(ankomstDato)) {
-            alert.setTitle("Ugyldig dato");
-            alert.setHeaderText("Din slutdato er før din startdato");
-            alert.show();
-            return;
-        }
-        if (afrejseDato.isAfter(konference.getSlutDato()) || ankomstDato.isBefore(konference.getStartDato())) {
-            alert.setTitle("Ugyldig dato");
-            alert.setHeaderText("Dine valgte ankomst eller afrejse dato er udenfor konferencens datoer");
-            alert.show();
-            return;
-        }
+
         Tilmelding h1 = Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected());
 
         if (hotelAftale != null) {

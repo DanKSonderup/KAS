@@ -53,21 +53,6 @@ public class OpretHotelBookingWindow extends Stage {
             lvwHotelAftaler.getItems().setAll(konference.getHotelaftaler());
 
 
-        /*
-            lvwHotelAftaler.setCellFactory(param -> new ListCell<HotelAftale>() {
-                @Override
-                protected void updateItem(HotelAftale item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (empty || item == null) {
-                        setText(null);
-                    } else {
-                        setText(item.getNavn());
-                    }
-                }
-            });
-
-         */
 
             Label lblHotelAftaler = new Label("Hotelaftaler");
             pane.add(lblHotelAftaler,0,0);

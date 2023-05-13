@@ -10,6 +10,7 @@ public class HotelAftale {
     private String lokation;
     private double prisPrNatEnkeltVærelse;
     private double prisPrDobbeltVærelse;
+    private String inkluderedeTillæg = "";
     private ArrayList<Tillæg> tillæg = new ArrayList<>();
     private ArrayList<HotelBooking> hotelBookings = new ArrayList<>();
 
@@ -49,9 +50,8 @@ public class HotelAftale {
         return hotelBookings;
     }
 
-    @Override
-    public String toString() {
-        return navn + " " + lokation + " " + prisPrNatEnkeltVærelse + " " + prisPrDobbeltVærelse;
+    public void addInkluderetTillæg(String inkluderedeTillæg) {
+        this.inkluderedeTillæg += inkluderedeTillæg;
     }
 
     public ArrayList<String> GetHotelNavne() {
@@ -79,6 +79,11 @@ public class HotelAftale {
 
     public void addHotelBooking(HotelBooking hotelBooking) {
         hotelBookings.add(hotelBooking);
+    }
+
+    @Override
+    public String toString() {
+        return navn + " " + lokation + " " + prisPrNatEnkeltVærelse + " " + prisPrDobbeltVærelse + (inkluderedeTillæg.length() == 0 ? "" : " inkl: " + inkluderedeTillæg);
     }
 
 }

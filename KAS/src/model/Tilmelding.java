@@ -70,7 +70,7 @@ public class Tilmelding {
                 if (ledsager.getUdflugter() != null) {
                     udskrift += "\nUdflugter: ";
                     for (Udflugt udflugt : ledsager.getUdflugter()) {
-                        udskrift += udflugt.getNavn();
+                        udskrift += udflugt.getNavn() + " ";
                     }
                 }
             }
@@ -96,5 +96,18 @@ public class Tilmelding {
 
     public HotelBooking getHotelBooking() {
         return hotelBooking;
+    }
+
+    public double beregnSamletPris() {
+        double samletPris = 0;
+        if (!foredragsholder) {
+            samletPris += konference.getPrisPerDag() * antalDage();
+        }
+        if (ledsager != null) {
+            samletPris += ledsager.samletUdflugtsPris();
+        }
+        samletPris += hotelBooking.samletPris();
+
+        return samletPris;
     }
 }
