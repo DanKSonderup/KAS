@@ -64,6 +64,8 @@ public abstract class Controller {
     /**
      * Opretter et tillæg
      * Pre: beskrivelse er ikke tomt, hotel ikke null, pris >= 0
+     *
+     * @return
      */
     public static void createTillæg(HotelAftale hotelAftale, String navn, double pris) {
         hotelAftale.createTillæg(new Tillæg(navn,pris));

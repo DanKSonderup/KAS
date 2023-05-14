@@ -68,9 +68,9 @@ public class Tilmelding {
             if (ledsager != null) {
                 udskrift += "\nLedsager: " + ledsager.getNavn();
                 if (ledsager.getUdflugter() != null) {
-                    udskrift += "\nUdflugter: ";
+                    udskrift += "\nUdflugter: \n";
                     for (Udflugt udflugt : ledsager.getUdflugter()) {
-                        udskrift += udflugt.getNavn() + " ";
+                        udskrift += udflugt.getNavn() + "   \n";
                     }
                 }
             }
