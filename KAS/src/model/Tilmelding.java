@@ -83,6 +83,7 @@ public class Tilmelding {
             if (firma != null) {
                 udskrift += "\n Firma: " + firma.getNavn();
             }
+            udskrift += "\n Samlet pris: " + beregnSamletPris();
             udskrift += "\n\n";
 
             return udskrift;
@@ -106,7 +107,9 @@ public class Tilmelding {
         if (ledsager != null) {
             samletPris += ledsager.samletUdflugtsPris();
         }
-        samletPris += hotelBooking.samletPris();
+        if (hotelBooking != null) {
+            samletPris += hotelBooking.samletPris();
+        }
 
         return samletPris;
     }

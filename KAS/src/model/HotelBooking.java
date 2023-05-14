@@ -28,10 +28,6 @@ public class HotelBooking {
 
     public double samletPris() {
         double pris = 0;
-        /** TODO
-         * Do the mathing
-         * I liked the part where Oliver said "Its mathing time" and then mathed all over the method
-         */
 
         double prisPrNat = 0;
 
