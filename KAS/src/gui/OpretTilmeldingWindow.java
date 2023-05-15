@@ -91,15 +91,6 @@ public class OpretTilmeldingWindow extends Stage {
         vboxKnapperTop.getChildren().add(btnOpretDeltager);
         vboxKnapperTop.getChildren().add(btnVælgDeltager);
 
-
-        Label lblDinTilmelding = new Label("Din tilmelding: ");
-        pane.add(lblDinTilmelding,0,9);
-        VBox vboxKnapperBund = new VBox();
-        vboxKnapperBund.setSpacing(15);
-        vboxKnapperBund.getChildren().add(btnOpretHotelBooking);
-        vboxKnapperBund.getChildren().add(btnTilføjFirma);
-        pane.add(vboxKnapperBund,3,11);
-
         Label lblAnkomstDato = new Label("Ankomstdato:");
         pane.add(lblAnkomstDato, 0, 6);
         pane.add(txfAnkomstDato, 1, 6);
@@ -111,6 +102,14 @@ public class OpretTilmeldingWindow extends Stage {
         txfAfrejseDato.setPromptText("DD-MM-YYYY");
         pane.add(btnVælgDatoer,3,8);
         pane.add(btnOpretLedsager, 3, 7);
+
+        Label lblDinTilmelding = new Label("Din tilmelding: ");
+        pane.add(lblDinTilmelding,0,9);
+        VBox vboxKnapperBund = new VBox();
+        vboxKnapperBund.setSpacing(15);
+        vboxKnapperBund.getChildren().add(btnOpretHotelBooking);
+        vboxKnapperBund.getChildren().add(btnTilføjFirma);
+        pane.add(vboxKnapperBund,3,11);
 
         btnVælgDatoer.setDisable(true);
 
@@ -133,6 +132,7 @@ public class OpretTilmeldingWindow extends Stage {
         hboxVindueKnapper.getChildren().add(btnOk);
         pane.add(hboxVindueKnapper,0,16);
 
+        // Opretter Actionevents
         btnOpretDeltager.setOnAction(event -> this.opretDeltagerOnAction());
         btnAfbryd.setOnAction(event -> this.afbrydOnAction());
         btnVælgDeltager.setOnAction(event -> this.vælgDeltagerOnAction());
