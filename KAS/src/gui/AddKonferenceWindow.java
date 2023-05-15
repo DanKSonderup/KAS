@@ -2,7 +2,6 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,7 +36,7 @@ public class AddKonferenceWindow extends Stage {
     //--------------------------------------------------
     // Data felter
     private final TextField txfNavn = new TextField();
-    private final TextField txfLokation = new TextField();
+    private final TextField txAdresse = new TextField();
     private final TextField txfStartDato = new TextField();
     private final TextField txfSlutDato = new TextField();
     private final TextField txfPrisPerDag = new TextField();
@@ -46,8 +45,8 @@ public class AddKonferenceWindow extends Stage {
     private final Label lblError = new Label("Der opstod en fejl \n prøv igen");
 
     public void initContent(GridPane pane) {
-        String[] labelStrenge = {"Navn:", "Lokation:", "Start Dato:", "Slut Dato:", "Pris pr. dag:"};
-        TextField[] tekstFelter = {txfNavn, txfLokation, txfStartDato, txfSlutDato, txfPrisPerDag};
+        String[] labelStrenge = {"Navn:", "Adresse:", "Start Dato:", "Slut Dato:", "Pris pr. dag:"};
+        TextField[] tekstFelter = {txfNavn, txAdresse, txfStartDato, txfSlutDato, txfPrisPerDag};
 
         pane.setPadding(new Insets(20));
         // set horizontal gap between components
@@ -91,7 +90,7 @@ public class AddKonferenceWindow extends Stage {
         String startDatoString = txfStartDato.getText().trim();
         String slutDatoString = txfSlutDato.getText().trim();
         String navn = txfNavn.getText().trim();
-        String lokation = txfLokation.getText().trim();
+        String lokation = txAdresse.getText().trim();
 
         if (navn.length() == 0) {
             lblError.setText("Navn skal udfyldes \n");
@@ -100,7 +99,7 @@ public class AddKonferenceWindow extends Stage {
             return;
         }
         if (lokation.length() == 0) {
-            lblError.setText("Lokation skal udfyldes \n");
+            lblError.setText("Adresse skal udfyldes \n");
             lblError.setTextFill(Color.RED);
             lblError.setVisible(true);
             return;

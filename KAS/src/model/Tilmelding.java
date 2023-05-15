@@ -59,13 +59,13 @@ public class Tilmelding {
         public String toString () {
             String udskrift = deltager.getNavn() + "\n" +
                     "fra " + ankomstDato + " til " + afrejseDato + "\n";
-                    udskrift += "Antal dage: " + this.antalDage();
+                    udskrift += "Antal dage: " + this.antalDage() + "\n";
             if (ledsager != null) {
-                udskrift += "\nLedsager: " + ledsager.getNavn();
+                udskrift += "\n(Ledsager: " + ledsager.getNavn() + ")";
                 if (ledsager.getUdflugter() != null) {
                     udskrift += "\nUdflugter: \n";
                     for (Udflugt udflugt : ledsager.getUdflugter()) {
-                        udskrift += udflugt.getNavn() + "   \n";
+                        udskrift += udflugt.getNavn() + "\n";
                     }
                 }
             }
@@ -78,7 +78,7 @@ public class Tilmelding {
             if (firma != null) {
                 udskrift += "\n Firma: " + firma.getNavn();
             }
-            udskrift += "\n Samlet pris: " + beregnSamletPris();
+            udskrift += "\n\nSamlet pris: " + beregnSamletPris();
             udskrift += "\n\n";
 
             return udskrift;

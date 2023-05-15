@@ -68,6 +68,9 @@ public class OpretHotelBookingWindow extends Stage {
 
             pane.add(btnOpretHotelBooking,1,4);
             btnOpretHotelBooking.setOnAction(event -> this.opretHotelBookingOnAction());
+
+            pane.add(btnAfbryd,0,4);
+            btnAfbryd.setOnAction(event -> this.afbrydOnAction());
         }
 
         private void hotelAftaleSelectionChanged (HotelAftale hotelAftale) {
@@ -88,6 +91,10 @@ public class OpretHotelBookingWindow extends Stage {
 
     public HotelAftale getHotelAftale() {
         return hotelAftale;
+    }
+
+    public void afbrydOnAction() {
+        this.hide();
     }
 
     public ArrayList<Tillæg> getValgteTillæg() {

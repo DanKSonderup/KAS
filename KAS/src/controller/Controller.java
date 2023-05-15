@@ -12,9 +12,9 @@ public abstract class Controller {
      * Opretter en konference
      * Pre: navn er ikke tomt, startDate <= endDDate, prisPerDag >= 0
      */
-    public static Konference createKonference(String navn, String sted, LocalDate startDato, LocalDate slutDato, double prisPrDag) {
-        Konference konference = new Konference(navn, sted, startDato, slutDato, prisPrDag);
-        Storage.storeKonferencer(konference);
+    public static Konference createKonference(String navn, String adresse, LocalDate startDato, LocalDate slutDato, double prisPrDag) {
+        Konference konference = new Konference(navn, adresse, startDato, slutDato, prisPrDag);
+        Storage.storeKonference(konference);
         return konference;
     }
 
@@ -52,7 +52,7 @@ public abstract class Controller {
      * Henter alle hotelaftaler fra storage og returnerer en liste med dem
      */
     public static ArrayList<HotelAftale> getAllHotelAftaler() {
-        return Storage.getHotelAftaler();
+        return Storage.getHotelAftale();
     }
 
     /**
@@ -123,13 +123,13 @@ public abstract class Controller {
     }
 
     /**
-     * Henter alle unikke deltagere og returnerer en liste med dem.
+     * Henter alle unikke deltagere som ikke er på konference og returnerer en liste med dem.
      */
-    public static ArrayList<Deltager> getAlleUnikkeDeltagere() {
+    public static ArrayList<Deltager> getAlleUnikkeDeltagere(Konference konferenceInput) {
         ArrayList<Deltager> unikkeDeltagere = new ArrayList<>();
         for (Konference konference: Storage.getKonferencer()) {
             for (Tilmelding tilmelding: konference.getTilmeldinger()) {
-                if (!unikkeDeltagere.contains(tilmelding.getDeltager())) {
+                if (!unikkeDeltagere.contains(tilmelding.getDeltager()) && !tilmelding.getKonference().equals(konferenceInput)) {
                     unikkeDeltagere.add(tilmelding.getDeltager());
                 }
             }
@@ -208,7 +208,7 @@ public abstract class Controller {
      */
     public static ArrayList<String> getUnikkeHotelNavne() {
         ArrayList<String> temp = new ArrayList<>();
-        for (HotelAftale hotelAftale : Storage.getHotelAftaler()) {
+        for (HotelAftale hotelAftale : Storage.getHotelAftale()) {
             if (!temp.contains(hotelAftale.getNavn())) {
                 temp.add(hotelAftale.getNavn());
             }
@@ -222,7 +222,7 @@ public abstract class Controller {
     public static ArrayList<HotelAftale> GetAlleHotelAftalerMedNavn(String hotelNavn) {
         // Find alle hotelaftaler med samme navn
         ArrayList<HotelAftale> temp = new ArrayList<>();
-        for (HotelAftale hotelAftale : Storage.getHotelAftaler()) {
+        for (HotelAftale hotelAftale : Storage.getHotelAftale()) {
             if (hotelAftale.getNavn().equals(hotelNavn)) {
                 temp.add(hotelAftale);
             }

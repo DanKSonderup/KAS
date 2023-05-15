@@ -57,9 +57,4 @@ public class InfoWindowTilmeldinger extends Stage {
         this.hide();
     }
 
-//    public String printInfoPåDeltager() {
-//        Controller.getAlleTilmeldinger(this.konference);
-//
-//        return "";
-//    }
 }
