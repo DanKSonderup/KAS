@@ -208,6 +208,13 @@ public abstract class Controller {
         return l1;
     }
 
+    public static void addUdflugterTilLedsager(Ledsager ledsager, ArrayList<Udflugt> udflugter) {
+        for (Udflugt udflugt: udflugter) {
+            ledsager.addUdflugt(udflugt);
+            udflugt.addLedsager(ledsager);
+        }
+    }
+
     public static String visHotelOgDeltagerInfo() {
         String udskrift = "";
         for (String s : getUnikkeHotelNavne()) {
