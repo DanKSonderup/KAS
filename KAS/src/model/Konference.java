@@ -18,9 +18,9 @@ public class Konference {
     ArrayList<HotelAftale> hotelaftaler = new ArrayList<>();
     ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
 
-    public Konference(String navn, String adresse, LocalDate startDato, LocalDate slutDato, double prisPerDag) {
+    public Konference(String navn, String sted, LocalDate startDato, LocalDate slutDato, double prisPerDag) {
         this.navn = navn;
-        this.adresse = adresse;
+        this.adresse = sted;
         this.startDato = startDato;
         this.slutDato = slutDato;
         this.prisPerDag = prisPerDag;
@@ -80,7 +80,7 @@ public class Konference {
         return udskrift;
     }
 
-    public String printInfoPåDeltager(Konference konference) {
+    public static String printInfoPåDeltager(Konference konference) {
         String s = "";
         Controller.getAlleTilmeldinger(konference);
         for (Tilmelding tilmelding : Controller.getAlleTilmeldinger(konference)) {
