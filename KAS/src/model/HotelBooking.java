@@ -37,6 +37,9 @@ public class HotelBooking {
             prisPrNat = hotelAftale.getPrisPrDobbeltVærelse();
         }
         pris = (tilmelding.antalDage()) * prisPrNat;
+        for (Tillæg tillæg : valgteTillæg) {
+            pris += tillæg.getPris() * tilmelding.antalDage();
+        }
         return pris;
     }
 
