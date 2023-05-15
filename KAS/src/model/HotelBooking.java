@@ -30,13 +30,13 @@ public class HotelBooking {
 
         double prisPrNat = 0;
 
-        if (tilmelding.getLedsager() == null) {
-            prisPrNat = hotelAftale.getPrisPrNatEnkeltVærelse();
-        } else {
+        if (tilmelding.getLedsager() != null) {
             prisPrNat = hotelAftale.getPrisPrDobbeltVærelse();
+        } else {
+            prisPrNat = hotelAftale.getPrisPrNatEnkeltVærelse();
         }
+        pris = (tilmelding.antalNætter()) * prisPrNat;
         if (valgteTillæg != null) {
-            pris = (tilmelding.antalNætter()) * prisPrNat;
             for (Tillæg tillæg : valgteTillæg) {
                 pris += tillæg.getPris() * tilmelding.antalNætter();
             }
