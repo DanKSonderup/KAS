@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HotelBooking {
@@ -36,9 +35,11 @@ public class HotelBooking {
         } else {
             prisPrNat = hotelAftale.getPrisPrNatEnkeltVærelse();
         }
-        pris = (tilmelding.antalDage()) * prisPrNat;
-        for (Tillæg tillæg : valgteTillæg) {
-            pris += tillæg.getPris() * tilmelding.antalDage();
+        if (valgteTillæg != null) {
+            pris = (tilmelding.antalNætter()) * prisPrNat;
+            for (Tillæg tillæg : valgteTillæg) {
+                pris += tillæg.getPris() * tilmelding.antalNætter();
+            }
         }
         return pris;
     }
