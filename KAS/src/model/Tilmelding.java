@@ -64,7 +64,7 @@ public class Tilmelding {
         public String toString () {
             String udskrift = deltager.getNavn() + "\n" +
                     "fra " + ankomstDato + " til " + afrejseDato + "\n";
-            udskrift += this.antalNætter();
+                    udskrift += this.antalNætter();
             if (ledsager != null) {
                 udskrift += "\nLedsager: " + ledsager.getNavn();
                 if (ledsager.getUdflugter() != null) {
