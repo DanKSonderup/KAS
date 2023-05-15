@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class OpretLedsagerWindow extends Stage {
     private Konference konference;
     private String navn;
-    private ArrayList<Udflugt> udflugter;
+    private ArrayList<Udflugt> udflugter = new ArrayList<>();
     private LocalDate ankomstDato;
     private LocalDate afrejseDato;
 
@@ -93,9 +93,11 @@ public class OpretLedsagerWindow extends Stage {
             return;
         } else {
             navn = txfNavn.getText().trim();
-            ArrayList<Udflugt> udflugter = new ArrayList<>(lvwUdflugter.getSelectionModel().getSelectedItems());
-            for (Udflugt udflugt: udflugter) {
-                this.udflugter.add(udflugt);
+            if (lvwUdflugter.getSelectionModel().getSelectedItems() != null) {
+                ArrayList<Udflugt> udflugter = new ArrayList<>(lvwUdflugter.getSelectionModel().getSelectedItems());
+                for (Udflugt udflugt: udflugter) {
+                    this.udflugter.add(udflugt);
+                }
             }
         }
         this.hide();
