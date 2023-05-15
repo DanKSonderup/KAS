@@ -112,6 +112,8 @@ public class OpretTilmeldingWindow extends Stage {
         pane.add(btnVælgDatoer,3,8);
         pane.add(btnOpretLedsager, 3, 7);
 
+        btnVælgDatoer.setDisable(true);
+
         btnOpretHotelBooking.setDisable(true);
         btnTilføjFirma.setDisable(true);
         btnOpretLedsager.setDisable(true);
@@ -142,7 +144,7 @@ public class OpretTilmeldingWindow extends Stage {
     }
 
     public void updateControls() {
-        lvwDeltagere.getItems().setAll(Controller.getAlleDeltagere());
+        lvwDeltagere.getItems().setAll(Controller.getAlleUnikkeDeltagere());
     }
 
     private void opretDeltagerOnAction() {
@@ -160,6 +162,7 @@ public class OpretTilmeldingWindow extends Stage {
             btnOpretDeltager.setDisable(true);
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
+            btnVælgDatoer.setDisable(false);
         }
     }
 
@@ -210,6 +213,7 @@ public class OpretTilmeldingWindow extends Stage {
             btnVælgDeltager.setDisable(true);
             btnTilføjFirma.setDisable(false);
             btnOpretHotelBooking.setDisable(false);
+            btnVælgDatoer.setDisable(false);
         } else {
             alert.setTitle("Ingen Deltager");
             alert.setHeaderText("Du skal vælge en deltager for at tildele en tidligere deltager");
