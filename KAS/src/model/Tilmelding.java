@@ -35,11 +35,6 @@ public class Tilmelding {
         this.hotelBooking = hotelBooking;
     }
 
-    public HotelBooking createHotelBooking(ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
-        HotelBooking hotelBooking1 = new HotelBooking(this, valgteTillæg, hotelAftale);
-        return hotelBooking1;
-    }
-
     public Ledsager getLedsager() {
         return ledsager;
     }
@@ -101,9 +96,6 @@ public class Tilmelding {
         return dage + 1;
         }
 
-    public HotelBooking getHotelBooking() {
-        return hotelBooking;
-    }
 
     public double beregnSamletPris() {
         double samletPris = 0;

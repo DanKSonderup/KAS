@@ -45,20 +45,13 @@ public class InfoWindowTilmeldinger extends Stage {
         pane.setVgap(10);
 
         pane.add(visTilmeldinger, 0, 0, 2, 2);
-        visTilmeldinger.setText(printInfoPåDeltager());
+        visTilmeldinger.setText(Controller.printInfoPåDeltager(konference));
 
         pane.add(btnLuk, 2, 3);
         btnLuk.setOnAction(event -> this.btnLukOnAction());
 
     }
-    public String printInfoPåDeltager() {
-        String s = "";
-        Controller.getAlleTilmeldinger(this.konference);
-        for (Tilmelding tilmelding : Controller.getAlleTilmeldinger(this.konference)) {
-            s += tilmelding.toString();
-        }
-        return s;
-    }
+
 
     private void btnLukOnAction() {
         this.hide();

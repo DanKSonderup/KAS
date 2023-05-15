@@ -40,10 +40,6 @@ public class Konference {
         return navn;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
     public LocalDate getStartDato() {
         return startDato;
     }

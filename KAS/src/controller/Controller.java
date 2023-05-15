@@ -216,6 +216,15 @@ public abstract class Controller {
         }
     }
 
+    public static String printInfoPåDeltager(Konference konference) {
+        String s = "";
+        Controller.getAlleTilmeldinger(konference);
+        for (Tilmelding tilmelding : Controller.getAlleTilmeldinger(konference)) {
+            s += tilmelding.toString();
+        }
+        return s;
+    }
+
     public static String visHotelOgDeltagerInfo() {
         String udskrift = "";
         for (String s : getUnikkeHotelNavne()) {
