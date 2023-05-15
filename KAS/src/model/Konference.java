@@ -75,12 +75,12 @@ public class Konference {
 
 
 
-    public String visInfo() {
+    public String visInfoUdflugter() {
         String udskrift = "Udflugter knyttet til konferencen " + navn + "\n";
 
         if (udflugter != null) {
             for (Udflugt u : udflugter) {
-                udskrift += u.getNavn() + " " + u.getDato() + "\n";
+                udskrift += u.getNavn() + " " + u.getDato() + " Pris: " + u.getPris() + "\n";
                 for (Ledsager ledsager: u.getLedsagere()) {
                     udskrift += "   " + ledsager.getNavn() + " (" + ledsager.getTilmelding().getDeltager().getNavn() + ")\n";
                 }

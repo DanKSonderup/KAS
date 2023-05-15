@@ -186,7 +186,7 @@ public abstract class Controller {
     }
 
     public static String getAlleUdflugterInfo(Konference konference) {
-        String info = konference.visInfo();
+        String info = konference.visInfoUdflugter();
         return info;
     }
 
