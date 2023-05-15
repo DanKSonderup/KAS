@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class HotelAftale {
     private String navn;
-    private String lokation;
     private double prisPrNatEnkeltVærelse;
     private double prisPrDobbeltVærelse;
+    private String lokation;
     private String inkluderedeTillæg = "";
     private ArrayList<Tillæg> tillæg = new ArrayList<>();
     private ArrayList<HotelBooking> hotelBookings = new ArrayList<>();
