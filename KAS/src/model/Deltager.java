@@ -7,12 +7,9 @@ public class Deltager {
     private String navn;
     private String adresse;
     private String telefonnummer;
-    private int id;
     private String by;
     private String land;
-    private Ledsager ledsager;
     ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
-    private static int counter;
 
     public Deltager(String navn, String adresse, String telefonnummer, String by, String land) {
         this.navn = navn;
@@ -20,8 +17,6 @@ public class Deltager {
         this.telefonnummer = telefonnummer;
         this.by = by;
         this.land = land;
-        counter++;
-        this.id = counter;
     }
 
     public String getNavn() {
@@ -34,10 +29,6 @@ public class Deltager {
 
     public String getTelefonnummer() {
         return telefonnummer;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getBy() {
@@ -69,10 +60,6 @@ public class Deltager {
             }
         }
         return null;
-    }
-
-    public Ledsager getLedsager() {
-        return ledsager;
     }
 
     @Override
