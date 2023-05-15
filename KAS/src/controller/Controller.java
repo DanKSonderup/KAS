@@ -77,23 +77,7 @@ public abstract class Controller {
         }
         return udflugter;
     }
-
-
-    // Firma
-
-    public static Firma createFirma(String navn, String telefonnummer) {
-        Firma firma = new Firma(navn, telefonnummer);
-        Storage.storeFirma(firma);
-        return firma;
-    }
-
-    // Deltager
-
-    public static Deltager createDeltager(String navn, String adresse, String telefonnummer, String by, String land, Tilmelding tilmelding) {
-        Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land);
-        Storage.storeDeltager(deltager);
-        return deltager;
-    }
+    
 
     /**
      * Opretter en tilmelding
@@ -103,6 +87,7 @@ public abstract class Controller {
         Tilmelding t1 = new Tilmelding(ankomstDato,afrejseDato,foredragsholder, deltager, konference);
         konference.addTilmelding(t1);
         deltager.addTilmelding(t1);
+        Storage.storeDeltager(deltager);
         return t1;
     }
 
@@ -121,6 +106,7 @@ public abstract class Controller {
     public static void addFirmaTilTilmelding(Firma firma, Tilmelding tilmelding) {
         tilmelding.addFirma(firma);
         firma.addTilmelding(tilmelding);
+        Storage.storeFirma(firma);
     }
 
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
