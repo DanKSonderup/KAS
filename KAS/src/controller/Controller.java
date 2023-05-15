@@ -186,7 +186,7 @@ public abstract class Controller {
     }
 
     public static String getAlleUdflugterInfo(Konference konference) {
-        String info = konference.visInfo();
+        String info = konference.visInfoUdflugter();
         return info;
     }
 
@@ -204,7 +204,15 @@ public abstract class Controller {
     public static Ledsager createLedsager(String navn, Tilmelding tilmelding) {
         Ledsager l1 = new Ledsager(navn, tilmelding);
         tilmelding.setLedsager(l1);
+        l1.setTilmelding(tilmelding);
         return l1;
+    }
+
+    public static void addUdflugterTilLedsager(Ledsager ledsager, ArrayList<Udflugt> udflugter) {
+        for (Udflugt udflugt: udflugter) {
+            ledsager.addUdflugt(udflugt);
+            udflugt.addLedsager(ledsager);
+        }
     }
 
     public static String visHotelOgDeltagerInfo() {

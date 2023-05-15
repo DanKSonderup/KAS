@@ -59,9 +59,11 @@ public class OpretTilmeldingWindow extends Stage {
     //-------------------------------------------------
     // Data Felter til oprettelse af Tilmelding
     private Deltager deltager;
-    private Ledsager ledsager;
+    // private Ledsager ledsager; // Not good
+    private String ledsagerNavn;
+    private ArrayList<Udflugt> udflugter;
     private Firma firma;
-    private HotelAftale hotelAftale;
+    private HotelAftale hotelAftale; // Good
     private ArrayList<Tillæg> valgteTillæg = new ArrayList<>();
     private LocalDate ankomstDato;
     private LocalDate afrejseDato;
@@ -221,12 +223,13 @@ public class OpretTilmeldingWindow extends Stage {
 
         // Wait for the modal dialog to close
 
-        if (dialog.getLedsager() != null) {
-            ledsager = dialog.getLedsager();
+        if (dialog.getNavn() != null) {
+            this.ledsagerNavn = dialog.getNavn();
+            this.udflugter = dialog.getUdflugter();
             String temp = TextAreaInfo.getText().trim();
-            temp += "\n\nLedsager: " + ledsager;
-            if (ledsager.getUdflugter().size() > 0) {
-                temp += "\n" + ledsager + "'s udflugter: " + ledsager.getUdflugter();
+            temp += "\n\nLedsager: " + ledsagerNavn;
+            if (udflugter.size() > 0) {
+                temp += "\n" + ledsagerNavn + "'s udflugter: " + udflugter;
             }
             TextAreaInfo.setText(temp);
             btnOpretLedsager.setDisable(true);
@@ -273,8 +276,9 @@ public class OpretTilmeldingWindow extends Stage {
         if (hotelAftale != null) {
             Controller.createHotelBooking(h1,valgteTillæg,hotelAftale);
         }
-        if (ledsager != null) {
-            Controller.addLedsagerTilTilmelding(h1, ledsager);
+        if (ledsagerNavn != null) {
+            Ledsager l1 = Controller.createLedsager(ledsagerNavn, h1);
+            Controller.addUdflugterTilLedsager(l1, udflugter);
         }
         if (firma != null) {
             Controller.addFirmaTilTilmelding(firma, h1);

@@ -1,17 +1,14 @@
 package gui;
 
-import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Konference;
-import model.Udflugt;
 
 public class InfoWindowUdflugter extends Stage {
     private Konference konference;
@@ -42,7 +39,7 @@ public class InfoWindowUdflugter extends Stage {
         pane.setVgap(10);
 
         pane.add(visUdflugter, 0,0, 2, 2);
-        visUdflugter.setText("" + konference.visInfo());
+        visUdflugter.setText("" + konference.visInfoUdflugter());
 
         pane.add(btnLuk, 2, 3);
         btnLuk.setOnAction(event -> this.btnLukOnAction());
