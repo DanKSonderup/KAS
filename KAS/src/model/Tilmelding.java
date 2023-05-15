@@ -55,46 +55,17 @@ public class Tilmelding {
         return konference;
     }
 
-        @Override
-        public String toString () {
-            String udskrift = deltager.getNavn() + "\n" +
-                    "fra " + ankomstDato + " til " + afrejseDato + "\n";
-                    udskrift += "Antal dage: " + this.antalDage();
-            if (ledsager != null) {
-                udskrift += "\nLedsager: " + ledsager.getNavn();
-                if (ledsager.getUdflugter() != null) {
-                    udskrift += "\nUdflugter: \n";
-                    for (Udflugt udflugt : ledsager.getUdflugter()) {
-                        udskrift += udflugt.getNavn() + "   \n";
-                    }
-                }
-            }
-            if (foredragsholder) {
-                udskrift += "\n" + "Er foredragsholder";
-            }
-            if (hotelBooking != null) {
-                udskrift += "\n Hotel: " + hotelBooking.getHotelAftaleNavn();
-            }
-            if (firma != null) {
-                udskrift += "\n Firma: " + firma.getNavn();
-            }
-            udskrift += "\n Samlet pris: " + beregnSamletPris();
-            udskrift += "\n\n";
+    public int antalNætter() {
+        long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
+        int dage = (int) daysBetween;
+        return dage;
+    }
 
-            return udskrift;
-        }
-
-        public int antalNætter() {
-            long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
-            int dage = (int) daysBetween;
-            return dage;
-        }
-
-        public int antalDage() {
+    public int antalDage() {
         long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
         int dage = (int) daysBetween;
         return dage + 1;
-        }
+    }
 
 
     public double beregnSamletPris() {
@@ -110,5 +81,34 @@ public class Tilmelding {
         }
 
         return samletPris;
+    }
+
+    @Override
+    public String toString () {
+        String udskrift = deltager.getNavn() + "\n" +
+                "fra " + ankomstDato + " til " + afrejseDato + "\n";
+        udskrift += "Antal dage: " + this.antalDage();
+        if (ledsager != null) {
+            udskrift += "\nLedsager: " + ledsager.getNavn();
+            if (ledsager.getUdflugter() != null) {
+                udskrift += "\nUdflugter: \n";
+                for (Udflugt udflugt : ledsager.getUdflugter()) {
+                    udskrift += udflugt.getNavn() + "   \n";
+                }
+            }
+        }
+        if (foredragsholder) {
+            udskrift += "\n" + "Er foredragsholder";
+        }
+        if (hotelBooking != null) {
+            udskrift += "\n Hotel: " + hotelBooking.getHotelAftaleNavn();
+        }
+        if (firma != null) {
+            udskrift += "\n Firma: " + firma.getNavn();
+        }
+        udskrift += "\n Samlet pris: " + beregnSamletPris();
+        udskrift += "\n\n";
+
+        return udskrift;
     }
 }

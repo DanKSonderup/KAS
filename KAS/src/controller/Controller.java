@@ -160,18 +160,6 @@ public abstract class Controller {
     }
 
     /**
-     * Returnerer en String oplysninger om en deltager til en specifik konference.
-     */
-    public static String printInfoPåDeltager(Konference konference) {
-        String s = "";
-        Controller.getAlleTilmeldinger(konference);
-        for (Tilmelding tilmelding : Controller.getAlleTilmeldinger(konference)) {
-            s += tilmelding.toString();
-        }
-        return s;
-    }
-
-    /**
      * Returnerer en String med oplysninger om alle hoteller og deltagere, som har besøgt hotellet.
      */
     public static String visHotelOgDeltagerInfo() {

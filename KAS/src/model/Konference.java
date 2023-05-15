@@ -1,5 +1,7 @@
 package model;
 
+import controller.Controller;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -64,13 +66,6 @@ public class Konference {
         return tilmeldinger;
     }
 
-    @Override
-    public String toString() {
-        return navn + " fra " + startDato + " til " + slutDato + " - Pris: " + prisPerDag;
-    }
-
-
-
     public String visInfoUdflugter() {
         String udskrift = "Udflugter knyttet til konferencen " + navn + "\n";
 
@@ -83,5 +78,19 @@ public class Konference {
             }
         }
         return udskrift;
+    }
+
+    public String printInfoPåDeltager(Konference konference) {
+        String s = "";
+        Controller.getAlleTilmeldinger(konference);
+        for (Tilmelding tilmelding : Controller.getAlleTilmeldinger(konference)) {
+            s += tilmelding.toString();
+        }
+        return s;
+    }
+
+    @Override
+    public String toString() {
+        return navn + " fra " + startDato + " til " + slutDato + " - Pris: " + prisPerDag;
     }
 }
