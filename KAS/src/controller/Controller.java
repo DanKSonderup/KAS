@@ -36,12 +36,6 @@ public abstract class Controller {
         return uf;
     }
 
-    /**
-     * Henter alle udflugter fra en konference og returnere en ArrayList med dem
-     */
-    public static ArrayList<Udflugt> getAlleUdflugter(Konference konference) {
-        return konference.getUdflugter();
-    }
 
     /**
      * Opretter et hotel
@@ -71,31 +65,6 @@ public abstract class Controller {
         hotelAftale.createTillæg(new Tillæg(navn,pris));
     }
 
-    /**
-     * Henter alle købstillæg fra en hotelaftale og returnerer en liste med dem
-     */
-
-    // Denne metode er blevet overflødig pågrund af rettelser i koden
-    public static ArrayList<Tillæg> getAlleKøbsTillæg(HotelAftale hotelAftale) {
-        ArrayList<Tillæg> købsTillæg = new ArrayList<>();
-        for (Tillæg købs : hotelAftale.getTillæg()) {
-            if (købs.getPris() > 0) {
-                købsTillæg.add(købs);
-            }
-        }
-        return købsTillæg;
-    }
-
-    // Denne metode er blevet overflødig pågrund af rettelser i koden
-    public static ArrayList<Tillæg> getAlleInkluderedeTillæg(HotelAftale hotelAftale) {
-        ArrayList<Tillæg> inkluderedeTillæg = new ArrayList<>();
-        for (Tillæg inkluderede : hotelAftale.getTillæg()) {
-            if (inkluderede.getPris() == 0) {
-                inkluderedeTillæg.add(inkluderede);
-            }
-        }
-        return inkluderedeTillæg;
-    }
 
     public static ArrayList<Udflugt> getUdflugterForKonferenceMellem(Konference konference, LocalDate d1, LocalDate d2) {
         ArrayList<Udflugt> udflugter = new ArrayList<>();
@@ -170,37 +139,6 @@ public abstract class Controller {
         return unikkeDeltagere;
     }
 
-    public static ArrayList<Deltager> getAlleDeltagerForKonference(Konference konference) {
-        ArrayList<Deltager> deltagerne = new ArrayList<>();
-        for (Tilmelding t : konference.getTilmeldinger()) {
-            deltagerne.add(t.getDeltager());
-        }
-        return deltagerne;
-    }
-
-    public static ArrayList<String> getAlleTilmeldingerInfo(Konference konference) {
-        ArrayList<String> info = new ArrayList<>();
-        for (Tilmelding t : konference.getTilmeldinger()) {
-            info.add(t.toString());
-        }
-        return info;
-    }
-
-    public static String getAlleUdflugterInfo(Konference konference) {
-        String info = konference.visInfoUdflugter();
-        return info;
-    }
-
-    public ArrayList<String> GetHotelNavne() {
-        // Finde alle unikke hotelnavne
-        ArrayList<String> temp = new ArrayList<>();
-        for (HotelAftale hotelAftale : Storage.getHotelAftaler()) {
-            if (!temp.contains(hotelAftale.getNavn())) {
-                temp.add(hotelAftale.getNavn());
-            }
-        }
-        return temp;
-    }
 
     public static Ledsager createLedsager(String navn, Tilmelding tilmelding) {
         Ledsager l1 = new Ledsager(navn, tilmelding);
