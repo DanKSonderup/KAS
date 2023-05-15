@@ -53,11 +53,6 @@ public class Test {
         Ledsager l2 = Controller.createLedsager("Mason Mount", t3);
         Ledsager l3 = Controller.createLedsager("Daniel Cock", t1);
 
-
-
-
-
-
         HotelAftale h1 = Controller.createHotelAftale("EsbjergHotel", 1000, 1200, "Esbjerg", k);
         HotelAftale h2 = Controller.createHotelAftale("Odense", 700, 1000, "Odense", k);
         HotelAftale h3 = Controller.createHotelAftale("EsbjergHotel", 1500, 2000, "Esbjerg", k2);

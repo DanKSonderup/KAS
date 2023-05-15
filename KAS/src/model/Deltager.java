@@ -47,12 +47,6 @@ public class Deltager {
         return tilmeldinger;
     }
 
-    public double samletPris() {
-        double pris = 0;
-
-        return pris;
-    }
-
     public Tilmelding findTilmeldingTilKonference(Konference konference) {
         for (Tilmelding tilmelding: tilmeldinger) {
             if (tilmelding.getKonference().equals(konference)) {
