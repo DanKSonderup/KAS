@@ -47,7 +47,7 @@ public class App {
         HotelAftale h3 = Controller.createHotelAftale("Esbjerg Hotel", 500, 600, "Odense", kf);
 
         // Hotel 1 tillæg
-        Controller.createTillæg(h1, "Bad", 0);
+        h1.addInkluderetTillæg("Bad");
         Controller.createTillæg(h1, "Wifi", 50);
 
         // Hotel 2 tillæg
@@ -57,13 +57,18 @@ public class App {
         // Hotel 3 tillæg
         Controller.createTillæg(h3,"Morgenmad", 100);
 
-        l1.addUdflugt(u1);
 
-        l2.addUdflugt(u2);
-        l2.addUdflugt(u3);
-
-        l3.addUdflugt(u1);
-        l3.addUdflugt(u2);
+        ArrayList<Udflugt> udflugter1 = new ArrayList<>();
+        udflugter1.add(u1);
+        ArrayList<Udflugt> udflugter2 = new ArrayList<>();
+        udflugter2.add(u2);
+        udflugter2.add(u3);
+        ArrayList<Udflugt> udflugter3 = new ArrayList<>();
+        udflugter3.add(u1);
+        udflugter3.add(u2);
+        Controller.addUdflugterTilLedsager(l1,udflugter1);
+        Controller.addUdflugterTilLedsager(l2,udflugter2);
+        Controller.addUdflugterTilLedsager(l3,udflugter3);
 
         Tillæg tilWIFI = new Tillæg("WIFI", 50);
 

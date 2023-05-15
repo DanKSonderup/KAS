@@ -158,15 +158,16 @@ public abstract class Controller {
         return tilmeldinger;
     }
 
-    public static ArrayList<Deltager> getAlleDeltagere() {
-        ArrayList<Deltager> deltagere = new ArrayList<>();
+    public static ArrayList<Deltager> getAlleUnikkeDeltagere() {
+        ArrayList<Deltager> unikkeDeltagere = new ArrayList<>();
         for (Konference konference: Storage.getKonferencer()) {
-
             for (Tilmelding tilmelding: konference.getTilmeldinger()) {
-                deltagere.add(tilmelding.getDeltager());
+                if (!unikkeDeltagere.contains(tilmelding.getDeltager())) {
+                    unikkeDeltagere.add(tilmelding.getDeltager());
+                }
             }
         }
-        return deltagere;
+        return unikkeDeltagere;
     }
 
     public static ArrayList<Deltager> getAlleDeltagerForKonference(Konference konference) {
