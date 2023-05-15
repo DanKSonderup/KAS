@@ -173,10 +173,13 @@ public abstract class Controller {
                             udskrift += "     " + tillæg.getNavn() + " " + tillæg.getPris() + "kr.\n";
                         }
                     }
+                            udskrift += "Konference: " + hotelBooking.getTilmelding().getKonference().getNavn() + "\n";
+                            udskrift += "Samlet pris: " + hotelBooking.samletPris() + "\n";
                     udskrift += "\n";
                 }
             }
         }
+
 
         return udskrift;
     }

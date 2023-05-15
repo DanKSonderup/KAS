@@ -23,22 +23,6 @@ public class Deltager {
         return navn;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public String getTelefonnummer() {
-        return telefonnummer;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public String getLand() {
-        return land;
-    }
-
     public void addTilmelding(Tilmelding tilmelding) {
         tilmeldinger.add(tilmelding);
     }
