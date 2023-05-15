@@ -276,6 +276,7 @@ public class OpretTilmeldingWindow extends Stage {
     public void opretTilmeldingOnAction() {
 
         Tilmelding h1 = Controller.createTilmelding(konference,deltager,ankomstDato,afrejseDato, cbxForedagsholder.isSelected());
+        Controller.createDeltager()
 
         if (hotelAftale != null) {
             Controller.createHotelBooking(h1,valgteTillæg,hotelAftale);

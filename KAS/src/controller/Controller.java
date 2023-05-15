@@ -79,6 +79,22 @@ public abstract class Controller {
     }
 
 
+    // Firma
+
+    public static Firma createFirma(String navn, String telefonnummer) {
+        Firma firma = new Firma(navn, telefonnummer);
+        Storage.storeFirma(firma);
+        return firma;
+    }
+
+    // Deltager
+
+    public static Deltager createDeltager(String navn, String adresse, String telefonnummer, String by, String land, Tilmelding tilmelding) {
+        Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land);
+        Storage.storeDeltager(deltager);
+        return deltager;
+    }
+
     /**
      * Opretter en tilmelding
      * Pre: Der eksisterer en konference, ankomstDato & afrejseDato skal være indenfor konferencens datoer
