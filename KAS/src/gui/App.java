@@ -34,10 +34,6 @@ public class App {
         Ledsager l2 = Controller.createLedsager("Mie Sommer", t4);
         Ledsager l3 = Controller.createLedsager("Jan Madsen", t5);
 
-        Controller.addLedsagerTilTilmelding(t3,l1);
-        Controller.addLedsagerTilTilmelding(t4,l2);
-        Controller.addLedsagerTilTilmelding(t5,l3);
-
         Udflugt u1 = Controller.createUdflugt(kf,"Byrundtur, Odense", d1, 125, "Odense", true);
         Udflugt u2 = Controller.createUdflugt(kf,"Egeskov", d2, 75, "Kværndrup", false);
         Udflugt u3 = Controller.createUdflugt(kf,"Trapholt Museum, Kolding", d3, 200, "Kolding", true);
