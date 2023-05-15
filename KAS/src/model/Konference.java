@@ -71,7 +71,7 @@ public class Konference {
 
         if (udflugter != null) {
             for (Udflugt u : udflugter) {
-                udskrift += u.getNavn() + " " + u.getDato() + " Pris: " + u.getPris() + "\n";
+                udskrift += "\n" + u.getNavn() + " " + u.getDato() + " Pris: " + u.getPris() + "\n";
                 for (Ledsager ledsager: u.getLedsagere()) {
                     udskrift += "   " + ledsager.getNavn() + " (" + ledsager.getTilmelding().getDeltager().getNavn() + ")\n";
                 }

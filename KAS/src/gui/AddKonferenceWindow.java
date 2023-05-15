@@ -125,6 +125,12 @@ public class AddKonferenceWindow extends Stage {
             lblError.setVisible(true);
             return;
         }
+        if (prisPrDag < 0) {
+            lblError.setText("Pris per må ikke være negativ\n");
+            lblError.setTextFill(Color.RED);
+            lblError.setVisible(true);
+            return;
+        }
         LocalDate startDate = null;
         LocalDate slutDate = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");

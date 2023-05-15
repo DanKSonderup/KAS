@@ -84,18 +84,23 @@ public class AddUdflugtWindow extends Stage {
         while (fortsæt) {
             if (!erDatoValid(txfDato.getText().trim())) {
                 lblError.setText("Datoen er skrevet\ni forkert format!");
+                lblError.setTextFill(Color.RED);
                 fortsæt = false;
             } else if (!erDatoIKonference(txfDato.getText().trim())) {
                 lblError.setText("Konferencen foregår\nikke på denne dato!");
+                lblError.setTextFill(Color.RED);
                 fortsæt = false;
             } else if (!erPrisValid(txfPris.getText().trim())) {
                 lblError.setText("Pris er ikke et gyldigt tal!");
+                lblError.setTextFill(Color.RED);
                 fortsæt = false;
             } else if (txfNavn.getText().trim().length() < 1) {
                 lblError.setText("Der er intet navn!");
+                lblError.setTextFill(Color.RED);
                 fortsæt = false;
             } else if (txfLokation.getText().trim().length() < 1) {
                 lblError.setText("Der ingen lokation!");
+                lblError.setTextFill(Color.RED);
                 fortsæt = false;
             } else {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
