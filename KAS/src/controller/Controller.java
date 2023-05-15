@@ -92,8 +92,8 @@ public abstract class Controller {
     }
 
     /**
-     * Opretter en HotelBooking
-     * Pre: der eksisterer en tilmelding
+     * Opretter en HotelBooking.
+     * Pre: der eksisterer en tilmelding.
      */
     public static HotelBooking createHotelBooking(Tilmelding tilmelding, ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
         HotelBooking h1 = new HotelBooking(tilmelding, valgteTillæg, hotelAftale);
@@ -102,13 +102,18 @@ public abstract class Controller {
         return h1;
     }
 
-    
+    /**
+     * Tilføjer et firma til en tilmelding.
+     */
     public static void addFirmaTilTilmelding(Firma firma, Tilmelding tilmelding) {
         tilmelding.addFirma(firma);
         firma.addTilmelding(tilmelding);
         Storage.storeFirma(firma);
     }
 
+    /**
+     * Henter alle tilmeldinger til en specifik konference og returnerer en liste med dem.
+     */
     public static ArrayList<Tilmelding> getAlleTilmeldinger(Konference konference) {
         ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
         for (Tilmelding t : konference.getTilmeldinger()) {
@@ -117,6 +122,9 @@ public abstract class Controller {
         return tilmeldinger;
     }
 
+    /**
+     * Henter alle unikke deltagere og returnerer en liste med dem.
+     */
     public static ArrayList<Deltager> getAlleUnikkeDeltagere() {
         ArrayList<Deltager> unikkeDeltagere = new ArrayList<>();
         for (Konference konference: Storage.getKonferencer()) {
@@ -130,6 +138,10 @@ public abstract class Controller {
     }
 
 
+    /**
+     * Opretter en ledsager og tilføjer til en tilmelding
+     * Pre: Der eksisterer en tilmelding
+     */
     public static Ledsager createLedsager(String navn, Tilmelding tilmelding) {
         Ledsager l1 = new Ledsager(navn, tilmelding);
         tilmelding.setLedsager(l1);
@@ -137,6 +149,9 @@ public abstract class Controller {
         return l1;
     }
 
+    /**
+     * Tilføjer udflugter til en ledsager.
+     */
     public static void addUdflugterTilLedsager(Ledsager ledsager, ArrayList<Udflugt> udflugter) {
         for (Udflugt udflugt: udflugter) {
             ledsager.addUdflugt(udflugt);
@@ -144,6 +159,9 @@ public abstract class Controller {
         }
     }
 
+    /**
+     * Returnerer en String oplysninger om en deltager til en specifik konference.
+     */
     public static String printInfoPåDeltager(Konference konference) {
         String s = "";
         Controller.getAlleTilmeldinger(konference);
@@ -153,6 +171,9 @@ public abstract class Controller {
         return s;
     }
 
+    /**
+     * Returnerer en String med oplysninger om alle hoteller og deltagere, som har besøgt hotellet.
+     */
     public static String visHotelOgDeltagerInfo() {
         String udskrift = "";
         for (String s : getUnikkeHotelNavne()) {
@@ -179,10 +200,12 @@ public abstract class Controller {
             }
         }
 
-
         return udskrift;
     }
 
+    /**
+     * Henter alle hotelaftaler og tilføjer dem med unikke navne til en liste af Strings, som returneres.
+     */
     public static ArrayList<String> getUnikkeHotelNavne() {
         ArrayList<String> temp = new ArrayList<>();
         for (HotelAftale hotelAftale : Storage.getHotelAftaler()) {
@@ -193,6 +216,9 @@ public abstract class Controller {
         return temp;
     }
 
+    /**
+     * Henter alle hotelaftaler med et specifikt navn og returnerer en liste med de hotelaftaler.
+     */
     public static ArrayList<HotelAftale> GetAlleHotelAftalerMedNavn(String hotelNavn) {
         // Find alle hotelaftaler med samme navn
         ArrayList<HotelAftale> temp = new ArrayList<>();
