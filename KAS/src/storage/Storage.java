@@ -32,17 +32,10 @@ public abstract class Storage {
         hotelAftaler.add(hotelAftale);
     }
     // Firma
-    public static ArrayList<Firma> getFirmaer() {
-        return new ArrayList<>(firmaer);
-    }
     public static void storeFirma(Firma firma) {
         firmaer.add(firma);
     }
-
-    // Deltager
-    public static ArrayList<Deltager> getDeltagere() {
-        return new ArrayList<>(deltagere);
-    }
+    
     public static void storeDeltager(Deltager deltager) {
         deltagere.add(deltager);
     }

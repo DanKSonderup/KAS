@@ -77,7 +77,7 @@ public abstract class Controller {
         }
         return udflugter;
     }
-    
+
 
     /**
      * Opretter en tilmelding
