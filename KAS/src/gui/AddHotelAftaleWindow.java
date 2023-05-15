@@ -55,6 +55,7 @@ public class AddHotelAftaleWindow extends Stage {
     private final TextField txfLokation = new TextField();
     private final TextField txfPrisPrNatEnkeltVærelse = new TextField();
     private final TextField txfPrisPrNatDobbeltVærelse = new TextField();
+    private final TextField txfInkluderedeTillæg = new TextField();
     private final Button btnAfbryd = new Button("Afbryd");
     private final ListView<Pair> lvwTillæg = new ListView<>();
     private final Button btnOpretTillæg = new Button("Opret tillæg");
@@ -62,24 +63,24 @@ public class AddHotelAftaleWindow extends Stage {
     private final Label lblError = new Label("Der opstod en fejl");
 
     public void initContent(GridPane pane) {
-        String[] labelStrenge = {"Navn:", "Lokation", "Pris per nat enkeltværelse:", "Pris per nat dobbeltværelse:"};
-        TextField[] tekstFelter = {txfNavn, txfLokation, txfPrisPrNatEnkeltVærelse, txfPrisPrNatDobbeltVærelse};
+        String[] labelStrenge = {"Navn:", "Lokation", "Pris per nat enkeltværelse:", "Pris per nat dobbeltværelse:", "Inkluderede tillæg:"};
+        TextField[] tekstFelter = {txfNavn, txfLokation, txfPrisPrNatEnkeltVærelse, txfPrisPrNatDobbeltVærelse, txfInkluderedeTillæg};
 
         pane.setPadding(new Insets(20));
         // set horizontal gap between components
         pane.setHgap(10);
         // set vertical gap between components
         pane.setVgap(10);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             Label lbl1 = new Label(labelStrenge[i]);
             pane.add(lbl1,0,i);
             pane.add(tekstFelter[i],1,i);
         }
         Label lblTillæg = new Label("Tillæg:");
-        pane.add(lblTillæg,0,5);
-        pane.add(lvwTillæg,1,5,1,3);
+        pane.add(lblTillæg,0,6);
+        pane.add(lvwTillæg,1,6,1,3);
         lvwTillæg.setMaxHeight(120);
-        pane.add(btnOpretTillæg,0,6);
+        pane.add(btnOpretTillæg,0,7);
         HBox hboxButtons = new HBox();
         hboxButtons.setSpacing(20);
         hboxButtons.getChildren().add(btnAfbryd);
@@ -133,7 +134,7 @@ public class AddHotelAftaleWindow extends Stage {
             return;
             }
             HotelAftale h1 = Controller.createHotelAftale(navn,prisPrNatEnkelt,prisPrNatDobbelt, lokation, konference);
-
+            h1.addInkluderetTillæg(txfInkluderedeTillæg.getText().trim());
             for (Pair pair: pairListe) {
                 Controller.createTillæg(h1, pair.navn, pair.pris);
             }

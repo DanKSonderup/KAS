@@ -68,9 +68,9 @@ public class Tilmelding {
             if (ledsager != null) {
                 udskrift += "\nLedsager: " + ledsager.getNavn();
                 if (ledsager.getUdflugter() != null) {
-                    udskrift += "\nUdflugter: ";
+                    udskrift += "\nUdflugter: \n";
                     for (Udflugt udflugt : ledsager.getUdflugter()) {
-                        udskrift += udflugt.getNavn();
+                        udskrift += udflugt.getNavn() + "   \n";
                     }
                 }
             }
@@ -83,6 +83,7 @@ public class Tilmelding {
             if (firma != null) {
                 udskrift += "\n Firma: " + firma.getNavn();
             }
+            udskrift += "\n Samlet pris: " + beregnSamletPris();
             udskrift += "\n\n";
 
             return udskrift;
@@ -96,5 +97,20 @@ public class Tilmelding {
 
     public HotelBooking getHotelBooking() {
         return hotelBooking;
+    }
+
+    public double beregnSamletPris() {
+        double samletPris = 0;
+        if (!foredragsholder) {
+            samletPris += konference.getPrisPerDag() * antalDage();
+        }
+        if (ledsager != null) {
+            samletPris += ledsager.samletUdflugtsPris();
+        }
+        if (hotelBooking != null) {
+            samletPris += hotelBooking.samletPris();
+        }
+
+        return samletPris;
     }
 }

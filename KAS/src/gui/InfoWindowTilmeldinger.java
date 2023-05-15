@@ -3,6 +3,7 @@ package gui;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -34,6 +35,7 @@ public class InfoWindowTilmeldinger extends Stage {
     // Data felter
 
     private final TextArea visTilmeldinger = new TextArea();
+    private final Button btnLuk = new Button("Luk");
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -42,8 +44,12 @@ public class InfoWindowTilmeldinger extends Stage {
         // set vertical gap between components
         pane.setVgap(10);
 
-        pane.add(visTilmeldinger, 0, 0);
+        pane.add(visTilmeldinger, 0, 0, 2, 2);
         visTilmeldinger.setText(printInfoPåDeltager());
+
+        pane.add(btnLuk, 2, 3);
+        btnLuk.setOnAction(event -> this.btnLukOnAction());
+
     }
     public String printInfoPåDeltager() {
         String s = "";
@@ -52,6 +58,10 @@ public class InfoWindowTilmeldinger extends Stage {
             s += tilmelding.toString();
         }
         return s;
+    }
+
+    private void btnLukOnAction() {
+        this.hide();
     }
 
 //    public String printInfoPåDeltager() {

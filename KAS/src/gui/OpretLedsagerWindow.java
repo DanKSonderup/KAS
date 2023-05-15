@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,18 +13,21 @@ import model.Konference;
 import model.Ledsager;
 import model.Udflugt;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OpretLedsagerWindow extends Stage {
-
     private Konference konference;
     private Ledsager ledsager;
-    public OpretLedsagerWindow(Konference konference) {
+    private LocalDate ankomstDato;
+    private LocalDate afrejseDato;
+
+    public OpretLedsagerWindow(Konference konference, LocalDate ankomstDato, LocalDate afrejseDato) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-        // this.setWidth(300); --> Nødvendig hvis hidden items
-
+        this.ankomstDato = ankomstDato;
+        this.afrejseDato = afrejseDato;
         this.konference = konference;
         this.setTitle("New Person");
         GridPane pane = new GridPane();
@@ -48,7 +52,7 @@ public class OpretLedsagerWindow extends Stage {
         // set vertical gap between components
         pane.setVgap(10);
 
-        lvwUdflugter.getItems().setAll(konference.getUdflugter());
+        lvwUdflugter.getItems().setAll(Controller.getUdflugterForKonferenceMellem(konference, ankomstDato, afrejseDato));
         lvwUdflugter.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         Label lblOpretLedsager = new Label("Opret Ledsager");

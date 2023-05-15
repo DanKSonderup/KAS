@@ -4,6 +4,7 @@ import controller.Controller;
 import model.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -12,37 +13,68 @@ public class App {
     }
 
     public static void initStorage() {
-        Konference kf = Controller.createKonference("Hav og Himmel", "Odense Universitet", LocalDate.parse("2023-10-08"), LocalDate.parse("2023-10-16"),1500);
-        LocalDate date1 = LocalDate.parse("2023-11-13");
-        LocalDate d2 = LocalDate.parse("2023-11-15");
+        Konference kf = Controller.createKonference("Hav og Himmel", "Odense Universitet", LocalDate.parse("2023-12-18"), LocalDate.parse("2023-12-20"),1500);
+        LocalDate d1 = LocalDate.parse("2023-12-18");
+        LocalDate d2 = LocalDate.parse("2023-12-19");
+        LocalDate d3 = LocalDate.parse("2023-12-20");
 
-        Deltager deltager1 = new Deltager("Hans", "Odensevej 22", "888888", "Odense", "Danmark");
-        Deltager deltager2 = new Deltager("Peter", "Odensevej 22", "888888", "Odense", "Danmark");
-        Deltager deltager3 = new Deltager("Oliver", "Tabervej 69", "69696969", "Odense", "Letland");
-        Deltager deltager4 = new Deltager("Daniel", "Vindervej 420", "13376969", "Herning", "Danmark");
+        Deltager deltager1 = new Deltager("Finn Madsen", "Odensevej 22", "11111111", "Aalborg", "Danmark");
+        Deltager deltager2 = new Deltager("Niels Petersen", "Gaden", "22222222", "Aarhus", "Danmark");
+        Deltager deltager3 = new Deltager("Ulla Hansen", "Tabervej 69", "33333333", "Herning", "Danmark");
+        Deltager deltager4 = new Deltager("Peter Sommer", "Vindervej 420", "44444444", "Liverpool", "England");
+        Deltager deltager5 = new Deltager("Lone Jensen", "Christiania", "55555555", "København", "Danmark");
 
+        Tilmelding t1 = Controller.createTilmelding(kf, deltager1, d1, d3,false);
+        Tilmelding t2 = Controller.createTilmelding(kf, deltager2, d1, d3,false);
+        Tilmelding t3 = Controller.createTilmelding(kf, deltager3, d1, d2, false);
+        Tilmelding t4 = Controller.createTilmelding(kf, deltager4, d1, d3, false);
+        Tilmelding t5 = Controller.createTilmelding(kf, deltager5, d1, d3, true);
 
-        // Tilmelding deltager2Tilmelding = new Tilmelding(date1,d2,true, deltager2, kf);
+        Ledsager l1 = Controller.createLedsager("Hans Hansen", t3);
+        Ledsager l2 = Controller.createLedsager("Mie Sommer", t4);
+        Ledsager l3 = Controller.createLedsager("Jan Madsen", t5);
 
+        Controller.addLedsagerTilTilmelding(t3,l1);
+        Controller.addLedsagerTilTilmelding(t4,l2);
+        Controller.addLedsagerTilTilmelding(t5,l3);
 
-        Tilmelding t2 = Controller.createTilmelding(kf, deltager1,date1,d2,true);
-        Tilmelding t1 = Controller.createTilmelding(kf, deltager2,date1,d2,true);
-        Tilmelding t3 = Controller.createTilmelding(kf, deltager3, date1, d2, false);
-        Tilmelding t4 = Controller.createTilmelding(kf, deltager4, date1, d2, false);
+        Udflugt u1 = Controller.createUdflugt(kf,"Byrundtur, Odense", d1, 125, "Odense", true);
+        Udflugt u2 = Controller.createUdflugt(kf,"Egeskov", d2, 75, "Kværndrup", false);
+        Udflugt u3 = Controller.createUdflugt(kf,"Trapholt Museum, Kolding", d3, 200, "Kolding", true);
 
-        Ledsager l1 = new Ledsager("Jeppe", t1);
-        Ledsager l2 = new Ledsager("Trent Alexander Arnold", t3);
-        Controller.addLedsagerTilTilmelding(t1,l1);
-        Controller.addLedsagerTilTilmelding(t3,l2);
+        HotelAftale h1 = Controller.createHotelAftale("Den Hvide Svane", 1050, 1250, "Odense", kf);
+        HotelAftale h2 = Controller.createHotelAftale("Høtel Phønix", 700, 800, "Odense", kf);
+        HotelAftale h3 = Controller.createHotelAftale("Esbjerg Hotel", 500, 600, "Odense", kf);
 
-        Udflugt u1 = Controller.createUdflugt(kf,"Byrundtur Odense", date1, 100, "Odense", true);
-        Udflugt u2 = Controller.createUdflugt(kf,"MCH Arena", date1, 100, "Herning", false);
+        // Hotel 1 tillæg
+        Controller.createTillæg(h1, "Bad", 0);
+        Controller.createTillæg(h1, "Wifi", 50);
 
-        HotelAftale h1 = Controller.createHotelAftale("Esbjerg Hotel", 1000, 1200, "Esbjerg", kf);
-        HotelAftale h2 = Controller.createHotelAftale("Odense Hotel", 700, 1000, "Odense", kf);
+        // Hotel 2 tillæg
+        Controller.createTillæg(h2,"Bad", 200);
+        Controller.createTillæg(h2,"WIFI", 75);
 
-        Controller.createTillæg(h1, "WIFI", 250);
-        Controller.createTillæg(h2, "Mad", 150);
-        Controller.createTillæg(h1,"Svømmekort", 450);
+        // Hotel 3 tillæg
+        Controller.createTillæg(h3,"Morgenmad", 100);
+
+        l1.addUdflugt(u1);
+
+        l2.addUdflugt(u2);
+        l2.addUdflugt(u3);
+
+        l3.addUdflugt(u1);
+        l3.addUdflugt(u2);
+
+        Tillæg tilWIFI = new Tillæg("WIFI", 50);
+
+        ArrayList<Tillæg> tillægPeter = new ArrayList<>();
+        tillægPeter.add(tilWIFI);
+
+        ArrayList<Tillæg> tillægLone = new ArrayList<>();
+        tillægLone.add(tilWIFI);
+
+        Controller.createHotelBooking(t2, null, h1);
+        Controller.createHotelBooking(t4, tillægPeter, h1);
+        Controller.createHotelBooking(t5, tillægLone, h1);
     }
 }

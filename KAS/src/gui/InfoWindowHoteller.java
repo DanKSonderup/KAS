@@ -3,6 +3,7 @@ package gui;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -30,6 +31,7 @@ public class InfoWindowHoteller extends Stage {
         // Data felter
 
     private TextArea visOversigt = new TextArea();
+    private final Button btnLuk = new Button("Luk");
 
     public void initContent (GridPane pane) {
         pane.setPadding(new Insets(20));
@@ -38,7 +40,17 @@ public class InfoWindowHoteller extends Stage {
         // set vertical gap between components
         pane.setVgap(10);
 
-        pane.add(visOversigt, 0,0 );
+        pane.add(visOversigt, 0,0 , 2, 2);
         visOversigt.setText(Controller.visHotelOgDeltagerInfo());
+
+        pane.add(btnLuk, 2, 3);
+        btnLuk.setOnAction(event -> this.btnLukOnAction());
     }
+
+    private void btnLukOnAction() {
+        this.hide();
+    }
+
+
+
 }
