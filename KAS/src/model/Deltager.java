@@ -27,19 +27,6 @@ public class Deltager {
         tilmeldinger.add(tilmelding);
     }
 
-    public ArrayList<Tilmelding> getTilmeldinger() {
-        return tilmeldinger;
-    }
-
-    public Tilmelding findTilmeldingTilKonference(Konference konference) {
-        for (Tilmelding tilmelding: tilmeldinger) {
-            if (tilmelding.getKonference().equals(konference)) {
-                return tilmelding;
-            }
-        }
-        return null;
-    }
-
     @Override
     public String toString() {
         return navn + " (" + telefonnummer + ") - " +  adresse + ", " + by + ", " + land;
