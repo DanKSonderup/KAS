@@ -23,37 +23,8 @@ public class Deltager {
         return navn;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public String getTelefonnummer() {
-        return telefonnummer;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public String getLand() {
-        return land;
-    }
-
     public void addTilmelding(Tilmelding tilmelding) {
         tilmeldinger.add(tilmelding);
-    }
-
-    public ArrayList<Tilmelding> getTilmeldinger() {
-        return tilmeldinger;
-    }
-
-    public Tilmelding findTilmeldingTilKonference(Konference konference) {
-        for (Tilmelding tilmelding: tilmeldinger) {
-            if (tilmelding.getKonference().equals(konference)) {
-                return tilmelding;
-            }
-        }
-        return null;
     }
 
     @Override

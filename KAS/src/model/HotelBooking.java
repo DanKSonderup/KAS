@@ -17,10 +17,6 @@ public class HotelBooking {
         return tilmelding;
     }
 
-    public HotelAftale getHotelAftale() {
-        return hotelAftale;
-    }
-
     public ArrayList<Tillæg> getValgteTillæg() {
         return valgteTillæg;
     }

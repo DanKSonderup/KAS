@@ -38,10 +38,6 @@ public class HotelAftale {
         return tillæg;
     }
 
-    public String getLokation() {
-        return lokation;
-    }
-
     public void createTillæg(Tillæg tillægInput) {
         tillæg.add(tillægInput);
     }
@@ -54,28 +50,6 @@ public class HotelAftale {
         this.inkluderedeTillæg += inkluderedeTillæg;
     }
 
-    public ArrayList<String> GetHotelNavne() {
-        // Finde alle unikke hotelnavne
-        ArrayList<String> temp = new ArrayList<>();
-        for (HotelAftale hotelAftale : Storage.getHotelAftaler()) {
-            if (!temp.contains(hotelAftale.getNavn())) {
-                temp.add(hotelAftale.getNavn());
-            }
-        }
-        return temp;
-    }
-
-    public ArrayList<HotelAftale> GetAlleHotelAftalerMedNavn(String hotelNavn) {
-        // Find alle hotelaftaler med samme navn
-        ArrayList<HotelAftale> temp = new ArrayList<>();
-        for (HotelAftale hotelAftale : Storage.getHotelAftaler()) {
-            if (hotelAftale.getNavn().equals(hotelNavn)) {
-                temp.add(hotelAftale);
-            }
-        }
-
-        return temp;
-    }
 
     public void addHotelBooking(HotelBooking hotelBooking) {
         hotelBookings.add(hotelBooking);
