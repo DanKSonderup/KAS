@@ -144,7 +144,7 @@ public class OpretTilmeldingWindow extends Stage {
     }
 
     public void updateControls() {
-        lvwDeltagere.getItems().setAll(Controller.getAlleUnikkeDeltagere());
+        lvwDeltagere.getItems().setAll(Controller.getAlleUnikkeDeltagere(konference));
     }
 
     private void opretDeltagerOnAction() {

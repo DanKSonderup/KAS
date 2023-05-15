@@ -28,7 +28,7 @@ public class LoginPane extends Application {
         GridPane pane = new GridPane();
         this.initContent(pane);
         pane.setMinHeight(600);
-        pane.setMinWidth(800);
+        pane.setMinWidth(750);
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
@@ -121,13 +121,6 @@ public class LoginPane extends Application {
             }
         });
 
-        ImageView danmarkFlag = new ImageView("/ressources/DanmarkFlag.png");
-        danmarkFlag.setTranslateX(640);
-        danmarkFlag.setTranslateY(520);
-        danmarkFlag.setFitHeight(45);
-        danmarkFlag.setFitWidth(45);
-        pane.getChildren().add(danmarkFlag);
-        danmarkFlag.setOnMouseClicked(mouseEvent -> this.danishLanguageIconOnAction());
     }
 
     public void loginOnAction() {
@@ -143,11 +136,5 @@ public class LoginPane extends Application {
             lblError.setText("Forkert brugernavn eller adgangskode!");
             lblError.setTextFill(Color.RED);
         }
-    }
-
-    public void danishLanguageIconOnAction() {
-        lblVelkommen.setText(danskeTeskter[0]);
-        lblBrugernavn.setText(danskeTeskter[1]);
-        lblKodeord.setText(danskeTeskter[2]);
     }
 }
