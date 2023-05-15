@@ -35,8 +35,8 @@ public class HotelBooking {
         } else {
             prisPrNat = hotelAftale.getPrisPrNatEnkeltVærelse();
         }
+        pris = (tilmelding.antalNætter()) * prisPrNat;
         if (valgteTillæg != null) {
-            pris = (tilmelding.antalNætter()) * prisPrNat;
             for (Tillæg tillæg : valgteTillæg) {
                 pris += tillæg.getPris() * tilmelding.antalNætter();
             }
