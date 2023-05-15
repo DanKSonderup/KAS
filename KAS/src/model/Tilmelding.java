@@ -63,8 +63,8 @@ public class Tilmelding {
         @Override
         public String toString () {
             String udskrift = deltager.getNavn() + "\n" +
-                    "fra " + ankomstDato + " til " + afrejseDato;
-
+                    "fra " + ankomstDato + " til " + afrejseDato + "\n";
+            udskrift += this.antalNætter();
             if (ledsager != null) {
                 udskrift += "\nLedsager: " + ledsager.getNavn();
                 if (ledsager.getUdflugter() != null) {
@@ -89,10 +89,16 @@ public class Tilmelding {
             return udskrift;
         }
 
-        public int antalDage () {
+        public int antalNætter() {
             long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
             int dage = (int) daysBetween;
             return dage;
+        }
+
+        public int antalDage() {
+        long daysBetween = ChronoUnit.DAYS.between(ankomstDato, afrejseDato);
+        int dage = (int) daysBetween;
+        return dage + 1;
         }
 
     public HotelBooking getHotelBooking() {
