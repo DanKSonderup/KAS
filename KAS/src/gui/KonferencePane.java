@@ -51,7 +51,7 @@ public class KonferencePane extends Application {
         pane.setHgap(25);
         // set vertical gap between components
         pane.setVgap(10);
-        
+
 
         lvwKonferencer.setMinWidth(500);
         lvwKonferencer.setMaxHeight(200);
