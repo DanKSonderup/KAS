@@ -46,7 +46,6 @@ public class LoginPane extends Application {
     private final Label lblVelkommen = new Label("Velkommen til KAS");
     private final Label lblBrugernavn = new Label("Brugernavn");
     private final Label lblKodeord = new Label("Kodeord");
-    private String[] engelskeTeskter = {"Welcome to KAS", "Username", "Password"};
     private String[] danskeTeskter = {"Velkommen til KAS", "Brugernavn", "Kodeord"};
 
 
@@ -129,14 +128,6 @@ public class LoginPane extends Application {
         danmarkFlag.setFitWidth(45);
         pane.getChildren().add(danmarkFlag);
         danmarkFlag.setOnMouseClicked(mouseEvent -> this.danishLanguageIconOnAction());
-
-        ImageView ukFlag = new ImageView("/ressources/united-kingdom.png");
-        ukFlag.setTranslateX(700);
-        ukFlag.setTranslateY(520);
-        ukFlag.setFitHeight(45);
-        ukFlag.setFitWidth(45);
-        pane.getChildren().add(ukFlag);
-        ukFlag.setOnMouseClicked(mouseEvent -> this.englishLanguageIconOnAction());
     }
 
     public void loginOnAction() {
@@ -152,12 +143,6 @@ public class LoginPane extends Application {
             lblError.setText("Forkert brugernavn eller adgangskode!");
             lblError.setTextFill(Color.RED);
         }
-    }
-
-    public void englishLanguageIconOnAction() {
-        lblVelkommen.setText(engelskeTeskter[0]);
-        lblBrugernavn.setText(engelskeTeskter[1]);
-        lblKodeord.setText(engelskeTeskter[2]);
     }
 
     public void danishLanguageIconOnAction() {

@@ -86,9 +86,7 @@ public abstract class Controller {
 
     // Deltager
 
-    public static Deltager createDeltager(
-            String navn, String adresse, String telefonnummer,
-            String by, String land) {
+    public static Deltager createDeltager(String navn, String adresse, String telefonnummer, String by, String land, Tilmelding tilmelding) {
         Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land);
         Storage.storeDeltager(deltager);
         return deltager;
