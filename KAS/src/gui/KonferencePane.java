@@ -51,19 +51,7 @@ public class KonferencePane extends Application {
         pane.setHgap(25);
         // set vertical gap between components
         pane.setVgap(10);
-
-        Label lblNavn = new Label("Navn");
-        Label lblDatoer = new Label("Datoer");
-        Label lblSted = new Label("Sted");
-        Label lblPrisPerDag = new Label("Pris pr. dag");
-        HBox hboxListViewHeader = new HBox();
-        hboxListViewHeader.setSpacing(80);
-        hboxListViewHeader.getChildren().add(lblNavn);
-        hboxListViewHeader.getChildren().add(lblDatoer);
-        hboxListViewHeader.getChildren().add(lblSted);
-        hboxListViewHeader.getChildren().add(lblPrisPerDag);
-
-        pane.add(hboxListViewHeader,0,0,4,1);
+        
 
         lvwKonferencer.setMinWidth(500);
         lvwKonferencer.setMaxHeight(200);
