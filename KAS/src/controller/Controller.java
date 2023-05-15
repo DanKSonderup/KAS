@@ -58,14 +58,16 @@ public abstract class Controller {
     /**
      * Opretter et tillæg
      * Pre: beskrivelse er ikke tomt, hotel ikke null, pris >= 0
-     *
-     * @return
      */
     public static void createTillæg(HotelAftale hotelAftale, String navn, double pris) {
         hotelAftale.createTillæg(new Tillæg(navn,pris));
     }
 
 
+    /**
+     * Henter alle udflugter fra en konference, mellem to datoer, og returnerer en liste med dem
+     * Pre: at d1 og d2 er mellem konferencens datoer.
+     */
     public static ArrayList<Udflugt> getUdflugterForKonferenceMellem(Konference konference, LocalDate d1, LocalDate d2) {
         ArrayList<Udflugt> udflugter = new ArrayList<>();
         for (Udflugt udflugt: konference.getUdflugter()) {
@@ -76,25 +78,11 @@ public abstract class Controller {
         return udflugter;
     }
 
-    // Firma
 
-    public static Firma createFirma(String navn, String telefonnummer) {
-        Firma firma = new Firma(navn, telefonnummer);
-        Storage.storeFirma(firma);
-        return firma;
-    }
-
-    // Deltager
-
-    public static Deltager createDeltager(
-            String navn, String adresse, String telefonnummer,
-            String by, String land) {
-        Deltager deltager = new Deltager(navn, adresse, telefonnummer, by, land);
-        Storage.storeDeltager(deltager);
-        return deltager;
-    }
-
-
+    /**
+     * Opretter en tilmelding
+     * Pre: Der eksisterer en konference, ankomstDato & afrejseDato skal være indenfor konferencens datoer
+     */
     public static Tilmelding createTilmelding(Konference konference, Deltager deltager, LocalDate ankomstDato, LocalDate afrejseDato, boolean foredragsholder) {
         Tilmelding t1 = new Tilmelding(ankomstDato,afrejseDato,foredragsholder, deltager, konference);
         konference.addTilmelding(t1);
@@ -102,6 +90,10 @@ public abstract class Controller {
         return t1;
     }
 
+    /**
+     * Opretter en HotelBooking
+     * Pre: der eksisterer en tilmelding
+     */
     public static HotelBooking createHotelBooking(Tilmelding tilmelding, ArrayList<Tillæg> valgteTillæg, HotelAftale hotelAftale) {
         HotelBooking h1 = new HotelBooking(tilmelding, valgteTillæg, hotelAftale);
         tilmelding.addHotelBooking(h1);
@@ -109,11 +101,7 @@ public abstract class Controller {
         return h1;
     }
 
-    public static void addLedsagerTilTilmelding(Tilmelding tilmelding, Ledsager ledsager) {
-        tilmelding.setLedsager(ledsager);
-        ledsager.setTilmelding(tilmelding);
-    }
-
+    
     public static void addFirmaTilTilmelding(Firma firma, Tilmelding tilmelding) {
         tilmelding.addFirma(firma);
         firma.addTilmelding(tilmelding);
