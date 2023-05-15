@@ -80,7 +80,7 @@ public class Konference {
         return udskrift;
     }
 
-    public static String printInfoPåDeltager(Konference konference) {
+    public String printInfoPåDeltager(Konference konference) {
         String s = "";
         Controller.getAlleTilmeldinger(konference);
         for (Tilmelding tilmelding : Controller.getAlleTilmeldinger(konference)) {
