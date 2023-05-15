@@ -204,6 +204,7 @@ public abstract class Controller {
     public static Ledsager createLedsager(String navn, Tilmelding tilmelding) {
         Ledsager l1 = new Ledsager(navn, tilmelding);
         tilmelding.setLedsager(l1);
+        l1.setTilmelding(tilmelding);
         return l1;
     }
 
